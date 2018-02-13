@@ -997,11 +997,12 @@
                     <connections>
                         <outlet property="nameTxt" destination="0Et-Sx-dqz" id="cg3-fu-Z0j"/>
                         <outlet property="phoneTxt" destination="4W8-tD-Gy6" id="0zL-Xm-dEj"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="tabbedVC" id="V4W-Jc-2ON"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1J-Vi-PfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-721" y="0.0"/>
+            <point key="canvasLocation" x="-846" y="0.0"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="9dP-pE-hmL">
@@ -1135,7 +1136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5l-gv-uDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1410.4000000000001" y="-0.44977511244377816"/>
+            <point key="canvasLocation" x="-1506" y="0.0"/>
         </scene>
         <!--RegisterVC-->
         <scene sceneID="xc8-o2-ggf">
@@ -1242,12 +1243,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QoI-9x-C7Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1415" y="671"/>
+            <point key="canvasLocation" x="-1506" y="670"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
             <objects>
-                <tabBarController id="49e-Tb-3d3" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabbedVC" id="49e-Tb-3d3" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="W28-zg-YXA">
                         <rect key="frame" x="0.0" y="975" width="768" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>

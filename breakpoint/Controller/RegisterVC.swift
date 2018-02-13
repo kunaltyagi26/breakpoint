@@ -42,25 +42,17 @@ class RegisterVC: UIViewController {
         if emailTxt.text != nil && passwordTxt.text != nil {
             AuthService.instance.registerUser(withEmail: self.emailTxt.text!, andPassword: self.passwordTxt.text!, completion: { (success, error) in
                 if error == nil {
-                    AuthService.instance.loginUser(withEmail: self.emailTxt.text!, andPassword: self.passwordTxt.text!, completion: { (success, nil) in
-                        if success {
-                            DataService.instance.checkForNewUser(uid: (Auth.auth().currentUser?.uid)!, completion: { isNewUser in
-                                print("New User?: " + String(describing: isNewUser))
-                                if isNewUser {
-                                    print("I AM BEING CALLED")
-                                    let userData = ["provider": Auth.auth().currentUser?.providerID, "email": Auth.auth().currentUser?.email]
-                                    DataService.instance.createDBUser(uid: (Auth.auth().currentUser?.uid)!, userData: userData)
-                                    guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
-                                    self.present(personalDetailsVC, animated: true, completion: nil)
-                                }
-                                else {
-                                    print("VALUE IS FALSE")
-                                    self.dismiss(animated: true, completion: nil)
-                                }
-                            })
-                            print("Successfully registered user.")
+                    DataService.instance.checkForNewUser(uid: (Auth.auth().currentUser?.uid)!, completion: { isNewUser in
+                        if isNewUser {
+                            guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+                            personalDetailsVC.getCredentials(email: self.emailTxt.text!, password: self.passwordTxt.text!)
+                            self.present(personalDetailsVC, animated: true, completion: nil)
+                        }
+                        else {
+                            self.dismiss(animated: true, completion: nil)
                         }
                     })
+                    print("Successfully registered user.")
                 }
                 else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)

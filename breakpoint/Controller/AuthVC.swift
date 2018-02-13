@@ -103,57 +103,6 @@ class AuthVC: UIViewController {
     }
 }
 
-/*extension AuthVC: FBSDKLoginButtonDelegate {
-    
-    func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith result: FBSDKLoginManagerLoginResult!, error: Error!) {
-        if error != nil {
-            print("Process error")
-        }
-        else if (result?.isCancelled)! {
-            print("Cancelled")
-        }
-        else {
-            print("Logged in.")
-            
-            let credential = FacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-            Auth.auth().signIn(with: credential) { (user, error) in
-                guard let user = user else {
-                    return
-                }
-                let req = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name"], tokenString: FBSDKAccessToken.current().tokenString, version: nil, httpMethod: "GET")
-                req?.start(completionHandler: { (connection: FBSDKGraphRequestConnection?, result: Any?, error: Error?) -> () in
-                    if(error == nil)
-                    {
-                        guard let dict = result as? NSDictionary else { return }
-                        let email = dict["email"]
-                        let userData = ["provider": "Facebook", "email": email]
-                        
-                        DataService.instance.checkForNewUser(uid: user.uid, completion: { (isNewUser) in
-                            if isNewUser {
-                                DataService.instance.createDBUser(uid: user.uid, userData: userData)
-                                print("User created.")
-                                guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
-                                self.present(personalDetailsVC, animated: true, completion: nil)
-                            }
-                            else {
-                                self.dismiss(animated: true, completion: nil)
-                            }
-                        })
-                    }
-                    else
-                    {
-                        print("error \(error)")
-                    }
-                })
-            }
-        }
-    }
-    
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("User logged out.")
-    }
-}*/
-
 extension AuthVC: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error == nil {
