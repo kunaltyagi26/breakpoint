@@ -96,7 +96,7 @@ class DataService {
             guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
             for user in userSnapshot {
                 if user.key == uid {
-                    completion(user.childSnapshot(forPath: "email").value as! String)
+                    completion(user.childSnapshot(forPath: "name").value as! String)
                 }
             }
         }

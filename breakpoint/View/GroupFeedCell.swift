@@ -10,12 +10,12 @@ import UIKit
 
 class GroupFeedCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var contentLbl: UILabel!
     
-    func configureCell(image: UIImage, email: String, content: String) {
+    func configureCell(image: UIImage, username: String, content: String) {
         self.profileImage.image = image
-        self.emailLbl.text = email
+        self.usernameLbl.text = username
         self.contentLbl.text = content
     }
 }

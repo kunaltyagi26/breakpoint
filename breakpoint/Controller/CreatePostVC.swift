@@ -12,7 +12,7 @@ import Firebase
 class CreatePostVC: UIViewController {
 
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var postTextView: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     
@@ -25,7 +25,9 @@ class CreatePostVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailLbl.text = Auth.auth().currentUser?.email
+        DataService.instance.getUserName(ForUID: (Auth.auth().currentUser?.uid)!) { (username) in
+            self.usernameLbl.text = username
+        }
     }
     
     @IBAction func sendPressed(_ sender: Any) {

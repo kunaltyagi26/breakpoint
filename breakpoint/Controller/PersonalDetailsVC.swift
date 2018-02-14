@@ -12,14 +12,13 @@ import Firebase
 class PersonalDetailsVC: UIViewController {
 
     @IBOutlet weak var nameTxt: InsetTextField!
-    @IBOutlet weak var phoneTxt: InsetTextField!
+    @IBOutlet weak var selectProfileBtn: UIButton!
     
     var email: String?
     var password: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
     }
     
     func getCredentials(email: String, password: String) {
@@ -35,11 +34,20 @@ class PersonalDetailsVC: UIViewController {
     @IBAction func NextPressed(_ sender: Any) {
         AuthService.instance.loginUser(withEmail: self.email!, andPassword: password!, completion: { (success, nil) in
             if success {
-                let userData = ["provider": Auth.auth().currentUser?.providerID, "email": Auth.auth().currentUser?.email, "name": self.nameTxt.text!, "number": self.phoneTxt.text!]
+                let userData = ["provider": Auth.auth().currentUser?.providerID, "email": Auth.auth().currentUser?.email, "name": self.nameTxt.text!]
                 DataService.instance.createDBUser(uid: (Auth.auth().currentUser?.uid)!, userData: userData)
                 self.performSegue(withIdentifier: "tabbedVC", sender: self)
-                //self.dismiss(animated: true, completion: nil)
             }
         })
     }
+    
+    @IBAction func imageBtnPressed(_ sender: Any) {
+        guard let popOverVC = storyboard?.instantiateViewController(withIdentifier: "imageSelectionVC") as? ImageSelectionVC else { return }
+        self.addChildViewController(popOverVC)
+        popOverVC.view.frame = self.view.frame
+        self.view.addSubview(popOverVC.view)
+        popOverVC.didMove(toParentViewController: self)
+    }
 }
+
+

@@ -14,17 +14,18 @@ import FacebookLogin
 class MeVC: UIViewController {
 
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        emailLbl.text = Auth.auth().currentUser?.email
+        DataService.instance.getUserName(ForUID: (Auth.auth().currentUser?.uid)!) { (username) in
+            self.usernameLbl.text = username
+        }
     }
     
     @IBAction func signOutPressed(_ sender: Any) {

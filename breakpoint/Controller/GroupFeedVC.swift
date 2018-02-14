@@ -95,7 +95,7 @@ extension GroupFeedVC: UITableViewDelegate, UITableViewDataSource {
         let message = groupMessages[indexPath.row]
         let image = UIImage(named: "defaultProfileImage")
         DataService.instance.getUserName(ForUID: message.senderId) { (username) in
-            cell.configureCell(image: image!, email: username, content: message.content)
+            cell.configureCell(image: image!, username: username, content: message.content)
         }
         return cell
     }

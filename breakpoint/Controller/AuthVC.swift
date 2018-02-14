@@ -20,11 +20,8 @@ class AuthVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        GIDSignIn.sharedInstance().delegate = self as! GIDSignInDelegate
-        GIDSignIn.sharedInstance().uiDelegate = self as! GIDSignInUIDelegate
-        
-        //fbLoginBtn.delegate = self
-        //fbLoginBtn.readPermissions = ["public_profile", "email"]
+        GIDSignIn.sharedInstance().delegate = self as GIDSignInDelegate
+        GIDSignIn.sharedInstance().uiDelegate = self as GIDSignInUIDelegate
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +45,7 @@ class AuthVC: UIViewController {
     
     @objc func fbBtnPressed() {
         let loginManager = LoginManager()
-        loginManager.logIn(readPermissions: [ .publicProfile ], viewController: self) { loginResult in
+        loginManager.logIn(readPermissions: [ .publicProfile, .email ], viewController: self) { loginResult in
             switch loginResult {
             case .failed(let error):
                 print(error)
@@ -58,9 +55,6 @@ class AuthVC: UIViewController {
                 print("Logged in!")
                 let credential = FacebookAuthProvider.credential(withAccessToken: String(describing: AccessToken.current))
                 Auth.auth().signIn(with: credential) { (user, error) in
-                    guard let user = user else {
-                        return
-                    }
                     let req = GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], accessToken: accessToken, httpMethod: GraphRequestHTTPMethod(rawValue: "GET")!, apiVersion: .defaultVersion)
                     let request = GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: FacebookCore.GraphAPIVersion.defaultVersion)
                     request.start { (response, result) in
