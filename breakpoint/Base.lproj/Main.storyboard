@@ -1319,7 +1319,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.19841609589041095" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.3048212756849315" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="V5e-Kx-oTN" firstAttribute="trailing" secondItem="2EJ-jP-dpX" secondAttribute="trailing" constant="36" id="5cN-2R-xd1"/>
                             <constraint firstItem="2EJ-jP-dpX" firstAttribute="leading" secondItem="V5e-Kx-oTN" secondAttribute="leading" constant="36" id="C0I-T2-0fm"/>
