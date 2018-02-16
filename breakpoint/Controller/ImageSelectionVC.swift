@@ -32,7 +32,7 @@ class ImageSelectionVC: UIViewController {
             collectionView.backgroundColor = #colorLiteral(red: 0.2549019608, green: 0.2705882353, blue: 0.3137254902, alpha: 1)
         case 1:
             imageType = "dark"
-            collectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+            collectionView.backgroundColor = #colorLiteral(red: 0.9317389131, green: 0.9261999726, blue: 0.9359964728, alpha: 1)
         default:
             break
         }
