@@ -39,8 +39,6 @@ class AuthVC: UIViewController {
         if Auth.auth().currentUser != nil {
             dismissDetail()
         }
-        
-        
     }
     
     @objc func fbBtnPressed() {
@@ -78,7 +76,10 @@ class AuthVC: UIViewController {
                             guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
                             self.present(personalDetailsVC, animated: true, completion: nil)
                         case .failed(let error):
-                            print(error)
+                            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+                            let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+                            alertController.addAction(alertAction)
+                            self.present(alertController, animated: true, completion: nil)
                         }
                     }
                 }
@@ -120,6 +121,12 @@ extension AuthVC: GIDSignInDelegate {
                     }
                 })
             }
+        }
+        else {
+            let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 }

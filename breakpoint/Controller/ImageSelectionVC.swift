@@ -11,6 +11,9 @@ import UIKit
 class ImageSelectionVC: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    var imageType: String? = "light"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,6 +23,20 @@ class ImageSelectionVC: UIViewController {
     }
     @IBAction func closePressed(_ sender: Any) {
         removeAnimate()
+    }
+    
+    @IBAction func imageTypeSelected(_ sender: Any) {
+        switch segmentedControl.selectedSegmentIndex {
+        case 0:
+            imageType = "light"
+            collectionView.backgroundColor = #colorLiteral(red: 0.2549019608, green: 0.2705882353, blue: 0.3137254902, alpha: 1)
+        case 1:
+            imageType = "dark"
+            collectionView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+        default:
+            break
+        }
+        collectionView.reloadData()
     }
     
     func showAnimate()
@@ -48,12 +65,17 @@ class ImageSelectionVC: UIViewController {
 
 extension ImageSelectionVC: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 28
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profileImageCell", for: indexPath) as? ProfileImageCell else { return UICollectionViewCell()}
-        cell.configureCell(image: UIImage(named: "defaultProfileImage")!)
+        if imageType == "light" {
+            cell.configureCell(image: UIImage(named: "light\(indexPath.row)")!)
+        }
+        else if imageType == "dark" {
+           cell.configureCell(image: UIImage(named: "dark\(indexPath.row)")!)
+        }
         return cell
     }
     

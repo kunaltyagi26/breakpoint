@@ -27,8 +27,10 @@ class PersonalDetailsVC: UIViewController {
     }
 
     @IBAction func backPressed(_ sender: Any) {
-        let authVC = self.storyboard?.instantiateViewController(withIdentifier: "AuthVC") as? AuthVC
-        self.present(authVC!, animated: true, completion: nil)
+        Auth.auth().currentUser?.delete(completion: { (error) in
+            let authVC = self.storyboard?.instantiateViewController(withIdentifier: "AuthVC") as? AuthVC
+            self.present(authVC!, animated: true, completion: nil)
+        })
     }
     
     @IBAction func NextPressed(_ sender: Any) {

@@ -1271,8 +1271,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JU0-n9-rsH">
-                                        <rect key="frame" x="0.0" y="56" width="303" height="396"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <rect key="frame" x="0.0" y="102" width="303" height="350"/>
+                                        <color key="backgroundColor" red="0.25490196078431371" green="0.27058823529411763" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="O9K-Hc-bEQ">
                                             <size key="itemSize" width="90" height="90"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1305,16 +1305,28 @@
                                             </collectionViewCell>
                                         </cells>
                                     </collectionView>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="4Le-bk-TjL">
+                                        <rect key="frame" x="106" y="54" width="91" height="29"/>
+                                        <segments>
+                                            <segment title="Light"/>
+                                            <segment title="Dark"/>
+                                        </segments>
+                                        <connections>
+                                            <action selector="imageTypeSelected:" destination="90c-ai-nBb" eventType="valueChanged" id="x9k-sn-nqN"/>
+                                        </connections>
+                                    </segmentedControl>
                                 </subviews>
                                 <color key="backgroundColor" red="0.25571328399999999" green="0.26997876170000001" blue="0.31373178959999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
+                                    <constraint firstItem="4Le-bk-TjL" firstAttribute="centerX" secondItem="2EJ-jP-dpX" secondAttribute="centerX" id="1K0-lQ-VSE"/>
                                     <constraint firstAttribute="bottom" secondItem="JU0-n9-rsH" secondAttribute="bottom" id="3wj-Gp-iMB"/>
-                                    <constraint firstItem="JU0-n9-rsH" firstAttribute="top" secondItem="paz-81-8JE" secondAttribute="bottom" constant="20" id="5yo-oe-7uG"/>
                                     <constraint firstItem="paz-81-8JE" firstAttribute="top" secondItem="2EJ-jP-dpX" secondAttribute="topMargin" constant="6" id="9sG-OI-5Ut"/>
+                                    <constraint firstItem="4Le-bk-TjL" firstAttribute="top" secondItem="f0u-mN-U3K" secondAttribute="bottom" constant="20" id="J6t-l5-vde"/>
                                     <constraint firstItem="f0u-mN-U3K" firstAttribute="centerX" secondItem="2EJ-jP-dpX" secondAttribute="centerX" id="QPI-k8-lms"/>
                                     <constraint firstItem="JU0-n9-rsH" firstAttribute="leading" secondItem="2EJ-jP-dpX" secondAttribute="leading" id="Ri4-5D-GVe"/>
                                     <constraint firstItem="f0u-mN-U3K" firstAttribute="centerY" secondItem="paz-81-8JE" secondAttribute="centerY" id="XBT-py-UDs"/>
                                     <constraint firstAttribute="trailing" secondItem="JU0-n9-rsH" secondAttribute="trailing" id="Xz4-Rs-Bgk"/>
+                                    <constraint firstItem="JU0-n9-rsH" firstAttribute="top" secondItem="4Le-bk-TjL" secondAttribute="bottom" constant="20" id="jRc-P8-pYn"/>
                                     <constraint firstItem="paz-81-8JE" firstAttribute="leading" secondItem="2EJ-jP-dpX" secondAttribute="leadingMargin" constant="6" id="m22-aQ-ooY"/>
                                 </constraints>
                             </view>
@@ -1330,6 +1342,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="JU0-n9-rsH" id="GI4-4A-hiR"/>
+                        <outlet property="segmentedControl" destination="4Le-bk-TjL" id="8N7-XZ-vfF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IY4-Ku-WR5" userLabel="First Responder" sceneMemberID="firstResponder"/>

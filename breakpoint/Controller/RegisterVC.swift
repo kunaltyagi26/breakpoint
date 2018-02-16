@@ -52,7 +52,6 @@ class RegisterVC: UIViewController {
                             self.dismiss(animated: true, completion: nil)
                         }
                     })
-                    print("Successfully registered user.")
                 }
                 else {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)

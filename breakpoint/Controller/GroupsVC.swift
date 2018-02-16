@@ -26,8 +26,7 @@ class GroupsVC: UIViewController {
             DataService.instance.getAllGroups { (returnedGroupArray) in
                 self.groupArray = returnedGroupArray
                 self.groupsTableView.reloadData()
-        }
-        
+            }
         }
     }
     
