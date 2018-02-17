@@ -19,8 +19,9 @@ class ImageSelectionVC: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        showAnimate()
+        //showAnimate()
     }
+    
     @IBAction func closePressed(_ sender: Any) {
         removeAnimate()
     }
@@ -29,25 +30,25 @@ class ImageSelectionVC: UIViewController {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             imageType = "light"
-            collectionView.backgroundColor = #colorLiteral(red: 0.2549019608, green: 0.2705882353, blue: 0.3137254902, alpha: 1)
+            collectionView.backgroundColor = UIColor.lightGray
         case 1:
             imageType = "dark"
-            collectionView.backgroundColor = #colorLiteral(red: 0.9317389131, green: 0.9261999726, blue: 0.9359964728, alpha: 1)
+            collectionView.backgroundColor = UIColor.white
         default:
             break
         }
         collectionView.reloadData()
     }
     
-    func showAnimate()
+    /*func showAnimate()
     {
-        self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
-        self.view.alpha = 0.0;
+        //self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
+        //self.view.alpha = 0.0;
         UIView.animate(withDuration: 0.25, animations: {
             self.view.alpha = 1.0
             self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         });
-    }
+    }*/
     
     func removeAnimate()
     {
@@ -57,7 +58,9 @@ class ImageSelectionVC: UIViewController {
         }, completion:{(finished : Bool)  in
             if (finished)
             {
-                self.view.removeFromSuperview()
+                //self.view.removeFromSuperview()
+                //guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+                self.dismiss(animated: false, completion: nil)
             }
         });
     }
@@ -79,5 +82,20 @@ extension ImageSelectionVC: UICollectionViewDelegate, UICollectionViewDataSource
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        /*let selectedImage = collectionView.cellForItem(at: indexPath) as! ProfileImageCell
+        guard let personalDetailsVC = storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+        print(selectedImage.profileImage.image!)
+        personalDetailsVC.setImage(selectedImage: selectedImage.profileImage.image!)
+        removeAnimate()
+        personalDetailsVC.configureImage(selectedImage: selectedImage.profileImage.image!)*/
+        if imageType == "light" {
+            DataService.instance.setAvatarName(avatarName: "light\(indexPath.item)")
+        }
+        else if imageType == "dark" {
+            DataService.instance.setAvatarName(avatarName: "dark\(indexPath.item)")
+        }
+        removeAnimate()
+        //dismiss(animated: true, completion: nil)
+    }
 }

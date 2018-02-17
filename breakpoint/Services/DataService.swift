@@ -19,6 +19,8 @@ class DataService {
     private var _REF_GROUPS = DB_BASE.child("groups")
     private var _REF_FEED = DB_BASE.child("feed")
     
+    public private(set) var avatarName = ""
+    
     var REF_BASE: DatabaseReference {
         return _REF_BASE
     }
@@ -91,12 +93,14 @@ class DataService {
         }
     }
     
-    func getUserName(ForUID uid: String, completion: @escaping (_ username: String)-> ()) {
+    func getUserNameAndImage(ForUID uid: String, completion: @escaping (_ username: String, _ image: String)-> ()) {
         REF_USERS.observeSingleEvent(of: .value) { (userSnapshot) in
             guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
             for user in userSnapshot {
                 if user.key == uid {
-                    completion(user.childSnapshot(forPath: "name").value as! String)
+                    let name = user.childSnapshot(forPath: "name").value as! String
+                    let image = user.childSnapshot(forPath: "image").value as! String
+                    completion(name, image)
                 }
             }
         }
@@ -166,5 +170,10 @@ class DataService {
             }
             completion(groupArray)
         }
+    }
+    
+    func setAvatarName(avatarName: String)
+    {
+        self.avatarName = avatarName
     }
 }

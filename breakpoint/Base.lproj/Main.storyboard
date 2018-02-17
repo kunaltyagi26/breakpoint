@@ -997,7 +997,7 @@
                     </view>
                     <connections>
                         <outlet property="nameTxt" destination="0Et-Sx-dqz" id="cg3-fu-Z0j"/>
-                        <outlet property="selectProfileBtn" destination="rUl-Nz-UmT" id="UWK-Zu-kHs"/>
+                        <outlet property="selectProfileBtn" destination="rUl-Nz-UmT" id="MZf-UH-mwq"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="tabbedVC" id="V4W-Jc-2ON"/>
                     </connections>
                 </viewController>

@@ -25,8 +25,9 @@ class CreatePostVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DataService.instance.getUserName(ForUID: (Auth.auth().currentUser?.uid)!) { (username) in
+        DataService.instance.getUserNameAndImage(ForUID: (Auth.auth().currentUser?.uid)!) { (username, image) in
             self.usernameLbl.text = username
+            self.profileImage.image = UIImage(named: image)
         }
     }
     
