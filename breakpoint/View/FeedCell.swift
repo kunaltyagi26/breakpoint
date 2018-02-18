@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class FeedCell: UITableViewCell {
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SkeletonView
 
 class FeedsVC: UIViewController {
 
@@ -18,10 +19,15 @@ class FeedsVC: UIViewController {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 100.0
+        tableView.isSkeletonable = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        view.showGradientSkeleton()
+        view.startSkeletonAnimation()
         DataService.instance.getAllFeedMessages { (messageArray) in
             self.messages = messageArray.reversed()
             self.tableView.reloadData()
@@ -33,7 +39,11 @@ class FeedsVC: UIViewController {
     }
 }
 
-extension FeedsVC: UITableViewDelegate, UITableViewDataSource {
+extension FeedsVC: UITableViewDelegate, UITableViewDataSource, SkeletonTableViewDataSource {
+    func collectionSkeletonView(_ skeletonView: UITableView, cellIdenfierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
+        return "FeedCell"
+    }
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -44,11 +54,13 @@ extension FeedsVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as? FeedCell else { return UITableViewCell() }
-        //let image = UIImage(named: "defaultProfileImage")
         let message = messages[indexPath.row]
         DataService.instance.getUserNameAndImage(ForUID: message.senderId) { (userName, image) in
             cell.configureCell(profileImage: UIImage(named: image)!, username: userName, content: message.content)
         }
+        tableView.isSkeletonable = false
+        tableView.stopSkeletonAnimation()
+        tableView.hideSkeleton()
         return cell
     }
 }
