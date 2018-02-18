@@ -61,10 +61,11 @@ class AuthVC: UIViewController {
                             guard let dict = value.dictionaryValue as? NSDictionary else { return }
                             let email = dict["email"]
                             let userData = ["provider": "Facebook", "email": email]
-                            
-                            /*DataService.instance.checkForNewUser(uid: user.uid, completion: { (isNewUser) in
+                            print((AccessToken.current?.userId)!)
+                            DataService.instance.checkForNewUser(uid: (AccessToken.current?.userId)!, completion: { (isNewUser) in
+                                print(isNewUser)
                                 if isNewUser {
-                                    DataService.instance.createDBUser(uid: user.uid, userData: userData)
+                                    DataService.instance.createDBUser(uid: (AccessToken.current?.userId)!, userData: userData)
                                     print("User created.")
                                     guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
                                     self.present(personalDetailsVC, animated: true, completion: nil)
@@ -72,9 +73,7 @@ class AuthVC: UIViewController {
                                 else {
                                     self.dismiss(animated: true, completion: nil)
                                 }
-                            })*/
-                            guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
-                            self.present(personalDetailsVC, animated: true, completion: nil)
+                            })
                         case .failed(let error):
                             let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                             let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
@@ -105,9 +104,7 @@ extension AuthVC: GIDSignInDelegate {
             let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                            accessToken: authentication.accessToken)
             Auth.auth().signIn(with: credential) { (user, error) in
-                guard let user = user else {
-                    return
-                }
+                guard let user = user else { return }
                 let userData = ["provider": "Google", "email": user.email]
                 DataService.instance.checkForNewUser(uid: user.uid, completion: { (isNewUser) in
                     if isNewUser {

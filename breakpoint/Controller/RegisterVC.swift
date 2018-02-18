@@ -42,14 +42,20 @@ class RegisterVC: UIViewController {
         if emailTxt.text != nil && passwordTxt.text != nil {
             AuthService.instance.registerUser(withEmail: self.emailTxt.text!, andPassword: self.passwordTxt.text!, completion: { (success, error) in
                 if error == nil {
-                    DataService.instance.checkForNewUser(uid: (Auth.auth().currentUser?.uid)!, completion: { isNewUser in
-                        if isNewUser {
-                            guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
-                            personalDetailsVC.getCredentials(email: self.emailTxt.text!, password: self.passwordTxt.text!)
-                            self.present(personalDetailsVC, animated: true, completion: nil)
-                        }
-                        else {
-                            self.dismiss(animated: true, completion: nil)
+                    AuthService.instance.loginUser(withEmail: self.emailTxt.text!, andPassword: self.passwordTxt.text!, completion: { (success, nil) in
+                        if success {
+                            DataService.instance.checkForNewUser(uid: (Auth.auth().currentUser?.uid)!, completion: { isNewUser in
+                                if isNewUser {
+                                    let userData = ["provider": Auth.auth().currentUser?.providerID, "email": self.emailTxt.text!]
+                                    DataService.instance.createDBUser(uid: (Auth.auth().currentUser?.uid)!, userData: userData)
+                                    guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+                                    //personalDetailsVC.getCredentials(email: self.emailTxt.text!, password: self.passwordTxt.text!)
+                                    self.present(personalDetailsVC, animated: true, completion: nil)
+                                }
+                                else {
+                                    self.dismiss(animated: true, completion: nil)
+                                }
+                            })
                         }
                     })
                 }

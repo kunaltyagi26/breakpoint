@@ -54,6 +54,10 @@ class DataService {
         }
     }
     
+    func updateNameAndPicture(uid: String, userData: Dictionary<String, Any>) {
+        REF_USERS.child(uid).updateChildValues(userData)
+    }
+    
     func uploadPost(withMessage message: String, forUID uid: String, withGroupKey groupKey: String?, completion: @escaping (_ status: Bool)-> ()) {
         if groupKey != nil {
             REF_GROUPS.child(groupKey!).child("messages").childByAutoId().updateChildValues(["content": message, "senderId": uid])

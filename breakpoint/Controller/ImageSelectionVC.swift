@@ -19,6 +19,7 @@ class ImageSelectionVC: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.backgroundColor = UIColor.lightGray
         //showAnimate()
     }
     
