@@ -10,12 +10,14 @@ import UIKit
 import Firebase
 import FacebookCore
 import FacebookLogin
+import NVActivityIndicatorView
 
 class MeVC: UIViewController {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,10 +25,22 @@ class MeVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
+        loadData { (completed) in
+            if completed {
+                self.activityIndicatorView.stopAnimating()
+                self.activityIndicatorView.isHidden = true
+            }
+        }
+    }
+    
+    func loadData(completion: @escaping (_ status: Bool)-> ()) {
         DataService.instance.getUserNameAndImage(ForUID: (Auth.auth().currentUser?.uid)!) { (username, image) in
             self.usernameLbl.text = username
             self.profileImage.image = UIImage(named: image)
         }
+        completion(true)
     }
     
     @IBAction func signOutPressed(_ sender: Any) {

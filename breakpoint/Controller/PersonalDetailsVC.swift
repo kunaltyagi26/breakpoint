@@ -94,7 +94,6 @@ class PersonalDetailsVC: UIViewController {
             self.activityIndicatorView.stopAnimating()
             self.performSegue(withIdentifier: "tabbedVC", sender: self)
         }
-        
     }
     
     @IBAction func imageBtnPressed(_ sender: Any) {

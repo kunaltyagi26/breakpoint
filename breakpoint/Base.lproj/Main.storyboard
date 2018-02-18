@@ -298,6 +298,20 @@
                                     <constraint firstItem="HdM-yo-Ujr" firstAttribute="top" secondItem="KmW-Ot-6g9" secondAttribute="top" constant="30" id="yvo-Kc-W8D"/>
                                 </constraints>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohm-T7-8JX" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
+                                <rect key="frame" x="157.5" y="303.5" width="60" height="60"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="cPe-cZ-b7e"/>
+                                    <constraint firstAttribute="height" constant="60" id="mKV-9A-RUX"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballGridBeat"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
+                                        <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KWp-yi-9Ex">
                                 <rect key="frame" x="0.0" y="345" width="375" height="273"/>
                                 <color key="backgroundColor" red="0.25571328399999999" green="0.26997876170000001" blue="0.31373178959999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -320,17 +334,20 @@
                             <constraint firstItem="KWp-yi-9Ex" firstAttribute="leading" secondItem="pFB-SS-sew" secondAttribute="leading" id="Hqw-dN-VAL"/>
                             <constraint firstItem="KWp-yi-9Ex" firstAttribute="bottom" secondItem="pFB-SS-sew" secondAttribute="bottom" id="JKb-XX-sjJ"/>
                             <constraint firstItem="KmW-Ot-6g9" firstAttribute="top" secondItem="uFs-JH-YZf" secondAttribute="bottom" id="Lyl-sP-qwn"/>
+                            <constraint firstItem="Ohm-T7-8JX" firstAttribute="centerY" secondItem="qJA-79-fwV" secondAttribute="centerY" id="NqP-gE-ZAf"/>
                             <constraint firstItem="KmW-Ot-6g9" firstAttribute="trailing" secondItem="pFB-SS-sew" secondAttribute="trailing" id="Wze-sW-Ub1"/>
                             <constraint firstItem="KWp-yi-9Ex" firstAttribute="trailing" secondItem="pFB-SS-sew" secondAttribute="trailing" id="ZN9-lr-yCG"/>
                             <constraint firstItem="uFs-JH-YZf" firstAttribute="trailing" secondItem="pFB-SS-sew" secondAttribute="trailing" id="aZV-PS-bCG"/>
                             <constraint firstItem="uFs-JH-YZf" firstAttribute="top" secondItem="qJA-79-fwV" secondAttribute="top" id="eX7-9u-R8v"/>
                             <constraint firstItem="KWp-yi-9Ex" firstAttribute="top" secondItem="KmW-Ot-6g9" secondAttribute="bottom" id="hPN-hj-mxD"/>
+                            <constraint firstItem="Ohm-T7-8JX" firstAttribute="centerX" secondItem="qJA-79-fwV" secondAttribute="centerX" id="nmd-Ey-fxa"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pFB-SS-sew"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Me" image="me-tabIcon" selectedImage="me-tabIcon" id="g75-uO-c6b"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="activityIndicatorView" destination="Ohm-T7-8JX" id="6bK-xB-hJK"/>
                         <outlet property="profileImage" destination="HdM-yo-Ujr" id="65Z-dh-yoi"/>
                         <outlet property="tableView" destination="KWp-yi-9Ex" id="9eY-h8-6qs"/>
                         <outlet property="usernameLbl" destination="hUB-If-XCy" id="TbW-2l-vJA"/>
