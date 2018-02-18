@@ -10,11 +10,13 @@ import UIKit
 import Firebase
 import FacebookCore
 import FacebookLogin
+import NVActivityIndicatorView
 
 class PersonalDetailsVC: UIViewController {
 
     @IBOutlet weak var nameTxt: InsetTextField!
     @IBOutlet weak var selectProfileBtn: UIButton!
+    @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     
     //var email: String?
     //var password: String?
@@ -72,18 +74,27 @@ class PersonalDetailsVC: UIViewController {
     }*/
     
     @IBAction func backPressed(_ sender: Any) {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
         let loginManager: LoginManager = LoginManager()
         loginManager.logOut()
         Auth.auth().currentUser?.delete(completion: { (error) in
-            let authVC = self.storyboard?.instantiateViewController(withIdentifier: "AuthVC") as? AuthVC
-            self.present(authVC!, animated: true, completion: nil)
+            let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
+            self.activityIndicatorView.stopAnimating()
+            self.present(loginVC!, animated: true, completion: nil)
         })
     }
     
     @IBAction func NextPressed(_ sender: Any) {
-        let userData = ["name": self.nameTxt.text!, "image": self.image!]
-        DataService.instance.updateNameAndPicture(uid: (Auth.auth().currentUser?.uid)!, userData: userData)
-        self.performSegue(withIdentifier: "tabbedVC", sender: self)
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
+        Auth.auth().addStateDidChangeListener { (auth, user) in
+            let userData = ["name": self.nameTxt.text!, "image": self.image!]
+            DataService.instance.updateNameAndPicture(uid: (user?.uid)!, userData: userData)
+            self.activityIndicatorView.stopAnimating()
+            self.performSegue(withIdentifier: "tabbedVC", sender: self)
+        }
+        
     }
     
     @IBAction func imageBtnPressed(_ sender: Any) {

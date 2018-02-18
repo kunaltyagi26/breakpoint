@@ -11,15 +11,16 @@ import Firebase
 import FacebookLogin
 import FacebookCore
 import GoogleSignIn
+import NVActivityIndicatorView
 
 class AuthVC: UIViewController {
 
     @IBOutlet weak var fbBtnView: UIView!
     @IBOutlet weak var googleLoginBtn: GIDSignInButton!
+    @IBOutlet var activityIndicatorView: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         GIDSignIn.sharedInstance().delegate = self as GIDSignInDelegate
         GIDSignIn.sharedInstance().uiDelegate = self as GIDSignInUIDelegate
     }
@@ -42,6 +43,8 @@ class AuthVC: UIViewController {
     }
     
     @objc func fbBtnPressed() {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
         let loginManager = LoginManager()
         loginManager.logIn(readPermissions: [ .publicProfile, .email ], viewController: self) { loginResult in
             switch loginResult {
@@ -62,12 +65,14 @@ class AuthVC: UIViewController {
                             let email = dict["email"]
                             let userData = ["provider": "Facebook", "email": email]
                             print((AccessToken.current?.userId)!)
+                            //print((Auth.auth().currentUser?.uid)!)
                             DataService.instance.checkForNewUser(uid: (AccessToken.current?.userId)!, completion: { (isNewUser) in
                                 print(isNewUser)
                                 if isNewUser {
                                     DataService.instance.createDBUser(uid: (AccessToken.current?.userId)!, userData: userData)
                                     print("User created.")
                                     guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+                                    self.activityIndicatorView.stopAnimating()
                                     self.present(personalDetailsVC, animated: true, completion: nil)
                                 }
                                 else {
@@ -99,6 +104,8 @@ class AuthVC: UIViewController {
 
 extension AuthVC: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
         if error == nil {
             guard let authentication = user.authentication else { return }
             let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
@@ -111,6 +118,7 @@ extension AuthVC: GIDSignInDelegate {
                         DataService.instance.createDBUser(uid: user.uid, userData: userData)
                         print("User created.")
                         guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+                        self.activityIndicatorView.stopAnimating()
                         self.present(personalDetailsVC, animated: true, completion: nil)
                     }
                     else {

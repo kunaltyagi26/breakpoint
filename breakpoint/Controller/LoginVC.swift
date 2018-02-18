@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
 class LoginVC: UIViewController {
 
@@ -18,6 +19,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var registerStackView: UIStackView!
     @IBOutlet weak var credentialsStackView: UIStackView!
     @IBOutlet weak var signInLbl: UILabel!
+    @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +39,8 @@ class LoginVC: UIViewController {
     
     @IBAction func signInPressed(_ sender: Any) {
         if emailTxt.text != nil && passwordTxt.text != nil {
+            activityIndicatorView.isHidden = false
+            activityIndicatorView.startAnimating()
             AuthService.instance.loginUser(withEmail: emailTxt.text!, andPassword: passwordTxt.text!, completion: { (success, error) in
                 if success {
                     self.dismiss(animated: true, completion: nil)
@@ -45,6 +49,7 @@ class LoginVC: UIViewController {
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                     alertController.addAction(alertAction)
+                    self.activityIndicatorView.stopAnimating()
                     self.present(alertController, animated: true, completion: nil)
                 }
                 

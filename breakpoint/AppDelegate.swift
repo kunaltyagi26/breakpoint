@@ -8,14 +8,14 @@
 
 import UIKit
 import Firebase
-import FBSDKLoginKit
+import FacebookLogin
+import FacebookCore
 import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -30,15 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        return SDKApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
 
-    func applicationWillResignActive(_ application: UIApplication) {
+    /*func applicationWillResignActive(_ application: UIApplication) {
         FBSDKAppEvents.activateApp()
-    }
+    }*/
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-        let facebook = FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+        
+        let facebook = SDKApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
         let google = GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: [:])
         return facebook || google
     }
@@ -57,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        let loginManager: FBSDKLoginManager = FBSDKLoginManager()
+        let loginManager: LoginManager = LoginManager()
         loginManager.logOut()
     }
 

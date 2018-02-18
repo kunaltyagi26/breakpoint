@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import NVActivityIndicatorView
 
 class RegisterVC: UIViewController {
 
@@ -15,6 +16,7 @@ class RegisterVC: UIViewController {
     @IBOutlet weak var passwordTxt: InsetTextField!
     @IBOutlet weak var credentialsStackView: UIStackView!
     @IBOutlet weak var registerView: UIView!
+    @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,8 @@ class RegisterVC: UIViewController {
     }
     
     @IBAction func registerPressed(_ sender: Any) {
+        activityIndicatorView.isHidden = false
+        activityIndicatorView.startAnimating()
         if emailTxt.text != nil && passwordTxt.text != nil {
             AuthService.instance.registerUser(withEmail: self.emailTxt.text!, andPassword: self.passwordTxt.text!, completion: { (success, error) in
                 if error == nil {
@@ -50,6 +54,7 @@ class RegisterVC: UIViewController {
                                     DataService.instance.createDBUser(uid: (Auth.auth().currentUser?.uid)!, userData: userData)
                                     guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
                                     //personalDetailsVC.getCredentials(email: self.emailTxt.text!, password: self.passwordTxt.text!)
+                                    self.activityIndicatorView.stopAnimating()
                                     self.present(personalDetailsVC, animated: true, completion: nil)
                                 }
                                 else {
