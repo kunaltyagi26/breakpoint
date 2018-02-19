@@ -1254,27 +1254,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GPD-Wr-n5S">
-                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qPj-Tc-iEm">
-                                        <rect key="frame" x="164.5" y="8" width="46" height="35"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="19"/>
-                                        <state key="normal" title="NEXT">
-                                            <color key="titleColor" red="0.66452372069999999" green="0.83083754779999996" blue="0.43913507460000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="nextPressed:" destination="aTF-bt-Vut" eventType="touchUpInside" id="Abh-LD-LNz"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.1607890129" green="0.16078069810000001" blue="0.1607845426" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="PIj-oh-9Ea"/>
-                                    <constraint firstItem="qPj-Tc-iEm" firstAttribute="centerX" secondItem="GPD-Wr-n5S" secondAttribute="centerX" id="sLb-9Y-UrO"/>
-                                    <constraint firstItem="qPj-Tc-iEm" firstAttribute="centerY" secondItem="GPD-Wr-n5S" secondAttribute="centerY" id="yrM-EE-U71"/>
-                                </constraints>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MgW-HU-G8H">
                                 <rect key="frame" x="16" y="28" width="12" height="22"/>
                                 <state key="normal" image="backIcon"/>
@@ -1339,21 +1318,46 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ca-Ph-y3s" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransition">
+                                <rect key="frame" x="112.5" y="452" width="150" height="40"/>
+                                <color key="backgroundColor" red="0.1607890129" green="0.16078069810000001" blue="0.1607845426" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="2cB-kI-67S"/>
+                                    <constraint firstAttribute="height" constant="40" id="41T-M1-vUk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="19"/>
+                                <state key="normal" title="NEXT">
+                                    <color key="titleColor" red="0.66452372069999999" green="0.83083754779999996" blue="0.43913507460000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="normalCornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="spinnerColor">
+                                        <color key="value" red="0.66452372069999999" green="0.83083754779999996" blue="0.43913507460000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="nextPressed:" destination="aTF-bt-Vut" eventType="touchUpInside" id="l5G-HF-qkz"/>
+                                    <action selector="signInPressed:" destination="xWM-s8-txd" eventType="touchUpInside" id="7zJ-SH-TQZ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.25571328401565552" green="0.26997876167297363" blue="0.31373178958892822" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="MgW-HU-G8H" firstAttribute="top" secondItem="OVh-Me-3Kh" secondAttribute="top" constant="8" id="3xe-FX-IPa"/>
-                            <constraint firstItem="GPD-Wr-n5S" firstAttribute="leading" secondItem="OVh-Me-3Kh" secondAttribute="leading" id="6fA-ZW-xKf"/>
+                            <constraint firstItem="OVh-Me-3Kh" firstAttribute="trailing" secondItem="6ca-Ph-y3s" secondAttribute="trailing" constant="112.5" id="587-Fd-LLm"/>
+                            <constraint firstItem="6ca-Ph-y3s" firstAttribute="centerX" secondItem="T67-LK-l7x" secondAttribute="centerX" id="9Kt-bK-78u"/>
                             <constraint firstItem="ILX-UF-PQ4" firstAttribute="top" secondItem="MgW-HU-G8H" secondAttribute="bottom" constant="12" id="E6a-qf-VFl"/>
+                            <constraint firstItem="6ca-Ph-y3s" firstAttribute="top" secondItem="ySh-eS-2db" secondAttribute="bottom" constant="100" id="F0t-Xs-SQl"/>
                             <constraint firstItem="i13-2j-qmD" firstAttribute="centerY" secondItem="T67-LK-l7x" secondAttribute="centerY" id="GjE-xu-AhP"/>
                             <constraint firstItem="MgW-HU-G8H" firstAttribute="leading" secondItem="OVh-Me-3Kh" secondAttribute="leading" constant="16" id="Hld-2c-p0m"/>
                             <constraint firstItem="OVh-Me-3Kh" firstAttribute="trailing" secondItem="ySh-eS-2db" secondAttribute="trailing" constant="36" id="KJ3-96-cRo"/>
                             <constraint firstItem="OVh-Me-3Kh" firstAttribute="trailing" secondItem="ILX-UF-PQ4" secondAttribute="trailing" constant="36" id="Xe2-Io-Hlh"/>
                             <constraint firstItem="ILX-UF-PQ4" firstAttribute="leading" secondItem="OVh-Me-3Kh" secondAttribute="leading" constant="36" id="aoZ-NI-xCi"/>
                             <constraint firstItem="i13-2j-qmD" firstAttribute="centerX" secondItem="T67-LK-l7x" secondAttribute="centerX" id="atQ-hH-K7o"/>
-                            <constraint firstItem="GPD-Wr-n5S" firstAttribute="trailing" secondItem="OVh-Me-3Kh" secondAttribute="trailing" id="dm8-iK-tOY"/>
                             <constraint firstItem="ySh-eS-2db" firstAttribute="leading" secondItem="OVh-Me-3Kh" secondAttribute="leading" constant="36" id="gBz-Ub-ODb"/>
-                            <constraint firstItem="GPD-Wr-n5S" firstAttribute="bottom" secondItem="OVh-Me-3Kh" secondAttribute="bottom" id="heo-lx-4LN"/>
+                            <constraint firstItem="6ca-Ph-y3s" firstAttribute="leading" secondItem="OVh-Me-3Kh" secondAttribute="leading" constant="112.5" id="gnc-ee-tRU"/>
                             <constraint firstItem="ySh-eS-2db" firstAttribute="top" secondItem="ILX-UF-PQ4" secondAttribute="bottom" constant="20" id="n4r-tv-i0l"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="OVh-Me-3Kh"/>
@@ -1363,7 +1367,6 @@
                         <outlet property="credentialsStackView" destination="ySh-eS-2db" id="UAu-H5-8RV"/>
                         <outlet property="emailTxt" destination="aVb-i6-TIT" id="Qd0-2R-Le8"/>
                         <outlet property="passwordTxt" destination="CDg-OL-dwh" id="B6Z-os-nqF"/>
-                        <outlet property="registerView" destination="GPD-Wr-n5S" id="8Wd-x8-1wP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QoI-9x-C7Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
