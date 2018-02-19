@@ -1239,6 +1239,7 @@
                         <outlet property="registerStackView" destination="Mtn-DA-WdQ" id="rce-yh-goW"/>
                         <outlet property="signInBtn" destination="Efh-cX-jBO" id="4qO-q8-pac"/>
                         <outlet property="signInLbl" destination="tfj-Fq-NJd" id="jFE-wu-Qml"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="tabbedVC" id="poQ-cw-gE6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="z5l-gv-uDw" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1510,5 +1511,8 @@
         <image name="send" width="29" height="29"/>
         <image name="whiteCheckmark" width="18" height="14"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="poQ-cw-gE6"/>
+    </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
 </document>

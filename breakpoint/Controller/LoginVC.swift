@@ -42,7 +42,8 @@ class LoginVC: UIViewController {
             AuthService.instance.loginUser(withEmail: emailTxt.text!, andPassword: passwordTxt.text!, completion: { (success, error) in
                 if success {
                     self.signInBtn.startFinishAnimation(1, completion: {
-                        self.dismiss(animated: true, completion: nil)
+                        //self.dismiss(animated: true, completion: nil)
+                        self.performSegue(withIdentifier: "tabbedVC", sender: self)
                     })
                 }
                 else {
