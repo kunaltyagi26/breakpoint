@@ -97,7 +97,6 @@ class AuthVC: UIViewController {
     }
     
     @IBAction func googleBtnPressed(_ sender: Any) {
-        
         GIDSignIn.sharedInstance().signIn()
     }
 }

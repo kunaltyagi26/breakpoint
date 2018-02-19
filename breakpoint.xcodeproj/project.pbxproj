@@ -10,6 +10,7 @@
 		2B164AFC20332B74004CF099 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B164AFB20332B74004CF099 /* RegisterVC.swift */; };
 		2B164AFE2034C5B7004CF099 /* ProfileImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B164AFD2034C5B7004CF099 /* ProfileImageCell.swift */; };
 		2B164B022034CDE3004CF099 /* ImageSelectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B164B012034CDE3004CF099 /* ImageSelectionVC.swift */; };
+		2B20DEFC203B45A9009D8CF5 /* NewAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20DEFB203B45A9009D8CF5 /* NewAnimation.swift */; };
 		2B248F9B201DAC9F00C96F17 /* MeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B248F9A201DAC9F00C96F17 /* MeVC.swift */; };
 		2B248F9D201DBEA100C96F17 /* CreatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B248F9C201DBEA100C96F17 /* CreatePostVC.swift */; };
 		2B248F9F201DF7CF00C96F17 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B248F9E201DF7CF00C96F17 /* UIViewExt.swift */; };
@@ -45,6 +46,7 @@
 		2B164AFD2034C5B7004CF099 /* ProfileImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageCell.swift; sourceTree = "<group>"; };
 		2B164B012034CDE3004CF099 /* ImageSelectionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionVC.swift; sourceTree = "<group>"; };
 		2B1E77982028CF82004184ED /* breakpoint.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = breakpoint.entitlements; sourceTree = "<group>"; };
+		2B20DEFB203B45A9009D8CF5 /* NewAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewAnimation.swift; sourceTree = "<group>"; };
 		2B248F9A201DAC9F00C96F17 /* MeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeVC.swift; sourceTree = "<group>"; };
 		2B248F9C201DBEA100C96F17 /* CreatePostVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePostVC.swift; sourceTree = "<group>"; };
 		2B248F9E201DF7CF00C96F17 /* UIViewExt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 		2BAC3CEB2017A4A700A92AF7 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2B20DEFB203B45A9009D8CF5 /* NewAnimation.swift */,
 				2B248F9E201DF7CF00C96F17 /* UIViewExt.swift */,
 				2BC1700220273CF600688D48 /* UITableViewExt.swift */,
 				2BC17004202764C000688D48 /* UIViewControllerExt.swift */,
@@ -298,8 +301,10 @@
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/NVActivityIndicatorView/NVActivityIndicatorView.framework",
+				"${BUILT_PRODUCTS_DIR}/RAMAnimatedTabBarController/RAMAnimatedTabBarController.framework",
 				"${BUILT_PRODUCTS_DIR}/Skeleton/Skeleton.framework",
 				"${BUILT_PRODUCTS_DIR}/SkeletonView/SkeletonView.framework",
+				"${BUILT_PRODUCTS_DIR}/TKSubmitTransition/TKSubmitTransition.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -314,8 +319,10 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NVActivityIndicatorView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RAMAnimatedTabBarController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Skeleton.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkeletonView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TKSubmitTransition.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -380,6 +387,7 @@
 				2BC17005202764C000688D48 /* UIViewControllerExt.swift in Sources */,
 				2B164AFE2034C5B7004CF099 /* ProfileImageCell.swift in Sources */,
 				2BA99E89201FA80B00577A70 /* CreateGroupsVC.swift in Sources */,
+				2B20DEFC203B45A9009D8CF5 /* NewAnimation.swift in Sources */,
 				2BC1700320273CF600688D48 /* UITableViewExt.swift in Sources */,
 				2BC16FFB2025ABB500688D48 /* Group.swift in Sources */,
 				2BABD9EB202240A000EDCC6F /* UserCell.swift in Sources */,

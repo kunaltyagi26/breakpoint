@@ -8,6 +8,7 @@
 
 import UIKit
 import SkeletonView
+import RAMAnimatedTabBarController
 
 class FeedsVC: UIViewController {
 
@@ -21,13 +22,13 @@ class FeedsVC: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
-        tableView.isSkeletonable = true
+        //tableView.isSkeletonable = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        view.showGradientSkeleton()
-        view.startSkeletonAnimation()
+        //view.showGradientSkeleton()
+        //view.startSkeletonAnimation()
         DataService.instance.getAllFeedMessages { (messageArray) in
             self.messages = messageArray.reversed()
             self.tableView.reloadData()
@@ -58,10 +59,9 @@ extension FeedsVC: UITableViewDelegate, UITableViewDataSource, SkeletonTableView
         DataService.instance.getUserNameAndImage(ForUID: message.senderId) { (userName, image) in
             cell.configureCell(profileImage: UIImage(named: image)!, username: userName, content: message.content)
         }
-        tableView.isSkeletonable = false
-        tableView.stopSkeletonAnimation()
-        tableView.hideSkeleton()
+        //tableView.isSkeletonable = false
+        //tableView.stopSkeletonAnimation()
+        //tableView.hideSkeleton()
         return cell
     }
 }
-

@@ -40,7 +40,7 @@ class RegisterVC: UIViewController {
         self.present(loginVC, animated: true, completion: nil)
     }
     
-    @IBAction func registerPressed(_ sender: Any) {
+    @IBAction func nextPressed(_ sender: Any) {
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
         if emailTxt.text != nil && passwordTxt.text != nil {
@@ -58,6 +58,7 @@ class RegisterVC: UIViewController {
                                     self.present(personalDetailsVC, animated: true, completion: nil)
                                 }
                                 else {
+                                    self.activityIndicatorView.stopAnimating()
                                     self.dismiss(animated: true, completion: nil)
                                 }
                             })
@@ -65,6 +66,7 @@ class RegisterVC: UIViewController {
                     })
                 }
                 else {
+                    self.activityIndicatorView.stopAnimating()
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(alertAction)
@@ -73,6 +75,7 @@ class RegisterVC: UIViewController {
             })
         }
         else {
+            self.activityIndicatorView.stopAnimating()
             let alertController = UIAlertController(title: "Error", message: "Please enter your username and password", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             alertController.addAction(alertAction)

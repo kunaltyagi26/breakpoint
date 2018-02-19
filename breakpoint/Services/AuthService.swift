@@ -27,7 +27,9 @@ class AuthService {
             if error != nil {
                 completion(false, error)
             }
-            completion(true, nil)
+            else {
+                completion(true, nil)
+            }
         }
     }
 }

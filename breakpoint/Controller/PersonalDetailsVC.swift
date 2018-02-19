@@ -11,12 +11,14 @@ import Firebase
 import FacebookCore
 import FacebookLogin
 import NVActivityIndicatorView
+import TKSubmitTransition
 
 class PersonalDetailsVC: UIViewController {
 
     @IBOutlet weak var nameTxt: InsetTextField!
     @IBOutlet weak var selectProfileBtn: UIButton!
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
+    @IBOutlet weak var registerBtn: TKTransitionSubmitButton!
     
     //var email: String?
     //var password: String?
@@ -85,14 +87,14 @@ class PersonalDetailsVC: UIViewController {
         })
     }
     
-    @IBAction func NextPressed(_ sender: Any) {
-        activityIndicatorView.isHidden = false
-        activityIndicatorView.startAnimating()
+    @IBAction func RegisterPressed(_ sender: Any) {
+        registerBtn.startLoadingAnimation()
         Auth.auth().addStateDidChangeListener { (auth, user) in
             let userData = ["name": self.nameTxt.text!, "image": self.image!]
             DataService.instance.updateNameAndPicture(uid: (user?.uid)!, userData: userData)
-            self.activityIndicatorView.stopAnimating()
-            self.performSegue(withIdentifier: "tabbedVC", sender: self)
+            self.registerBtn.startFinishAnimation(1, completion: {
+                self.performSegue(withIdentifier: "tabbedVC", sender: self)
+            })
         }
     }
     
