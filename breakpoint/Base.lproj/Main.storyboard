@@ -854,7 +854,7 @@
         <scene sceneID="Dvz-ac-bcm">
             <objects>
                 <viewController storyboardIdentifier="AuthVC" id="kpf-Zk-8Yo" customClass="AuthVC" customModule="breakpoint" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Hnk-FB-KFp">
+                    <view key="view" contentMode="scaleToFill" id="Hnk-FB-KFp" customClass="PastelView" customModule="Pastel">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -972,6 +972,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicatorView" destination="Six-ey-91F" id="RYI-cE-ksb"/>
+                        <outlet property="authView" destination="Hnk-FB-KFp" id="BuC-TK-RdW"/>
                         <outlet property="fbBtnView" destination="D9D-Kf-3gz" id="nWK-kB-Lq5"/>
                         <outlet property="googleLoginBtn" destination="QoX-jw-cb0" id="Ycu-Us-4uO"/>
                     </connections>
@@ -984,7 +985,7 @@
         <scene sceneID="7NQ-e4-BSm">
             <objects>
                 <viewController storyboardIdentifier="personalDetailsVC" id="3j9-ci-dZF" customClass="PersonalDetailsVC" customModule="breakpoint" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="mDF-nq-c0m">
+                    <view key="view" contentMode="scaleToFill" id="mDF-nq-c0m" customClass="PastelView" customModule="Pastel">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1101,6 +1102,7 @@
                     <connections>
                         <outlet property="activityIndicatorView" destination="1me-8e-Wl8" id="hqF-Hu-WOf"/>
                         <outlet property="nameTxt" destination="0Et-Sx-dqz" id="cg3-fu-Z0j"/>
+                        <outlet property="personalDetailsView" destination="mDF-nq-c0m" id="3aK-uk-W33"/>
                         <outlet property="registerBtn" destination="86F-nM-hdR" id="eab-d0-VAb"/>
                         <outlet property="selectProfileBtn" destination="rUl-Nz-UmT" id="MZf-UH-mwq"/>
                         <segue destination="49e-Tb-3d3" kind="show" identifier="tabbedVC" id="V4W-Jc-2ON"/>
@@ -1114,7 +1116,7 @@
         <scene sceneID="9dP-pE-hmL">
             <objects>
                 <viewController storyboardIdentifier="LoginVC" id="xWM-s8-txd" customClass="LoginVC" customModule="breakpoint" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Q1V-xT-pvl">
+                    <view key="view" contentMode="scaleToFill" id="Q1V-xT-pvl" customClass="PastelView" customModule="Pastel">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1235,6 +1237,7 @@
                     <connections>
                         <outlet property="credentialsStackView" destination="q5f-dd-C1Y" id="J1U-uW-dSj"/>
                         <outlet property="emailTxt" destination="Mv1-Bx-hYQ" id="YSy-QF-A0O"/>
+                        <outlet property="loginView" destination="Q1V-xT-pvl" id="MDr-XD-pFK"/>
                         <outlet property="passwordTxt" destination="Baq-rI-6sh" id="51U-U1-HWo"/>
                         <outlet property="registerStackView" destination="Mtn-DA-WdQ" id="rce-yh-goW"/>
                         <outlet property="signInBtn" destination="Efh-cX-jBO" id="4qO-q8-pac"/>
@@ -1250,7 +1253,7 @@
         <scene sceneID="xc8-o2-ggf">
             <objects>
                 <viewController storyboardIdentifier="registerVC" id="aTF-bt-Vut" customClass="RegisterVC" customModule="breakpoint" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="T67-LK-l7x">
+                    <view key="view" contentMode="scaleToFill" id="T67-LK-l7x" customClass="PastelView" customModule="Pastel">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1367,6 +1370,7 @@
                         <outlet property="credentialsStackView" destination="ySh-eS-2db" id="UAu-H5-8RV"/>
                         <outlet property="emailTxt" destination="aVb-i6-TIT" id="Qd0-2R-Le8"/>
                         <outlet property="passwordTxt" destination="CDg-OL-dwh" id="B6Z-os-nqF"/>
+                        <outlet property="registerView" destination="T67-LK-l7x" id="xaC-NM-sUp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QoI-9x-C7Q" userLabel="First Responder" sceneMemberID="firstResponder"/>

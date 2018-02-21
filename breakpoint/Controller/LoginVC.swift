@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import NVActivityIndicatorView
 import TKSubmitTransition
+import Pastel
 
 class LoginVC: UIViewController {
 
@@ -19,6 +20,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var registerStackView: UIStackView!
     @IBOutlet weak var credentialsStackView: UIStackView!
     @IBOutlet weak var signInLbl: UILabel!
+    @IBOutlet var loginView: PastelView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,15 @@ class LoginVC: UIViewController {
         credentialsStackView.elementsMoveWithKeyboard()
         signInBtn.elementsMoveWithKeyboard()
         screenTap()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        #colorLiteral(red: 0.3960784314, green: 0.4745098039, blue: 0.6078431373, alpha: 1)
+        loginView.startPastelPoint = .bottomLeft
+        loginView.endPastelPoint = .topRight
+        loginView.setColors([UIColor(red: 98/255, green: 39/255, blue: 116/255, alpha: 1.0), UIColor(red: 197/255, green: 51/255, blue: 100/255, alpha: 1.0), UIColor(red: 113/255, green: 23/255, blue: 234/255, alpha: 1.0), UIColor(red: 234/255, green: 96/255, blue: 96/255, alpha: 1.0)])
+        loginView.startAnimation()
     }
     
     @IBAction func registerPressed(_ sender: Any) {

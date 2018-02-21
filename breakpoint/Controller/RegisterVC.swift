@@ -9,21 +9,29 @@
 import UIKit
 import Firebase
 import NVActivityIndicatorView
+import Pastel
 
 class RegisterVC: UIViewController {
 
     @IBOutlet weak var emailTxt: InsetTextField!
     @IBOutlet weak var passwordTxt: InsetTextField!
     @IBOutlet weak var credentialsStackView: UIStackView!
-    @IBOutlet weak var registerView: UIView!
+    @IBOutlet weak var registerView: PastelView!
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTxt.autocorrectionType = .no
         credentialsStackView.elementsMoveWithKeyboard()
-        registerView.bindToKeyboard()
         screenTap()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        registerView.startPastelPoint = .bottomLeft
+        registerView.endPastelPoint = .topRight
+        registerView.setColors([UIColor(red: 98/255, green: 39/255, blue: 116/255, alpha: 1.0), UIColor(red: 197/255, green: 51/255, blue: 100/255, alpha: 1.0), UIColor(red: 113/255, green: 23/255, blue: 234/255, alpha: 1.0), UIColor(red: 234/255, green: 96/255, blue: 96/255, alpha: 1.0)])
+        registerView.startAnimation()
     }
 
     func screenTap(){

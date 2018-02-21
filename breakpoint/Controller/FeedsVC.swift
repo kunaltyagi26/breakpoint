@@ -1,5 +1,5 @@
 //
-//  FirstViewController.swift
+//  FeedsVC.swift
 //  breakpoint
 //
 //  Created by Kunal Tyagi on 23/01/18.
@@ -27,7 +27,7 @@ class FeedsVC: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //view.showGradientSkeleton()
+        //view.showAnimatedGradientSkeleton()
         //view.startSkeletonAnimation()
         DataService.instance.getAllFeedMessages { (messageArray) in
             self.messages = messageArray.reversed()
@@ -45,23 +45,19 @@ extension FeedsVC: UITableViewDelegate, UITableViewDataSource, SkeletonTableView
         return "FeedCell"
     }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return messages.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //tableView.isSkeletonable = false
+        //tableView.stopSkeletonAnimation()
+        //tableView.hideSkeleton()
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as? FeedCell else { return UITableViewCell() }
         let message = messages[indexPath.row]
         DataService.instance.getUserNameAndImage(ForUID: message.senderId) { (userName, image) in
             cell.configureCell(profileImage: UIImage(named: image)!, username: userName, content: message.content)
         }
-        //tableView.isSkeletonable = false
-        //tableView.stopSkeletonAnimation()
-        //tableView.hideSkeleton()
         return cell
     }
 }

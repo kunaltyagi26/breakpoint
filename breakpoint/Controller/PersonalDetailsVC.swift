@@ -12,6 +12,7 @@ import FacebookCore
 import FacebookLogin
 import NVActivityIndicatorView
 import TKSubmitTransition
+import Pastel
 
 class PersonalDetailsVC: UIViewController {
 
@@ -19,6 +20,7 @@ class PersonalDetailsVC: UIViewController {
     @IBOutlet weak var selectProfileBtn: UIButton!
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     @IBOutlet weak var registerBtn: TKTransitionSubmitButton!
+    @IBOutlet var personalDetailsView: PastelView!
     
     //var email: String?
     //var password: String?
@@ -34,6 +36,10 @@ class PersonalDetailsVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        personalDetailsView.startPastelPoint = .bottomLeft
+        personalDetailsView.endPastelPoint = .topRight
+        personalDetailsView.setColors([UIColor(red: 98/255, green: 39/255, blue: 116/255, alpha: 1.0), UIColor(red: 197/255, green: 51/255, blue: 100/255, alpha: 1.0), UIColor(red: 113/255, green: 23/255, blue: 234/255, alpha: 1.0), UIColor(red: 234/255, green: 96/255, blue: 96/255, alpha: 1.0)])
+        personalDetailsView.startAnimation()
         if DataService.instance.avatarName != ""
         {
             image = DataService.instance.avatarName
