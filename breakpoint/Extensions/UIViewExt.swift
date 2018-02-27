@@ -15,8 +15,8 @@ extension UIView{
     }
     
     @objc func keyboardWillShow(notification: NSNotification){
-        let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
-        self.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height)
+        //let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
+        self.transform = CGAffineTransform(translationX: 0, y: -60)
     }
     
     @objc func keyboardWillHide(notification: NSNotification){
@@ -30,7 +30,7 @@ extension UIView{
     
     @objc func keyboardWillShowWithElements(notification: NSNotification){
         //let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
-        self.transform = CGAffineTransform(translationX: 0, y: -40)
+        self.transform = CGAffineTransform(translationX: 0, y: -30)
     }
     
     @objc func keyboardWillHideWithElements(notification: NSNotification){

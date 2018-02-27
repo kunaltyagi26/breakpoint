@@ -13,6 +13,10 @@
     <customFonts key="customFonts">
         <array key="HelveticaNeue.ttc">
             <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Medium</string>
+        </array>
+        <array key="HelveticaNeueLights.ttc">
+            <string>HelveticaNeue-Light</string>
         </array>
         <array key="Menlo.ttc">
             <string>Menlo-Regular</string>
@@ -53,6 +57,9 @@
                                     <constraint firstItem="KYM-Gd-Fs3" firstAttribute="top" secondItem="PM2-t1-qgB" secondAttribute="top" constant="30" id="rwq-q8-uM2"/>
                                     <constraint firstAttribute="height" constant="70" id="zJh-GN-bDN"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qHG-wF-Xw6">
                                 <rect key="frame" x="0.0" y="70" width="375" height="548"/>
@@ -71,6 +78,9 @@
                                                         <constraint firstAttribute="height" constant="50" id="FtP-rw-X9A"/>
                                                         <constraint firstAttribute="width" constant="50" id="bOh-bg-yMV"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="C7e-qW-kMf">
                                                     <rect key="frame" x="85" y="21" width="265" height="58"/>
@@ -91,6 +101,9 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -101,8 +114,14 @@
                                                 <constraint firstItem="g0a-fb-Rzo" firstAttribute="top" secondItem="LN6-vL-QnS" secondAttribute="topMargin" constant="10" id="nSR-He-es1"/>
                                                 <constraint firstItem="g0a-fb-Rzo" firstAttribute="leading" secondItem="LN6-vL-QnS" secondAttribute="leadingMargin" constant="10" id="sJP-td-0Kw"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                            </userDefinedRuntimeAttributes>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.16078431372549018" green="0.16862745098039217" blue="0.20392156862745098" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <outlet property="contentLbl" destination="m3E-3U-035" id="Nie-ho-n7R"/>
                                             <outlet property="profileImage" destination="g0a-fb-Rzo" id="XTp-dC-JiY"/>
@@ -110,6 +129,9 @@
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.25490196078431371" green="0.27058823529411763" blue="0.31372549019607843" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -864,9 +886,9 @@
                                     <constraint firstAttribute="height" constant="334" id="dif-SV-z0O"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_breakpoint" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kk9-Qn-WJD">
-                                <rect key="frame" x="108" y="50" width="159" height="28"/>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="24"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BREAKPOINT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kk9-Qn-WJD">
+                                <rect key="frame" x="92" y="50" width="192.5" height="36"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="30"/>
                                 <color key="textColor" red="0.5607843137254902" green="0.81176470588235294" blue="0.30588235294117649" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -878,7 +900,8 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="lyi-tA-Ja8"/>
                                         </constraints>
-                                        <state key="normal" title=" By Email" image="emailIcon">
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                        <state key="normal" title="BY EMAIL" image="emailIcon">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -888,10 +911,10 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="lse-8t-fna">
                                         <rect key="frame" x="20" y="20" width="303" height="278.5"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="_login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nqz-1z-DDS">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Login" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nqz-1z-DDS">
                                                 <rect key="frame" x="0.0" y="0.0" width="303" height="62"/>
-                                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="18"/>
-                                                <color key="textColor" red="0.015686274509803921" green="0.6705882352941176" blue="0.77254901960784317" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                                <color key="textColor" red="0.66452372069999999" green="0.83083754779999996" blue="0.43913507460000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D9D-Kf-3gz">
@@ -900,8 +923,8 @@
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QoX-jw-cb0">
                                                 <rect key="frame" x="0.0" y="144.5" width="303" height="62"/>
-                                                <color key="backgroundColor" red="0.80784313725490198" green="0.32941176470588235" blue="0.23921568627450979" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                                <color key="backgroundColor" red="0.84647923707962036" green="0.068086817860603333" blue="0.25283011794090271" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                                 <state key="normal" title="LOGIN WITH G+">
                                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
@@ -916,14 +939,14 @@
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T1C-cW-lU8">
                                                 <rect key="frame" x="0.0" y="216.5" width="303" height="62"/>
-                                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="18"/>
-                                                <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" red="0.66452372069999999" green="0.83083754779999996" blue="0.43913507460000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
                                     </stackView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.25490196078431371" green="0.27058823529411763" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.04816911369562149" green="0.049685202538967133" blue="0.12663605809211731" alpha="0.39918664383561642" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="ZYE-X9-IZp" secondAttribute="trailing" constant="20" id="06P-6h-2gC"/>
                                     <constraint firstAttribute="trailing" secondItem="lse-8t-fna" secondAttribute="trailing" constant="20" id="Hov-Zf-rd5"/>
@@ -1110,7 +1133,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I1J-Vi-PfP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-847.20000000000005" y="-0.44977511244377816"/>
+            <point key="canvasLocation" x="-847" y="0.0"/>
         </scene>
         <!--LoginVC-->
         <scene sceneID="9dP-pE-hmL">
@@ -1132,58 +1155,59 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="koe-z3-5gb"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="19"/>
-                                <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="q5f-dd-C1Y">
-                                <rect key="frame" x="36" y="140" width="303" height="220"/>
+                                <rect key="frame" x="36" y="140" width="303" height="202"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDi-9I-ywV">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="50"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
-                                        <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="41"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter your email..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mv1-Bx-hYQ" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="303" height="60"/>
-                                        <color key="backgroundColor" red="0.14613077347048653" green="0.14613077347048653" blue="0.14613077347048653" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mv1-Bx-hYQ" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="41" width="303" height="60"/>
+                                        <color key="backgroundColor" red="0.14613077347048653" green="0.14613077347048653" blue="0.14613077347048653" alpha="0.3031624571917807" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="ZpW-5d-lUW"/>
                                         </constraints>
-                                        <color key="textColor" red="0.56078431370000004" green="0.81176470590000005" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H97-Fz-85w">
-                                        <rect key="frame" x="0.0" y="110" width="303" height="50"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
-                                        <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="101" width="303" height="41"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter your password..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Baq-rI-6sh" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="303" height="60"/>
-                                        <color key="backgroundColor" red="0.1596142760085576" green="0.1596142760085576" blue="0.1596142760085576" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <color key="textColor" red="0.56078431370000004" green="0.81176470590000005" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Baq-rI-6sh" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="142" width="303" height="60"/>
+                                        <color key="backgroundColor" red="0.1596142760085576" green="0.1596142760085576" blue="0.1596142760085576" alpha="0.30433968321917809" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mtn-DA-WdQ">
-                                <rect key="frame" x="57" y="380" width="261.5" height="34"/>
+                                <rect key="frame" x="80.5" y="362" width="214" height="32"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New User? Click to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Saj-8A-I8R">
-                                        <rect key="frame" x="0.0" y="0.0" width="184.5" height="34"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
-                                        <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="141" height="32"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V1n-uF-kpO">
-                                        <rect key="frame" x="194.5" y="0.0" width="67" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                        <rect key="frame" x="151" y="0.0" width="63" height="32"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="Register">
-                                            <color key="titleColor" red="0.66452372069999999" green="0.83083754779999996" blue="0.43913507460000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="registerPressed:" destination="xWM-s8-txd" eventType="touchUpInside" id="lhw-QU-ZU0"/>
@@ -1192,22 +1216,23 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efh-cX-jBO" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransition">
-                                <rect key="frame" x="112.5" y="454" width="150" height="40"/>
-                                <color key="backgroundColor" red="0.16078901290893555" green="0.16078069806098938" blue="0.16078454256057739" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="112.5" y="434" width="150" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="8vB-z1-sUD"/>
                                     <constraint firstAttribute="width" constant="150" id="VMy-12-PmQ"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="19"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                                <color key="tintColor" red="0.79961901903152466" green="0.074791721999645233" blue="0.19010293483734131" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="SIGN IN">
-                                    <color key="titleColor" red="0.66452372074127197" green="0.83083754777908325" blue="0.43913507461547852" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="0.77662521600000001" green="0.18392121789999999" blue="0.2705684304" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="normalCornerRadius">
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="spinnerColor">
-                                        <color key="value" red="0.66452372069999999" green="0.83083754779999996" blue="0.43913507460000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="value" red="0.77662521600723267" green="0.183921217918396" blue="0.27056843042373657" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -1265,79 +1290,65 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email Register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ILX-UF-PQ4">
-                                <rect key="frame" x="36" y="62" width="303" height="50"/>
+                                <rect key="frame" x="36" y="70" width="303" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="ofh-yu-x3P"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="19"/>
-                                <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="ySh-eS-2db">
-                                <rect key="frame" x="36" y="132" width="303" height="220"/>
+                                <rect key="frame" x="36" y="140" width="303" height="202"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKH-WW-eHp">
-                                        <rect key="frame" x="0.0" y="0.0" width="303" height="50"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
-                                        <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="41"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter your email..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVb-i6-TIT" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="303" height="60"/>
-                                        <color key="backgroundColor" red="0.14613077350000001" green="0.14613077350000001" blue="0.14613077350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aVb-i6-TIT" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="41" width="303" height="60"/>
+                                        <color key="backgroundColor" red="0.14613077350000001" green="0.14613077350000001" blue="0.14613077350000001" alpha="0.3028949058219178" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="GxN-DM-fVi"/>
                                         </constraints>
-                                        <color key="textColor" red="0.56078431370000004" green="0.81176470590000005" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wuu-av-pkd">
-                                        <rect key="frame" x="0.0" y="110" width="303" height="50"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
-                                        <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="101" width="303" height="41"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter your password..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CDg-OL-dwh" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="160" width="303" height="60"/>
-                                        <color key="backgroundColor" red="0.159614276" green="0.159614276" blue="0.159614276" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <color key="textColor" red="0.56078431370000004" green="0.81176470590000005" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CDg-OL-dwh" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="142" width="303" height="60"/>
+                                        <color key="backgroundColor" red="0.159614276" green="0.159614276" blue="0.159614276" alpha="0.29658069349315069" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                             </stackView>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i13-2j-qmD" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="157.5" y="303.5" width="60" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="G1w-Ec-8yh"/>
-                                    <constraint firstAttribute="height" constant="60" id="mso-c2-8gr"/>
-                                </constraints>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballGridBeat"/>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="color">
-                                        <color key="value" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ca-Ph-y3s" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransition">
-                                <rect key="frame" x="112.5" y="452" width="150" height="40"/>
-                                <color key="backgroundColor" red="0.1607890129" green="0.16078069810000001" blue="0.1607845426" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="112.5" y="432" width="150" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="2cB-kI-67S"/>
                                     <constraint firstAttribute="height" constant="40" id="41T-M1-vUk"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="19"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <state key="normal" title="NEXT">
-                                    <color key="titleColor" red="0.66452372069999999" green="0.83083754779999996" blue="0.43913507460000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="0.77662521600000001" green="0.18392121789999999" blue="0.2705684304" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="normalCornerRadius">
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="spinnerColor">
-                                        <color key="value" red="0.66452372069999999" green="0.83083754779999996" blue="0.43913507460000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="value" red="0.77662521600000001" green="0.18392121789999999" blue="0.2705684304" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -1351,14 +1362,12 @@
                             <constraint firstItem="MgW-HU-G8H" firstAttribute="top" secondItem="OVh-Me-3Kh" secondAttribute="top" constant="8" id="3xe-FX-IPa"/>
                             <constraint firstItem="OVh-Me-3Kh" firstAttribute="trailing" secondItem="6ca-Ph-y3s" secondAttribute="trailing" constant="112.5" id="587-Fd-LLm"/>
                             <constraint firstItem="6ca-Ph-y3s" firstAttribute="centerX" secondItem="T67-LK-l7x" secondAttribute="centerX" id="9Kt-bK-78u"/>
-                            <constraint firstItem="ILX-UF-PQ4" firstAttribute="top" secondItem="MgW-HU-G8H" secondAttribute="bottom" constant="12" id="E6a-qf-VFl"/>
-                            <constraint firstItem="6ca-Ph-y3s" firstAttribute="top" secondItem="ySh-eS-2db" secondAttribute="bottom" constant="100" id="F0t-Xs-SQl"/>
-                            <constraint firstItem="i13-2j-qmD" firstAttribute="centerY" secondItem="T67-LK-l7x" secondAttribute="centerY" id="GjE-xu-AhP"/>
+                            <constraint firstItem="ILX-UF-PQ4" firstAttribute="top" secondItem="MgW-HU-G8H" secondAttribute="bottom" constant="20" id="E6a-qf-VFl"/>
+                            <constraint firstItem="6ca-Ph-y3s" firstAttribute="top" secondItem="ySh-eS-2db" secondAttribute="bottom" constant="90" id="F0t-Xs-SQl"/>
                             <constraint firstItem="MgW-HU-G8H" firstAttribute="leading" secondItem="OVh-Me-3Kh" secondAttribute="leading" constant="16" id="Hld-2c-p0m"/>
                             <constraint firstItem="OVh-Me-3Kh" firstAttribute="trailing" secondItem="ySh-eS-2db" secondAttribute="trailing" constant="36" id="KJ3-96-cRo"/>
                             <constraint firstItem="OVh-Me-3Kh" firstAttribute="trailing" secondItem="ILX-UF-PQ4" secondAttribute="trailing" constant="36" id="Xe2-Io-Hlh"/>
                             <constraint firstItem="ILX-UF-PQ4" firstAttribute="leading" secondItem="OVh-Me-3Kh" secondAttribute="leading" constant="36" id="aoZ-NI-xCi"/>
-                            <constraint firstItem="i13-2j-qmD" firstAttribute="centerX" secondItem="T67-LK-l7x" secondAttribute="centerX" id="atQ-hH-K7o"/>
                             <constraint firstItem="ySh-eS-2db" firstAttribute="leading" secondItem="OVh-Me-3Kh" secondAttribute="leading" constant="36" id="gBz-Ub-ODb"/>
                             <constraint firstItem="6ca-Ph-y3s" firstAttribute="leading" secondItem="OVh-Me-3Kh" secondAttribute="leading" constant="112.5" id="gnc-ee-tRU"/>
                             <constraint firstItem="ySh-eS-2db" firstAttribute="top" secondItem="ILX-UF-PQ4" secondAttribute="bottom" constant="20" id="n4r-tv-i0l"/>
@@ -1366,9 +1375,9 @@
                         <viewLayoutGuide key="safeArea" id="OVh-Me-3Kh"/>
                     </view>
                     <connections>
-                        <outlet property="activityIndicatorView" destination="i13-2j-qmD" id="bLp-Gu-Wid"/>
                         <outlet property="credentialsStackView" destination="ySh-eS-2db" id="UAu-H5-8RV"/>
                         <outlet property="emailTxt" destination="aVb-i6-TIT" id="Qd0-2R-Le8"/>
+                        <outlet property="nextBtn" destination="6ca-Ph-y3s" id="qMd-sw-0Ev"/>
                         <outlet property="passwordTxt" destination="CDg-OL-dwh" id="B6Z-os-nqF"/>
                         <outlet property="registerView" destination="T67-LK-l7x" id="xaC-NM-sUp"/>
                     </connections>

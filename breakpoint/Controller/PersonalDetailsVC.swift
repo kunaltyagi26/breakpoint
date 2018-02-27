@@ -22,16 +22,12 @@ class PersonalDetailsVC: UIViewController {
     @IBOutlet weak var registerBtn: TKTransitionSubmitButton!
     @IBOutlet var personalDetailsView: PastelView!
     
-    //var email: String?
-    //var password: String?
     var image: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("Called")
-        /*if image != nil {
-            selectProfileBtn.setImage(image, for: .normal)
-        }*/
+        nameTxt.elementsMoveWithKeyboard()
+        registerBtn.bindToKeyboard()
     }
     
     override func viewWillAppear(_ animated: Bool) {

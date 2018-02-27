@@ -22,14 +22,19 @@ class FeedsVC: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
-        //tableView.isSkeletonable = true
+        tableView.isSkeletonable = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //view.showAnimatedGradientSkeleton()
-        //view.startSkeletonAnimation()
+        let gradient = SkeletonGradient(baseColor: UIColor.turquoise)
+        //let animation = GradientDirection.topLeftBottomRight.slidingAnimation()
+        let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .bottomRightTopLeft)
+        view.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+        view.startSkeletonAnimation()
         DataService.instance.getAllFeedMessages { (messageArray) in
+            self.tableView.isSkeletonable = false
+            self.tableView.hideSkeleton()
             self.messages = messageArray.reversed()
             self.tableView.reloadData()
         }
@@ -50,9 +55,6 @@ extension FeedsVC: UITableViewDelegate, UITableViewDataSource, SkeletonTableView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //tableView.isSkeletonable = false
-        //tableView.stopSkeletonAnimation()
-        //tableView.hideSkeleton()
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as? FeedCell else { return UITableViewCell() }
         let message = messages[indexPath.row]
         DataService.instance.getUserNameAndImage(ForUID: message.senderId) { (userName, image) in

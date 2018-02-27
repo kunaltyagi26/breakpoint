@@ -23,7 +23,7 @@ class ShadowView: UIView {
     
     func setUpView() {
         self.layer.shadowOpacity = 0.75
-        self.layer.shadowRadius = 5
+        self.layer.shadowRadius = 10
         self.layer.shadowColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
     }
 }

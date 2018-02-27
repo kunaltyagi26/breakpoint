@@ -34,8 +34,9 @@ class AuthVC: UIViewController {
         authView.setColors([UIColor(red: 98/255, green: 39/255, blue: 116/255, alpha: 1.0), UIColor(red: 197/255, green: 51/255, blue: 100/255, alpha: 1.0), UIColor(red: 113/255, green: 23/255, blue: 234/255, alpha: 1.0), UIColor(red: 234/255, green: 96/255, blue: 96/255, alpha: 1.0)])
         authView.startAnimation()
         let fbButton = UIButton(frame: CGRect(x: 0, y: 0, width: fbBtnView.frame.width, height: fbBtnView.frame.height))
-        fbButton.backgroundColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
-        fbButton.setTitle("Login with FB", for: .normal)
+        fbButton.backgroundColor = #colorLiteral(red: 0.2823529412, green: 0.4039215686, blue: 0.6784313725, alpha: 1)
+        fbButton.setTitle("LOGIN WITH FB", for: .normal)
+        fbButton.titleLabel?.font = UIFont(name: "Helvetica Neue", size: 17)
         fbButton.addTarget(self, action: #selector(fbBtnPressed), for: .touchUpInside)
         fbBtnView.addSubview(fbButton)
     }
