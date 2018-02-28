@@ -23,11 +23,15 @@ class PersonalDetailsVC: UIViewController {
     @IBOutlet var personalDetailsView: PastelView!
     
     var image: String?
+    var overlay: UIView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameTxt.elementsMoveWithKeyboard()
         registerBtn.bindToKeyboard()
+        overlay = UIView(frame: view.frame)
+        overlay!.backgroundColor = UIColor.black
+        overlay!.alpha = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -78,12 +82,17 @@ class PersonalDetailsVC: UIViewController {
     }*/
     
     @IBAction func backPressed(_ sender: Any) {
+        overlay!.alpha = 0.5
+        view.addSubview(overlay!)
+        self.view.bringSubview(toFront: self.activityIndicatorView)
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
         let loginManager: LoginManager = LoginManager()
         loginManager.logOut()
         Auth.auth().currentUser?.delete(completion: { (error) in
             let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
+            self.overlay!.alpha = 0.8
+            self.overlay!.removeFromSuperview()
             self.activityIndicatorView.stopAnimating()
             self.present(loginVC!, animated: true, completion: nil)
         })

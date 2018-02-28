@@ -19,16 +19,25 @@ class MeVC: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
     
+    var overlay: UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        overlay = UIView(frame: view.frame)
+        overlay!.backgroundColor = UIColor.black
+        overlay!.alpha = 0.5
+        view.addSubview(overlay!)
+        self.view.bringSubview(toFront: self.activityIndicatorView)
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
         loadData { (completed) in
             if completed {
+                self.overlay!.alpha = 0.8
+                self.overlay!.removeFromSuperview()
                 self.activityIndicatorView.stopAnimating()
                 self.activityIndicatorView.isHidden = true
             }

@@ -335,11 +335,11 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohm-T7-8JX" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="157.5" y="303.5" width="60" height="60"/>
+                                <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="cPe-cZ-b7e"/>
-                                    <constraint firstAttribute="height" constant="60" id="mKV-9A-RUX"/>
+                                    <constraint firstAttribute="width" constant="40" id="cPe-cZ-b7e"/>
+                                    <constraint firstAttribute="height" constant="40" id="mKV-9A-RUX"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballGridBeat"/>
@@ -960,11 +960,11 @@
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Six-ey-91F" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="157.5" y="303.5" width="60" height="60"/>
+                                <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="OgP-d1-yr0"/>
-                                    <constraint firstAttribute="height" constant="60" id="xuR-eA-LUL"/>
+                                    <constraint firstAttribute="width" constant="40" id="OgP-d1-yr0"/>
+                                    <constraint firstAttribute="height" constant="40" id="xuR-eA-LUL"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballGridBeat"/>
@@ -1021,18 +1021,18 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kO8-QU-NXX">
                                 <rect key="frame" x="36" y="153" width="303" height="20"/>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
-                                <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="Enter your full name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Et-Sx-dqz" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
-                                <rect key="frame" x="36" y="193" width="303" height="60"/>
-                                <color key="backgroundColor" red="0.14613077350000001" green="0.14613077350000001" blue="0.14613077350000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your full name..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Et-Sx-dqz" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
+                                <rect key="frame" x="36" y="180" width="303" height="60"/>
+                                <color key="backgroundColor" red="0.159614276" green="0.159614276" blue="0.159614276" alpha="0.39554794519999997" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="sMK-6G-hhp"/>
                                 </constraints>
-                                <color key="textColor" red="0.56078431370000004" green="0.81176470590000005" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Bu-cs-qvI">
@@ -1040,29 +1040,29 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="6eA-cy-UJV"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="19"/>
-                                <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select profile picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kq9-3Z-Gij">
-                                <rect key="frame" x="36" y="273" width="303" height="20"/>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="17"/>
-                                <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="36" y="260" width="303" height="20"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rUl-Nz-UmT">
-                                <rect key="frame" x="136" y="313" width="102" height="102"/>
+                                <rect key="frame" x="136" y="300" width="102" height="102"/>
                                 <state key="normal" image="defaultProfileImage"/>
                                 <connections>
                                     <action selector="imageBtnPressed:" destination="3j9-ci-dZF" eventType="touchUpInside" id="DFk-4U-LyS"/>
                                 </connections>
                             </button>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1me-8e-Wl8" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
-                                <rect key="frame" x="157.5" y="303.5" width="60" height="60"/>
+                                <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="jpQ-U5-3gt"/>
-                                    <constraint firstAttribute="width" constant="60" id="t9z-gw-5Dv"/>
+                                    <constraint firstAttribute="height" constant="40" id="jpQ-U5-3gt"/>
+                                    <constraint firstAttribute="width" constant="40" id="t9z-gw-5Dv"/>
                                 </constraints>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="typeName" value="ballGridBeat"/>
@@ -1072,22 +1072,22 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="86F-nM-hdR" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransition">
-                                <rect key="frame" x="112.5" y="452" width="150" height="40"/>
-                                <color key="backgroundColor" red="0.1607890129" green="0.16078069810000001" blue="0.1607845426" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="112.5" y="430" width="150" height="40"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="150" id="He9-33-mVX"/>
                                     <constraint firstAttribute="height" constant="40" id="TlB-gj-lNN"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="19"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                 <state key="normal" title="REGISTER">
-                                    <color key="titleColor" red="0.66452372069999999" green="0.83083754779999996" blue="0.43913507460000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="titleColor" red="0.77662521600000001" green="0.18392121789999999" blue="0.2705684304" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="normalCornerRadius">
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="spinnerColor">
-                                        <color key="value" red="0.56078431370000004" green="0.81176470590000005" blue="0.30588235289999999" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="value" red="0.77662521600000001" green="0.18392121789999999" blue="0.2705684304" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
@@ -1106,7 +1106,7 @@
                             <constraint firstItem="Kq9-3Z-Gij" firstAttribute="top" secondItem="0Et-Sx-dqz" secondAttribute="bottom" constant="20" id="MQ3-w3-njy"/>
                             <constraint firstItem="Kq9-3Z-Gij" firstAttribute="leading" secondItem="haS-yg-YD8" secondAttribute="leading" constant="36" id="PLe-AI-8xb"/>
                             <constraint firstItem="haS-yg-YD8" firstAttribute="trailing" secondItem="Kq9-3Z-Gij" secondAttribute="trailing" constant="36" id="PWy-K5-gCS"/>
-                            <constraint firstItem="0Et-Sx-dqz" firstAttribute="top" secondItem="kO8-QU-NXX" secondAttribute="bottom" constant="20" id="QgN-g8-8aS"/>
+                            <constraint firstItem="0Et-Sx-dqz" firstAttribute="top" secondItem="kO8-QU-NXX" secondAttribute="bottom" constant="7" id="QgN-g8-8aS"/>
                             <constraint firstItem="kO8-QU-NXX" firstAttribute="leading" secondItem="haS-yg-YD8" secondAttribute="leading" constant="36" id="SNu-ua-PNG"/>
                             <constraint firstItem="1me-8e-Wl8" firstAttribute="centerY" secondItem="mDF-nq-c0m" secondAttribute="centerY" id="cRX-Ja-KV1"/>
                             <constraint firstItem="kO8-QU-NXX" firstAttribute="top" secondItem="5Bu-cs-qvI" secondAttribute="bottom" constant="33" id="ccx-SK-wUE"/>
@@ -1117,7 +1117,7 @@
                             <constraint firstItem="5Bu-cs-qvI" firstAttribute="top" secondItem="5dU-hV-MGd" secondAttribute="bottom" constant="20" id="let-JP-QBY"/>
                             <constraint firstItem="haS-yg-YD8" firstAttribute="trailing" secondItem="0Et-Sx-dqz" secondAttribute="trailing" constant="36" id="sWk-uJ-3g6"/>
                             <constraint firstItem="1me-8e-Wl8" firstAttribute="centerX" secondItem="mDF-nq-c0m" secondAttribute="centerX" id="xaP-b4-LXT"/>
-                            <constraint firstItem="86F-nM-hdR" firstAttribute="top" secondItem="rUl-Nz-UmT" secondAttribute="bottom" constant="37" id="yyh-X2-K0F"/>
+                            <constraint firstItem="86F-nM-hdR" firstAttribute="top" secondItem="rUl-Nz-UmT" secondAttribute="bottom" constant="28" id="yyh-X2-K0F"/>
                             <constraint firstItem="5dU-hV-MGd" firstAttribute="leading" secondItem="haS-yg-YD8" secondAttribute="leading" constant="16" id="zR8-7w-9ll"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="haS-yg-YD8"/>
@@ -1160,7 +1160,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="q5f-dd-C1Y">
-                                <rect key="frame" x="36" y="140" width="303" height="202"/>
+                                <rect key="frame" x="36" y="140" width="303" height="199"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oDi-9I-ywV">
                                         <rect key="frame" x="0.0" y="0.0" width="303" height="41"/>
@@ -1175,17 +1175,17 @@
                                             <constraint firstAttribute="height" constant="60" id="ZpW-5d-lUW"/>
                                         </constraints>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H97-Fz-85w">
-                                        <rect key="frame" x="0.0" y="101" width="303" height="41"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                        <rect key="frame" x="0.0" y="101" width="303" height="38"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="16"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Baq-rI-6sh" customClass="InsetTextField" customModule="breakpoint" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="142" width="303" height="60"/>
+                                        <rect key="frame" x="0.0" y="139" width="303" height="60"/>
                                         <color key="backgroundColor" red="0.1596142760085576" green="0.1596142760085576" blue="0.1596142760085576" alpha="0.30433968321917809" colorSpace="custom" customColorSpace="displayP3"/>
                                         <color key="tintColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1195,7 +1195,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Mtn-DA-WdQ">
-                                <rect key="frame" x="80.5" y="362" width="214" height="32"/>
+                                <rect key="frame" x="80.5" y="359" width="214" height="32"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New User? Click to" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Saj-8A-I8R">
                                         <rect key="frame" x="0.0" y="0.0" width="141" height="32"/>
@@ -1216,7 +1216,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efh-cX-jBO" customClass="TKTransitionSubmitButton" customModule="TKSubmitTransition">
-                                <rect key="frame" x="112.5" y="434" width="150" height="40"/>
+                                <rect key="frame" x="112.5" y="431" width="150" height="40"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="8vB-z1-sUD"/>
@@ -1528,7 +1528,7 @@
         <image name="whiteCheckmark" width="18" height="14"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="poQ-cw-gE6"/>
+        <segue reference="V4W-Jc-2ON"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
 </document>

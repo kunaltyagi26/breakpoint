@@ -21,10 +21,15 @@ class AuthVC: UIViewController {
     @IBOutlet var activityIndicatorView: NVActivityIndicatorView!
     @IBOutlet var authView: PastelView!
     
+    var overlay: UIView?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         GIDSignIn.sharedInstance().delegate = self as GIDSignInDelegate
         GIDSignIn.sharedInstance().uiDelegate = self as GIDSignInUIDelegate
+        overlay = UIView(frame: view.frame)
+        overlay!.backgroundColor = UIColor.black
+        overlay!.alpha = 0
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,12 +55,17 @@ class AuthVC: UIViewController {
     }
     
     @objc func fbBtnPressed() {
+        overlay!.alpha = 0.5
+        view.addSubview(overlay!)
+        activityIndicatorView.bringSubview(toFront: overlay!)
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
         let loginManager = LoginManager()
         loginManager.logIn(readPermissions: [ .publicProfile, .email ], viewController: self) { loginResult in
             switch loginResult {
             case .failed(let error):
+                self.activityIndicatorView.stopAnimating()
+                self.activityIndicatorView.isHidden = true
                 print(error)
             case .cancelled:
                 print("User cancelled login.")
@@ -87,6 +97,8 @@ class AuthVC: UIViewController {
                                 }
                             })
                         case .failed(let error):
+                            self.activityIndicatorView.stopAnimating()
+                            self.activityIndicatorView.isHidden = true
                             let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
                             let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                             alertController.addAction(alertAction)
@@ -110,6 +122,9 @@ class AuthVC: UIViewController {
 
 extension AuthVC: GIDSignInDelegate {
     func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        overlay!.alpha = 0.5
+        view.addSubview(overlay!)
+        self.view.bringSubview(toFront: self.activityIndicatorView)
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
         if error == nil {
@@ -124,6 +139,8 @@ extension AuthVC: GIDSignInDelegate {
                         DataService.instance.createDBUser(uid: user.uid, userData: userData)
                         print("User created.")
                         guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+                        self.overlay!.alpha = 0.8
+                        self.overlay!.removeFromSuperview()
                         self.activityIndicatorView.stopAnimating()
                         self.present(personalDetailsVC, animated: true, completion: nil)
                     }
@@ -134,6 +151,8 @@ extension AuthVC: GIDSignInDelegate {
             }
         }
         else {
+            activityIndicatorView.stopAnimating()
+            activityIndicatorView.isHidden = true
             let alertController = UIAlertController(title: "Error", message: error.localizedDescription, preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
             alertController.addAction(alertAction)
