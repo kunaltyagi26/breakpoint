@@ -38,6 +38,12 @@ class DataService {
         REF_USERS.child(uid).updateChildValues(userData)
     }
     
+    func deleteDBUser(uid: String, completion: @escaping (_ status: Bool)-> ()) {
+        let ref = REF_USERS.child(uid)
+        ref.removeValue()
+        completion(true)
+    }
+    
     func checkForNewUser(uid: String, completion: @escaping (_ status: Bool)-> ()) {
         var users = [String]()
         REF_USERS.observeSingleEvent(of: .value) { (userSnapshot) in

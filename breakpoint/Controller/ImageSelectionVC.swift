@@ -7,11 +7,14 @@
 //
 
 import UIKit
+import Pastel
 
 class ImageSelectionVC: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet var imageSelectionView: PastelView!
+    @IBOutlet weak var imagesView: UIView!
     
     var imageType: String? = "light"
     
@@ -19,8 +22,17 @@ class ImageSelectionVC: UIViewController {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = UIColor.lightGray
-        //showAnimate()
+        collectionView.backgroundColor = UIColor.black
+        self.imageSelectionView.alpha = 0.7
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        imageSelectionView.startPastelPoint = .bottomLeft
+        imageSelectionView.endPastelPoint = .topRight
+        imageSelectionView.setColors([UIColor(red: 98/255, green: 39/255, blue: 116/255, alpha: 1.0), UIColor(red: 197/255, green: 51/255, blue: 100/255, alpha: 1.0), UIColor(red: 113/255, green: 23/255, blue: 234/255, alpha: 1.0), UIColor(red: 234/255, green: 96/255, blue: 96/255, alpha: 1.0)])
+        imageSelectionView.startAnimation()
+        showAnimate()
     }
     
     @IBAction func closePressed(_ sender: Any) {
@@ -31,7 +43,7 @@ class ImageSelectionVC: UIViewController {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             imageType = "light"
-            collectionView.backgroundColor = UIColor.lightGray
+            collectionView.backgroundColor = UIColor.black
         case 1:
             imageType = "dark"
             collectionView.backgroundColor = UIColor.white
@@ -41,15 +53,16 @@ class ImageSelectionVC: UIViewController {
         collectionView.reloadData()
     }
     
-    /*func showAnimate()
+    func showAnimate()
     {
         //self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
         //self.view.alpha = 0.0;
+        print("Being called now.")
         UIView.animate(withDuration: 0.25, animations: {
-            self.view.alpha = 1.0
-            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+            self.imagesView.alpha = 1.0
+            self.imagesView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         });
-    }*/
+    }
     
     func removeAnimate()
     {

@@ -13,8 +13,8 @@ class NewAnimation: RAMItemAnimation {
     
     override func playAnimation(_ icon: UIImageView, textLabel: UILabel) {
         playBounceAnimation(icon)
-        textLabel.textColor = #colorLiteral(red: 0.6187600493, green: 0.836951673, blue: 0.3785187602, alpha: 1)
-        icon.tintColor = #colorLiteral(red: 0.6187600493, green: 0.836951673, blue: 0.3785187602, alpha: 1)
+        textLabel.textColor = #colorLiteral(red: 0.8464793563, green: 0.06808697432, blue: 0.2528300583, alpha: 1)
+        icon.tintColor = #colorLiteral(red: 0.8464793563, green: 0.06808697432, blue: 0.2528300583, alpha: 1)
     }
     
     override func deselectAnimation(_ icon: UIImageView, textLabel: UILabel, defaultTextColor: UIColor, defaultIconColor: UIColor) {
@@ -23,8 +23,8 @@ class NewAnimation: RAMItemAnimation {
     }
     
     override func selectedState(_ icon: UIImageView, textLabel: UILabel) {
-        textLabel.textColor = #colorLiteral(red: 0.6187600493, green: 0.836951673, blue: 0.3785187602, alpha: 1)
-        icon.tintColor = #colorLiteral(red: 0.6187600493, green: 0.836951673, blue: 0.3785187602, alpha: 1)
+        textLabel.textColor = #colorLiteral(red: 0.8464793563, green: 0.06808697432, blue: 0.2528300583, alpha: 1)
+        icon.tintColor = #colorLiteral(red: 0.8464793563, green: 0.06808697432, blue: 0.2528300583, alpha: 1)
     }
     
     func playBounceAnimation(_ icon : UIImageView) {

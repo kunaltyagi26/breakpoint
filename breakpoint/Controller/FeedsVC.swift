@@ -22,7 +22,7 @@ class FeedsVC: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
-        tableView.isSkeletonable = true
+        //tableView.isSkeletonable = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,15 +30,16 @@ class FeedsVC: UIViewController {
         let gradient = SkeletonGradient(baseColor: UIColor.turquoise)
         //let animation = GradientDirection.topLeftBottomRight.slidingAnimation()
         let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .bottomRightTopLeft)
-        view.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
-        view.startSkeletonAnimation()
+        //view.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+        //view.startSkeletonAnimation()
         DataService.instance.getAllFeedMessages { (messageArray) in
-            self.tableView.isSkeletonable = false
-            self.tableView.hideSkeleton()
+            //self.tableView.isSkeletonable = false
+            //self.tableView.hideSkeleton()
             self.messages = messageArray.reversed()
             self.tableView.reloadData()
         }
     }
+    
     @IBAction func addPressed(_ sender: Any) {
         guard let createPostVC = storyboard?.instantiateViewController(withIdentifier: "createPostVC") as? CreatePostVC else { return }
         presentDetail(viewControllerToPresent: createPostVC)

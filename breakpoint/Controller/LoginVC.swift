@@ -11,11 +11,10 @@ import Firebase
 import NVActivityIndicatorView
 import TKSubmitTransition
 import Pastel
-import TextFieldEffects
 
 class LoginVC: UIViewController {
 
-    @IBOutlet weak var emailTxt: JiroTextField!
+    @IBOutlet weak var emailTxt: InsetTextField!
     @IBOutlet weak var passwordTxt: InsetTextField!
     @IBOutlet weak var signInBtn: TKTransitionSubmitButton!
     @IBOutlet weak var registerStackView: UIStackView!
@@ -64,7 +63,7 @@ class LoginVC: UIViewController {
                 }
                 else {
                     self.signInBtn.setOriginalState()
-                    self.signInBtn.setTitle("Sign In", for: .normal)
+                    self.signInBtn.setTitle("SIGN IN", for: .normal)
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
                     alertController.addAction(alertAction)

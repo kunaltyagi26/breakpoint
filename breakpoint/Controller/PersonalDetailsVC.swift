@@ -27,11 +27,13 @@ class PersonalDetailsVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        nameTxt.delegate = self
         nameTxt.elementsMoveWithKeyboard()
         registerBtn.bindToKeyboard()
         overlay = UIView(frame: view.frame)
         overlay!.backgroundColor = UIColor.black
         overlay!.alpha = 0
+        selectProfileBtn.layer.cornerRadius = 40
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +49,7 @@ class PersonalDetailsVC: UIViewController {
             let avatarName = DataService.instance.avatarName
             if avatarName.contains("light")
             {
-                selectProfileBtn.backgroundColor = UIColor.lightGray
+                selectProfileBtn.backgroundColor = UIColor.black
             }
             else if avatarName.contains("dark") {
                 selectProfileBtn.backgroundColor = UIColor.white
@@ -89,13 +91,23 @@ class PersonalDetailsVC: UIViewController {
         activityIndicatorView.startAnimating()
         let loginManager: LoginManager = LoginManager()
         loginManager.logOut()
-        Auth.auth().currentUser?.delete(completion: { (error) in
-            let loginVC = self.storyboard?.instantiateViewController(withIdentifier: "LoginVC") as? LoginVC
-            self.overlay!.alpha = 0.8
-            self.overlay!.removeFromSuperview()
-            self.activityIndicatorView.stopAnimating()
-            self.present(loginVC!, animated: true, completion: nil)
-        })
+        DataService.instance.deleteDBUser(uid: (Auth.auth().currentUser?.uid)!) { (completed) in
+            if completed {
+                Auth.auth().currentUser?.delete(completion: { (error) in
+                    do {
+                        try Auth.auth().signOut()
+                        let registerVC = self.storyboard?.instantiateViewController(withIdentifier: "registerVC") as? RegisterVC
+                        self.overlay!.alpha = 0.8
+                        self.overlay!.removeFromSuperview()
+                        self.activityIndicatorView.stopAnimating()
+                        self.present(registerVC!, animated: true, completion: nil)
+                    }
+                    catch {
+                        print(error.localizedDescription)
+                    }
+                })
+            }
+        }
     }
     
     @IBAction func RegisterPressed(_ sender: Any) {
@@ -123,4 +135,15 @@ class PersonalDetailsVC: UIViewController {
     }
 }
 
+extension PersonalDetailsVC: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderColor = #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1)
+        textField.layer.borderWidth = 2.0
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        textField.layer.borderWidth = 1.0
+    }
+}
 

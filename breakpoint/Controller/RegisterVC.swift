@@ -23,6 +23,8 @@ class RegisterVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailTxt.delegate = self
+        passwordTxt.delegate = self
         emailTxt.autocorrectionType = .no
         credentialsStackView.elementsMoveWithKeyboard()
         nextBtn.bindToKeyboard()
@@ -85,7 +87,7 @@ class RegisterVC: UIViewController {
                 }
                 else {
                     self.nextBtn.setOriginalState()
-                    self.nextBtn.setTitle("Next", for: .normal)
+                    self.nextBtn.setTitle("NEXT", for: .normal)
                     let alertController = UIAlertController(title: "Error", message: error?.localizedDescription, preferredStyle: .alert)
                     let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(alertAction)
