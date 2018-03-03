@@ -17,6 +17,7 @@ class UserCell: UITableViewCell {
     var showing = false
     
     func configureCell(profileImage: UIImage, email: String, isSelected: Bool) {
+        self.profileImage.layer.cornerRadius = 15
         self.profileImage.image = profileImage
         self.emailLbl.text = email
         if isSelected {

@@ -23,6 +23,7 @@ class PersonalDetailsVC: UIViewController {
     @IBOutlet var personalDetailsView: PastelView!
     
     var image: String?
+    var imageBackground: String?
     var overlay: UIView?
     
     override func viewDidLoad() {
@@ -49,9 +50,11 @@ class PersonalDetailsVC: UIViewController {
             let avatarName = DataService.instance.avatarName
             if avatarName.contains("light")
             {
+                imageBackground = "black"
                 selectProfileBtn.backgroundColor = UIColor.black
             }
             else if avatarName.contains("dark") {
+                imageBackground = "white"
                 selectProfileBtn.backgroundColor = UIColor.white
             }
         }
@@ -113,7 +116,7 @@ class PersonalDetailsVC: UIViewController {
     @IBAction func RegisterPressed(_ sender: Any) {
         registerBtn.startLoadingAnimation()
         Auth.auth().addStateDidChangeListener { (auth, user) in
-            let userData = ["name": self.nameTxt.text!, "image": self.image!]
+            let userData = ["name": self.nameTxt.text!, "image": self.image!, "imageBackground": self.imageBackground!]
             DataService.instance.updateNameAndPicture(uid: (user?.uid)!, userData: userData)
             self.registerBtn.startFinishAnimation(1, completion: {
                 self.performSegue(withIdentifier: "tabbedVC", sender: self)

@@ -25,9 +25,16 @@ class CreatePostVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        DataService.instance.getUserNameAndImage(ForUID: (Auth.auth().currentUser?.uid)!) { (username, image) in
+        DataService.instance.getUserNameAndImage(ForUID: (Auth.auth().currentUser?.uid)!) { (username, image, imageBackground) in
             self.usernameLbl.text = username
+            self.profileImage.layer.cornerRadius = 20
             self.profileImage.image = UIImage(named: image)
+            if imageBackground == "black" {
+                self.profileImage.backgroundColor = UIColor.black
+            }
+            else {
+                self.profileImage.backgroundColor = UIColor.white
+            }
         }
     }
     

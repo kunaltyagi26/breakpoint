@@ -103,14 +103,21 @@ class DataService {
         }
     }
     
-    func getUserNameAndImage(ForUID uid: String, completion: @escaping (_ username: String, _ image: String)-> ()) {
+    func getUserNameAndImage(ForUID uid: String, completion: @escaping (_ username: String, _ image: String, _ imageBackground: String)-> ()) {
         REF_USERS.observeSingleEvent(of: .value) { (userSnapshot) in
             guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
             for user in userSnapshot {
                 if user.key == uid {
+                    var imageBackground: String? = ""
                     let name = user.childSnapshot(forPath: "name").value as! String
                     let image = user.childSnapshot(forPath: "image").value as! String
-                    completion(name, image)
+                    if image.contains("light") {
+                        imageBackground = "black"
+                    }
+                    else if image.contains("dark") {
+                        imageBackground = "white"
+                    }
+                    completion(name, image, imageBackground!)
                 }
             }
         }

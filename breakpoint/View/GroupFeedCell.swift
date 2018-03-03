@@ -13,8 +13,15 @@ class GroupFeedCell: UITableViewCell {
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var contentLbl: UILabel!
     
-    func configureCell(image: UIImage, username: String, content: String) {
+    func configureCell(image: UIImage, imageBackground: String, username: String, content: String) {
+        self.profileImage.layer.cornerRadius = 20
         self.profileImage.image = image
+        if imageBackground == "black" {
+            self.profileImage.backgroundColor = UIColor.black
+        }
+        else {
+            self.profileImage.backgroundColor = UIColor.white
+        }
         self.usernameLbl.text = username
         self.contentLbl.text = content
     }

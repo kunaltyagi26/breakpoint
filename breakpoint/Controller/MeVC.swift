@@ -45,9 +45,16 @@ class MeVC: UIViewController {
     }
     
     func loadData(completion: @escaping (_ status: Bool)-> ()) {
-        DataService.instance.getUserNameAndImage(ForUID: (Auth.auth().currentUser?.uid)!) { (username, image) in
+        DataService.instance.getUserNameAndImage(ForUID: (Auth.auth().currentUser?.uid)!) { (username, image, imageBackground) in
+            self.profileImage.layer.cornerRadius = 40
             self.usernameLbl.text = username
             self.profileImage.image = UIImage(named: image)
+            if imageBackground == "black" {
+                self.profileImage.backgroundColor = UIColor.black
+            }
+            else {
+                self.profileImage.backgroundColor = UIColor.white
+            }
         }
         completion(true)
     }

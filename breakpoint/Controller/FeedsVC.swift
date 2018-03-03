@@ -58,8 +58,8 @@ extension FeedsVC: UITableViewDelegate, UITableViewDataSource, SkeletonTableView
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as? FeedCell else { return UITableViewCell() }
         let message = messages[indexPath.row]
-        DataService.instance.getUserNameAndImage(ForUID: message.senderId) { (userName, image) in
-            cell.configureCell(profileImage: UIImage(named: image)!, username: userName, content: message.content)
+        DataService.instance.getUserNameAndImage(ForUID: message.senderId) { (userName, image, imageBackground) in
+            cell.configureCell(profileImage: UIImage(named: image)!, imageBackground: imageBackground, username: userName, content: message.content)
         }
         return cell
     }
