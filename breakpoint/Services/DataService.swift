@@ -19,7 +19,7 @@ class DataService {
     private var _REF_GROUPS = DB_BASE.child("groups")
     private var _REF_FEED = DB_BASE.child("feed")
     
-    public private(set) var avatarName = ""
+    public private(set) var avatarName = UIImage()
     
     var REF_BASE: DatabaseReference {
         return _REF_BASE
@@ -189,7 +189,7 @@ class DataService {
         }
     }
     
-    func setAvatarName(avatarName: String)
+    func setAvatarName(avatarName: UIImage)
     {
         self.avatarName = avatarName
     }

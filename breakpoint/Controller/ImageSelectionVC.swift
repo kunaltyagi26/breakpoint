@@ -8,6 +8,7 @@
 
 import UIKit
 import Pastel
+import Photos
 
 class ImageSelectionVC: UIViewController {
 
@@ -17,6 +18,8 @@ class ImageSelectionVC: UIViewController {
     @IBOutlet weak var imagesView: UIView!
     
     var imageType: String? = "light"
+    var imagePicker = UIImagePickerController()
+    var selectedImageFromPicker = UIImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +27,8 @@ class ImageSelectionVC: UIViewController {
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.black
         self.imageSelectionView.alpha = 0.7
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +58,46 @@ class ImageSelectionVC: UIViewController {
         collectionView.reloadData()
     }
     
+    @IBAction func fromGalleryPressed(_ sender: Any) {
+        checkPermission()
+    }
+    
+    func checkPermission() {
+        let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
+        switch photoAuthorizationStatus {
+        case .authorized:
+            //print("Access is granted by user")
+            if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+                //print("Button capture")
+                
+                imagePicker.sourceType = .savedPhotosAlbum;
+                
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        case .notDetermined:
+            PHPhotoLibrary.requestAuthorization({
+                (newStatus) in
+                //print("status is \(newStatus)")
+                /*if newStatus ==  PHAuthorizationStatus.authorized {
+                    if UIImagePickerController.isSourceTypeAvailable(.savedPhotosAlbum){
+                        print("Button capture")
+                        
+                        self.imagePicker.sourceType = .savedPhotosAlbum;
+                        
+                        self.present(self.imagePicker, animated: true, completion: nil)
+                    }
+                }*/
+            })
+            //print("It is not determined until now")
+        case .restricted:
+            // same same
+            print("User do not have access to photo album.")
+        case .denied:
+            // same same
+            print("User has denied the permission.")
+        }
+    }
+    
     func showAnimate()
     {
         //self.view.transform = CGAffineTransform(scaleX: 1.3, y: 1.3)
@@ -73,7 +118,8 @@ class ImageSelectionVC: UIViewController {
             if (finished)
             {
                 //self.view.removeFromSuperview()
-                //guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+                /*guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+                self.present(personalDetailsVC, animated: true, completion: nil)*/
                 self.dismiss(animated: false, completion: nil)
             }
         });
@@ -103,13 +149,45 @@ extension ImageSelectionVC: UICollectionViewDelegate, UICollectionViewDataSource
         personalDetailsVC.setImage(selectedImage: selectedImage.profileImage.image!)
         removeAnimate()
         personalDetailsVC.configureImage(selectedImage: selectedImage.profileImage.image!)*/
+        
         if imageType == "light" {
-            DataService.instance.setAvatarName(avatarName: "light\(indexPath.item)")
+            //DataService.instance.setAvatarName(avatarName: "light\(indexPath.item)")
+            selectedImageFromPicker = UIImage(named: "light\(indexPath.item)")!
+            DataService.instance.setAvatarName(avatarName: selectedImageFromPicker)
         }
         else if imageType == "dark" {
-            DataService.instance.setAvatarName(avatarName: "dark\(indexPath.item)")
+            //DataService.instance.setAvatarName(avatarName: "dark\(indexPath.item)")
+            selectedImageFromPicker = UIImage(named: "light\(indexPath.item)")!
+            DataService.instance.setAvatarName(avatarName: selectedImageFromPicker)
         }
+        
+        guard let personalDetailsVC = storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+        personalDetailsVC.setImage(selectedImage: selectedImageFromPicker)
+        
         removeAnimate()
         //dismiss(animated: true, completion: nil)
+    }
+}
+
+
+extension ImageSelectionVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+            selectedImageFromPicker = editedImage
+        }
+        else if let orginalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            selectedImageFromPicker = orginalImage
+            /*let imgData: NSData = NSData(data: UIImageJPEGRepresentation((orginalImage), 1)!)
+            let imageSize: Int = imgData.length
+            print("size of image in KB: %f ", Double(imageSize) / 1024.0)*/
+        }
+        guard let personalDetailsVC = storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
+        personalDetailsVC.setImage(selectedImage: selectedImageFromPicker)
+        dismiss(animated: true, completion: nil)
+        present(personalDetailsVC, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 }

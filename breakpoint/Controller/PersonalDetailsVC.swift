@@ -22,7 +22,7 @@ class PersonalDetailsVC: UIViewController {
     @IBOutlet weak var registerBtn: TKTransitionSubmitButton!
     @IBOutlet var personalDetailsView: PastelView!
     
-    var image: String?
+    var image: UIImage?
     var imageBackground: String?
     var overlay: UIView?
     
@@ -35,6 +35,7 @@ class PersonalDetailsVC: UIViewController {
         overlay!.backgroundColor = UIColor.black
         overlay!.alpha = 0
         selectProfileBtn.layer.cornerRadius = 40
+        //selectProfileBtn.setImage(image, for: .normal)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,11 +44,12 @@ class PersonalDetailsVC: UIViewController {
         personalDetailsView.endPastelPoint = .topRight
         personalDetailsView.setColors([UIColor(red: 98/255, green: 39/255, blue: 116/255, alpha: 1.0), UIColor(red: 197/255, green: 51/255, blue: 100/255, alpha: 1.0), UIColor(red: 113/255, green: 23/255, blue: 234/255, alpha: 1.0), UIColor(red: 234/255, green: 96/255, blue: 96/255, alpha: 1.0)])
         personalDetailsView.startAnimation()
-        if DataService.instance.avatarName != ""
+        /*if DataService.instance.avatarName != nil
         {
             image = DataService.instance.avatarName
-            selectProfileBtn.setImage(UIImage(named: image!), for: .normal)
-            let avatarName = DataService.instance.avatarName
+            //selectProfileBtn.setImage(UIImage(named: image!), for: .normal)
+            selectProfileBtn.setImage(image, for: .normal)
+            /*let avatarName = DataService.instance.avatarName
             if avatarName.contains("light")
             {
                 imageBackground = "black"
@@ -56,7 +58,16 @@ class PersonalDetailsVC: UIViewController {
             else if avatarName.contains("dark") {
                 imageBackground = "white"
                 selectProfileBtn.backgroundColor = UIColor.white
-            }
+            }*/
+        }*/
+        
+        image = DataService.instance.avatarName
+        print(image)
+        if image == nil {
+            selectProfileBtn.setImage(UIImage(named: "defaultProfileImage"), for: .normal)
+        }
+        else {
+            selectProfileBtn.setImage(image, for: .normal)
         }
     }
     
@@ -65,7 +76,7 @@ class PersonalDetailsVC: UIViewController {
         self.password = password
     }*/
 
-    /*func setImage(selectedImage: UIImage) {
+    func setImage(selectedImage: UIImage) {
         print(selectedImage)
         self.image = selectedImage
         print(image!)
@@ -73,7 +84,7 @@ class PersonalDetailsVC: UIViewController {
         //selectProfileBtn.setImage(image, for: .normal)
     }
     
-    func configureImage(selectedImage: UIImage) {
+    /*func configureImage(selectedImage: UIImage) {
         print("Entered configure.")
         print(selectedImage)
         if let tempBtn = self.selectProfileBtn
@@ -116,11 +127,11 @@ class PersonalDetailsVC: UIViewController {
     @IBAction func RegisterPressed(_ sender: Any) {
         registerBtn.startLoadingAnimation()
         Auth.auth().addStateDidChangeListener { (auth, user) in
-            let userData = ["name": self.nameTxt.text!, "image": self.image!, "imageBackground": self.imageBackground!]
+            /*let userData = ["name": self.nameTxt.text!, "image": self.image!, "imageBackground": self.imageBackground!]
             DataService.instance.updateNameAndPicture(uid: (user?.uid)!, userData: userData)
             self.registerBtn.startFinishAnimation(1, completion: {
                 self.performSegue(withIdentifier: "tabbedVC", sender: self)
-            })
+            })*/
         }
     }
     
