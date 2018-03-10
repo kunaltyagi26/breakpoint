@@ -71,8 +71,11 @@ class AuthVC: UIViewController {
                 print("User cancelled login.")
             case .success(let grantedPermissions, let declinedPermissions, let accessToken):
                 print("Logged in!")
-                let credential = FacebookAuthProvider.credential(withAccessToken: String(describing: AccessToken.current))
+                let credential = FacebookAuthProvider.credential(withAccessToken: String(describing: accessToken.authenticationToken))
+                print(AccessToken.current?.authenticationToken)
+                print(accessToken.authenticationToken)
                 Auth.auth().signIn(with: credential) { (user, error) in
+                  print(error)
                     let req = GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], accessToken: accessToken, httpMethod: GraphRequestHTTPMethod(rawValue: "GET")!, apiVersion: .defaultVersion)
                     let request = GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: FacebookCore.GraphAPIVersion.defaultVersion)
                     request.start { (response, result) in
@@ -82,15 +85,15 @@ class AuthVC: UIViewController {
                             let email = dict["email"]
                             let userData = ["provider": "Facebook", "email": email]
                             print((AccessToken.current?.userId)!)
-                            //print((Auth.auth().currentUser?.uid)!)
-                            DataService.instance.checkForNewUser(uid: (AccessToken.current?.userId)!, completion: { (isNewUser) in
+                            DataService.instance.checkForNewUser(uid: (Auth.auth().currentUser?.uid)!, completion: { (isNewUser) in
                                 print(isNewUser)
                                 if isNewUser {
-                                    DataService.instance.createDBUser(uid: (AccessToken.current?.userId)!, userData: userData)
+                                    DataService.instance.createDBUser(uid: (Auth.auth().currentUser?.uid)!, userData: userData)
                                     print("User created.")
                                     guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
                                     self.activityIndicatorView.stopAnimating()
-                                    self.present(personalDetailsVC, animated: true, completion: nil)
+//                                    self.present(personalDetailsVC, animated: true, completion: nil)
+                                   self.dismiss(animated: true, completion: nil)
                                 }
                                 else {
                                     self.dismiss(animated: true, completion: nil)
@@ -142,7 +145,8 @@ extension AuthVC: GIDSignInDelegate {
                         self.overlay!.alpha = 0.8
                         self.overlay!.removeFromSuperview()
                         self.activityIndicatorView.stopAnimating()
-                        self.present(personalDetailsVC, animated: true, completion: nil)
+//                        self.present(personalDetailsVC, animated: true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                     }
                     else {
                         self.dismiss(animated: true, completion: nil)
