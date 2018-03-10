@@ -23,6 +23,18 @@ class CreateGroupsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         doneBtn.isHidden = true
+        TitleTxt.delegate = self
+        DescriptionTxt.delegate = self
+        emailSearchTxt.delegate = self
+        TitleTxt.layer.cornerRadius = 10
+        TitleTxt.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
+        TitleTxt.layer.borderWidth = 1.0
+        DescriptionTxt.layer.cornerRadius = 10
+        DescriptionTxt.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
+        DescriptionTxt.layer.borderWidth = 1.0
+        emailSearchTxt.layer.cornerRadius = 10
+        emailSearchTxt.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
+        emailSearchTxt.layer.borderWidth = 1.0
     }
     
     override func viewDidLoad() {
@@ -118,6 +130,14 @@ class CreateGroupsVC: UIViewController {
  }
  
  extension CreateGroupsVC: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
+        textField.layer.borderWidth = 2.0
+    }
     
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        textField.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
+        textField.layer.borderWidth = 1.0
+    }
  }
  

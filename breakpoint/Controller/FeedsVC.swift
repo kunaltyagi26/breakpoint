@@ -22,19 +22,23 @@ class FeedsVC: UIViewController {
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100.0
-        //tableView.isSkeletonable = true
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let gradient = SkeletonGradient(baseColor: UIColor.turquoise)
-        //let animation = GradientDirection.topLeftBottomRight.slidingAnimation()
-        let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .bottomRightTopLeft)
-        //view.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
-        //view.startSkeletonAnimation()
+        //if messages.count == 0 {
+            tableView.isSkeletonable = true
+            let gradient = SkeletonGradient(baseColor: UIColor.turquoise)
+            //let animation = GradientDirection.topLeftBottomRight.slidingAnimation()
+            let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .bottomRightTopLeft)
+            view.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)
+            view.startSkeletonAnimation()
+        //}
+        
         DataService.instance.getAllFeedMessages { (messageArray) in
-            //self.tableView.isSkeletonable = false
-            //self.tableView.hideSkeleton()
+            print("Entered!!!")
+            self.tableView.isSkeletonable = false
+            self.tableView.hideSkeleton()
             self.messages = messageArray.reversed()
             self.tableView.reloadData()
         }
@@ -46,9 +50,13 @@ class FeedsVC: UIViewController {
     }
 }
 
-extension FeedsVC: UITableViewDelegate, UITableViewDataSource, SkeletonTableViewDataSource {
+extension FeedsVC: UITableViewDelegate, SkeletonTableViewDataSource {
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdenfierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier {
         return "FeedCell"
+    }
+    
+    func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1 + messages.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -57,6 +65,11 @@ extension FeedsVC: UITableViewDelegate, UITableViewDataSource, SkeletonTableView
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as? FeedCell else { return UITableViewCell() }
+        if indexPath.row > messages.count - 1 {
+            return cell
+        }
+        cell.isSkeletonable = false
+        cell.hideSkeleton()
         let message = messages[indexPath.row]
         DataService.instance.getUserNameAndImage(ForUID: message.senderId) { (userName, image, imageBackground) in
             cell.configureCell(profileImage: UIImage(named: image)!, imageBackground: imageBackground, username: userName, content: message.content)

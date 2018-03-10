@@ -23,29 +23,39 @@ class MeVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         overlay = UIView(frame: view.frame)
         overlay!.backgroundColor = UIColor.black
-        overlay!.alpha = 0.5
+        overlay!.alpha = 0.8
         view.addSubview(overlay!)
         self.view.bringSubview(toFront: self.activityIndicatorView)
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
-        loadData { (completed) in
-            if completed {
-                self.overlay!.alpha = 0.8
-                self.overlay!.removeFromSuperview()
-                self.activityIndicatorView.stopAnimating()
-                self.activityIndicatorView.isHidden = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.loadData { (completed) in
+                if completed {
+                    //self.overlay!.alpha = 0.8
+//                    self.overlay!.removeFromSuperview()
+//                    self.activityIndicatorView.stopAnimating()
+//                    self.activityIndicatorView.isHidden = true
+                }
             }
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
+    
     func loadData(completion: @escaping (_ status: Bool)-> ()) {
         DataService.instance.getUserNameAndImage(ForUID: (Auth.auth().currentUser?.uid)!) { (username, image, imageBackground) in
+//            self.overlay = UIView(frame: self.view.frame)
+//            self.overlay!.backgroundColor = UIColor.black
+//            self.overlay!.alpha = 0.8
+//            self.view.addSubview(self.overlay!)
+//            self.view.bringSubview(toFront: self.activityIndicatorView)
+            self.overlay!.removeFromSuperview()
+            self.activityIndicatorView.stopAnimating()
+            self.activityIndicatorView.isHidden = true
             self.profileImage.layer.cornerRadius = 40
             self.usernameLbl.text = username
             self.profileImage.image = UIImage(named: image)
