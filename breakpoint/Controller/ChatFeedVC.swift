@@ -55,10 +55,10 @@ class ChatFeedVC: UIViewController {
         self.profileImage.image = UIImage(named: image!)
         self.username.text = name
     }
-
-    @IBAction func backPressed(_ sender: Any) {
-        guard let chatVC = storyboard?.instantiateViewController(withIdentifier: "chatVC") as? ChatVC else { return }
-        present(chatVC, animated: true, completion: nil)
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let tabbarController = segue.destination as! UITabBarController
+        tabbarController.selectedIndex = 1
     }
     
     @IBAction func sendPressed(_ sender: Any) {
