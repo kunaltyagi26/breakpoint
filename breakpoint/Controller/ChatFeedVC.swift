@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import RAMAnimatedTabBarController
 
 class ChatFeedVC: UIViewController {
 
@@ -57,8 +58,8 @@ class ChatFeedVC: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let tabbarController = segue.destination as! UITabBarController
-        tabbarController.selectedIndex = 1
+        let tabbarController = segue.destination as! RAMAnimatedTabBarController
+        tabbarController.setSelectIndex(from: 0, to: 1)
     }
     
     @IBAction func sendPressed(_ sender: Any) {
