@@ -36,7 +36,7 @@ class FeedsVC: UIViewController {
         //}
         
         DataService.instance.getAllFeedMessages { (messageArray) in
-            print("Entered!!!")
+            //print("Entered!!!")
             self.tableView.isSkeletonable = false
             self.tableView.hideSkeleton()
             self.messages = messageArray.reversed()

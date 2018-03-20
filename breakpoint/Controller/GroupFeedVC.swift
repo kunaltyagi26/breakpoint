@@ -48,7 +48,10 @@ class GroupFeedVC: UIViewController {
                 self.tableView.reloadData()
                 
                 if self.groupMessages.count > 0 {
-                    self.tableView.scrollToRow(at: IndexPath.init(row: self.groupMessages.count - 1, section: 0), at: .none, animated: true)
+                    DispatchQueue.main.async {
+                        let indexPath = IndexPath(row: self.groupMessages.count - 1, section: 0)
+                        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                    }
                 }
             })
         }
