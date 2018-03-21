@@ -104,20 +104,6 @@ extension ChatFeedVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "chatFeedCell") as? ChatFeedCell else { return UITableViewCell() }
-        if messages[indexPath.row].fromId != Auth.auth().currentUser?.uid {
-            //cell.messageView.translatesAutoresizingMaskIntoConstraints = false
-            //view.addConstraint(NSLayoutConstraint(item: cell.messageView, attribute: .trailing, relatedBy: .equal, toItem: view, attribute: .trailing, multiplier: 1, constant: 16))
-            print("Moved to left for " + String(describing: indexPath.row))
-            cell.messageView.frame = CGRect(x: 16, y: 0, width: cell.messageView.frame.width, height: cell.messageView.frame.height)
-            cell.messageView.backgroundColor = #colorLiteral(red: 0.7540688515, green: 0.7540867925, blue: 0.7540771365, alpha: 0.3039383562)
-        }
-        else {
-            //cell.messageView.translatesAutoresizingMaskIntoConstraints = false
-            //view.addConstraint(NSLayoutConstraint(item: cell.messageView, attribute: .leading, relatedBy: .equal, toItem: view, attribute: .leading, multiplier: 1, constant: 16))
-            print("Moved to right for " + String(describing: indexPath.row))
-            cell.messageView.frame = CGRect(x: view.frame.width - cell.messageView.frame.width - 16, y: 0, width: cell.messageView.frame.width, height: cell.messageView.frame.height)
-            cell.messageView.backgroundColor = #colorLiteral(red: 0.2978684604, green: 0.3234421611, blue: 1, alpha: 1)
-        }
         let chatMessage = messages[indexPath.row]
         cell.configureCell(chatMessage: chatMessage)
         return cell
