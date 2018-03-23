@@ -125,30 +125,20 @@ class DataService {
     }
     
     func getAllChatMessages(userId: String, completion: @escaping (_ messageArray: [ChatMessage]) -> ()) {
-        //print("Get all chat messages.")
         var chatMessageArray = [ChatMessage]()
         var addedMessages = [String]()
         REF_CHATS.child((Auth.auth().currentUser?.uid)!).child(userId).observe(.value) { (MessageIdSnapshot) in
             guard let MessageIdSnapshot = MessageIdSnapshot.children.allObjects as? [DataSnapshot] else { return }
             for messageId in MessageIdSnapshot {
-                //let messageId = message.childSnapshot(forPath: "messageId").value as! String
-                //print("MessageId Key: " + String(messageId.key))
                 self.REF_MESSAGES.observe(.value, with: { (userMessageSnapshot) in
-                    //print("Checking for messages...")
                     guard let userMessageSnapshot = userMessageSnapshot.children.allObjects as? [DataSnapshot] else { return }
                     for message in userMessageSnapshot {
-                        //print("Message Key: " + String(message.key))
                         if message.key == messageId.key && !addedMessages.contains(messageId.key) {
-                            //print("Keys matched!!!")
                             addedMessages.append(messageId.key)
                             let fromId = message.childSnapshot(forPath: "fromId").value as! String
                             let toId = message.childSnapshot(forPath: "toId").value as! String
                             let content = message.childSnapshot(forPath: "content").value as! String
                             let timestamp = message.childSnapshot(forPath: "timestamp").value as! String
-                            //print(fromId)
-                            //print(toId)
-                            //print(content)
-                            //print(timestamp)
                             let chatMessage = ChatMessage(content: content, fromId: fromId, toId: toId, timestamp: timestamp)
                             chatMessageArray.append(chatMessage)
                         }
@@ -160,17 +150,55 @@ class DataService {
         
     }
     
-    /*func getChatContacts(id: String, completion: @escaping (_ users: [String])-> ()) {
+    func getChatContactDetails(id: String, completion: @escaping (_ users: [Users], _ messages: [ChatMessage])-> ()) {
         var userArray = [Users]()
-        REF_CHATS.observeSingleEvent(of: .value) { (userSnapshot) in
-            guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
-            for user in userSnapshot {
-                if user.key == Auth.auth().currentUser?.uid {
-                    let chatUserId = user.childSnapshot(forPath: <#T##String#>)
+        var messageArray = [ChatMessage]()
+        REF_CHATS.child(id).observe(.value) { (userChatSnapshot) in
+            guard let userChatSnapshot = userChatSnapshot.children.allObjects as? [DataSnapshot] else { return }
+            //print(userChatSnapshot.count)
+            for chatUser in userChatSnapshot {
+                self.REF_USERS.observeSingleEvent(of: .value) { (userSnapshot) in
+                    guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
+                    for user in userSnapshot {
+                        if user.key == chatUser.key {
+                            let email = user.childSnapshot(forPath: "email").value as! String
+                            let image = user.childSnapshot(forPath: "image").value as! String
+                            let name = user.childSnapshot(forPath: "name").value as! String
+                            let provider = user.childSnapshot(forPath: "provider").value as! String
+                            let currentUser = Users(email: email, name: name, profileImage: image, provider: provider)
+                            //print(name)
+                            //print(image)
+                            userArray.append(currentUser)
+                        }
+                    }
+                    //print(userArray.count)
                 }
+                self.REF_CHATS.child(id).child(chatUser.key).observe(.value, with: { (chatMessagesSnapshot) in
+                    guard let chatMessagesSnapshot = chatMessagesSnapshot.children.allObjects as? [DataSnapshot] else { return }
+                    //print(chatMessagesSnapshot.count)
+                    for chatMessage in chatMessagesSnapshot {
+                        self.REF_MESSAGES.observeSingleEvent(of: .value, with: { (messageSnapshot) in
+                            guard let messageSnap = messageSnapshot.children.allObjects as? [DataSnapshot] else { return }
+                            //print(messageSnap.count)
+                            let lastMessage = messageSnap[messageSnap.count - 1]
+                            for message in messageSnap {
+                                if message.key == chatMessage.key {
+                                    let fromId = lastMessage.childSnapshot(forPath: "fromId").value as! String
+                                    let toId = lastMessage.childSnapshot(forPath: "toId").value as! String
+                                    let content = lastMessage.childSnapshot(forPath: "content").value as! String
+                                    let timestamp = lastMessage.childSnapshot(forPath: "timestamp").value as! String
+                                    let currentMessage = ChatMessage(content: content, fromId: fromId, toId: toId, timestamp: timestamp)
+                                    messageArray.append(currentMessage)
+                                }
+                            }
+                        })
+                    }
+                })
             }
+            print(userArray.count)
+            completion(userArray, messageArray)
         }
-    }*/
+    }
     
     func getAllContacts(completion: @escaping (_ idArray: [String], _ users: [Users])-> ()) {
         var userArray = [Users]()
