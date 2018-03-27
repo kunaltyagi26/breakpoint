@@ -22,10 +22,15 @@ class ChatVC: UIViewController {
         tableView.dataSource = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        DataService.instance.getChatContactDetails(id: (Auth.auth().currentUser?.uid)!) { (users, chatMessages) in
+    override func viewWillAppear(_ animated: Bool) {
+        DataService.instance.getChatContactDetails(id: (Auth.auth().currentUser?.uid)!) { (users) in
             self.userArray = users
-            self.chatMessageArray = chatMessages
+//            for user in self.userArray {
+//                print(user.name)
+//                print(user.profileImage)
+//            }
+            print(self.userArray.count)
+            //self.chatMessageArray = chatMessages
             self.tableView.reloadData()
         }
     }
@@ -42,12 +47,14 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(userArray.count)
         return userArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell") as? ChatCell else { return UITableViewCell() }
-        cell.configureCell(profileImage: UIImage(named: userArray[indexPath.row].profileImage)! , name: userArray[indexPath.row].name, recentMessage: chatMessageArray[indexPath.row].content, timestamp: chatMessageArray[indexPath.row].timestamp)
+        print(userArray[indexPath.row].name)
+        cell.configureCell(profileImage: UIImage(named: userArray[indexPath.row].profileImage)!, name: userArray[indexPath.row].name, recentMessage: chatMessageArray[indexPath.row].content, timestamp: chatMessageArray[indexPath.row].timestamp)
         return cell
     }
 }
