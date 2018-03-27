@@ -316,27 +316,36 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KmW-Ot-6g9">
                                 <rect key="frame" x="0.0" y="70" width="375" height="275"/>
                                 <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sdg-vS-eP2" customClass="PastelView" customModule="Pastel">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="HdM-yo-Ujr">
-                                        <rect key="frame" x="138" y="30" width="100" height="100"/>
+                                        <rect key="frame" x="138" y="100" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="Hhz-pk-6iA"/>
                                             <constraint firstAttribute="width" constant="100" id="LEl-Hm-nC5"/>
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUB-If-XCy">
-                                        <rect key="frame" x="188" y="150" width="0.0" height="0.0"/>
-                                        <fontDescription key="fontDescription" name="Menlo-Regular" family="Menlo" pointSize="18"/>
-                                        <color key="textColor" red="0.015686274510000001" green="0.6705882353" blue="0.7725490196" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="187" y="38" width="0.0" height="30"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="25"/>
+                                        <color key="textColor" red="0.95722240209999998" green="0.97237414119999999" blue="0.98431676629999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.95722240209579468" green="0.97237414121627808" blue="0.98431676626205444" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstItem="hUB-If-XCy" firstAttribute="top" secondItem="HdM-yo-Ujr" secondAttribute="bottom" constant="20" id="ETe-QH-PN6"/>
+                                    <constraint firstItem="HdM-yo-Ujr" firstAttribute="top" secondItem="hUB-If-XCy" secondAttribute="bottom" constant="32" id="1Aa-Xr-rEy"/>
+                                    <constraint firstItem="hUB-If-XCy" firstAttribute="centerX" secondItem="KmW-Ot-6g9" secondAttribute="centerX" id="1S4-BJ-QCe"/>
+                                    <constraint firstItem="Sdg-vS-eP2" firstAttribute="leading" secondItem="KmW-Ot-6g9" secondAttribute="leading" id="77u-xg-2SY"/>
+                                    <constraint firstAttribute="bottom" secondItem="Sdg-vS-eP2" secondAttribute="bottom" constant="130" id="M2A-0l-EBd"/>
                                     <constraint firstAttribute="height" constant="275" id="OXf-NK-j7r"/>
-                                    <constraint firstItem="hUB-If-XCy" firstAttribute="centerX" secondItem="KmW-Ot-6g9" secondAttribute="centerX" id="g6q-V0-3qZ"/>
-                                    <constraint firstItem="HdM-yo-Ujr" firstAttribute="centerX" secondItem="KmW-Ot-6g9" secondAttribute="centerX" id="mG9-YF-bxG"/>
-                                    <constraint firstItem="HdM-yo-Ujr" firstAttribute="top" secondItem="KmW-Ot-6g9" secondAttribute="top" constant="30" id="yvo-Kc-W8D"/>
+                                    <constraint firstItem="HdM-yo-Ujr" firstAttribute="top" secondItem="KmW-Ot-6g9" secondAttribute="top" constant="100" id="OfS-X0-pJL"/>
+                                    <constraint firstItem="HdM-yo-Ujr" firstAttribute="centerX" secondItem="KmW-Ot-6g9" secondAttribute="centerX" id="RIb-1v-ed4"/>
+                                    <constraint firstItem="hUB-If-XCy" firstAttribute="top" secondItem="KmW-Ot-6g9" secondAttribute="top" constant="38" id="bNt-x6-Nsy"/>
+                                    <constraint firstItem="Sdg-vS-eP2" firstAttribute="top" secondItem="KmW-Ot-6g9" secondAttribute="top" id="iEv-Bk-pYg"/>
+                                    <constraint firstAttribute="trailing" secondItem="Sdg-vS-eP2" secondAttribute="trailing" id="pA5-87-7K1"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohm-T7-8JX" customClass="NVActivityIndicatorView" customModule="NVActivityIndicatorView">
@@ -405,12 +414,13 @@
                         <outlet property="profileImage" destination="HdM-yo-Ujr" id="65Z-dh-yoi"/>
                         <outlet property="tableView" destination="KWp-yi-9Ex" id="9eY-h8-6qs"/>
                         <outlet property="usernameLbl" destination="hUB-If-XCy" id="TbW-2l-vJA"/>
+                        <outlet property="usernamePastelView" destination="Sdg-vS-eP2" id="cZZ-kY-hcp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mWY-Tv-ONk" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="JsH-pp-9e4" customClass="NewAnimation" customModule="breakpoint" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="1418" y="0.0"/>
+            <point key="canvasLocation" x="1416.8" y="-0.44977511244377816"/>
         </scene>
         <!--Groups-->
         <scene sceneID="wg7-f3-ORb">

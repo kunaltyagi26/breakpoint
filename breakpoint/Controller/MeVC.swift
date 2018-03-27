@@ -11,6 +11,7 @@ import Firebase
 import FacebookCore
 import FacebookLogin
 import NVActivityIndicatorView
+import Pastel
 
 class MeVC: UIViewController {
 
@@ -18,6 +19,7 @@ class MeVC: UIViewController {
     @IBOutlet weak var usernameLbl: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicatorView: NVActivityIndicatorView!
+    @IBOutlet weak var usernamePastelView: PastelView!
     
     var overlay: UIView?
     
@@ -30,6 +32,10 @@ class MeVC: UIViewController {
         self.view.bringSubview(toFront: self.activityIndicatorView)
         activityIndicatorView.isHidden = false
         activityIndicatorView.startAnimating()
+        usernamePastelView.startPastelPoint = .bottomLeft
+        usernamePastelView.endPastelPoint = .topRight
+        usernamePastelView.setColors([UIColor(red: 98/255, green: 39/255, blue: 116/255, alpha: 1.0), UIColor(red: 197/255, green: 51/255, blue: 100/255, alpha: 1.0), UIColor(red: 113/255, green: 23/255, blue: 234/255, alpha: 1.0), UIColor(red: 234/255, green: 96/255, blue: 96/255, alpha: 1.0)])
+        usernamePastelView.startAnimation()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.loadData { (completed) in
                 if completed {

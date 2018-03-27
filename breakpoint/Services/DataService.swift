@@ -153,30 +153,27 @@ class DataService {
     func getChatContactDetails(id: String, completion: @escaping (_ users: [Users])-> ()) {
         var userArray = [Users]()
         var userIdArray = [String]()
+        var arrayId = 0
         REF_CHATS.child(id).observe(.value) { (userChatSnapshot) in
             guard let userChatSnapshot = userChatSnapshot.children.allObjects as? [DataSnapshot] else { return }
-            //print(userChatSnapshot.count)
             for chatUser in userChatSnapshot {
                 self.REF_USERS.observeSingleEvent(of: .value) { (userSnapshot) in
+                    arrayId += 1
                     guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
                     for user in userSnapshot {
                         if chatUser.key == user.key && !userIdArray.contains(user.key) {
-                            print("for " + String(chatUser.key) + " and " + String(user.key))
                             userIdArray.append(user.key)
-                            print(userIdArray)
                             let email = user.childSnapshot(forPath: "email").value as! String
                             let image = user.childSnapshot(forPath: "image").value as! String
                             let name = user.childSnapshot(forPath: "name").value as! String
                             let provider = user.childSnapshot(forPath: "provider").value as! String
                             let currentUser = Users(email: email, name: name, profileImage: image, provider: provider)
-                            //print(name)
-                            //print(image)
                             userArray.append(currentUser)
-                            print(userArray.count)
                         }
                     }
-                    //print(userArray.count)
-                    completion(userArray)
+                    if arrayId == userChatSnapshot.count {
+                        completion(userArray)
+                    }
                 }
             }
         }
