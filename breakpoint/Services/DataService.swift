@@ -183,31 +183,25 @@ class DataService {
         var messageArray = [ChatMessage]()
         REF_CHATS.child(id).observe(.value) { (userChatSnapshot) in
             guard let userChatSnapshot = userChatSnapshot.children.allObjects as? [DataSnapshot] else { return }
-            //print(userChatSnapshot.count)
             for chatUser in userChatSnapshot {
                 self.REF_CHATS.child(id).child(chatUser.key).observe(.value, with: { (chatMessagesSnapshot) in
-                guard let chatMessagesSnapshot = chatMessagesSnapshot.children.allObjects as? [DataSnapshot] else { return }
-                //print(chatMessagesSnapshot.count)
-                for chatMessage in chatMessagesSnapshot {
-                    self.REF_MESSAGES.observeSingleEvent(of: .value, with: { (messageSnapshot) in
-                        guard let messageSnap = messageSnapshot.children.allObjects as? [DataSnapshot] else { return }
-                        //print(messageSnap.count)
-                        let lastMessage = messageSnap[messageSnap.count - 1]
-                        for message in messageSnap {
-                            if message.key == chatMessage.key {
-                                let fromId = lastMessage.childSnapshot(forPath: "fromId").value as! String
-                                let toId = lastMessage.childSnapshot(forPath: "toId").value as! String
-                                let content = lastMessage.childSnapshot(forPath: "content").value as! String
-                                let timestamp = lastMessage.childSnapshot(forPath: "timestamp").value as! String
-                                let currentMessage = ChatMessage(content: content, fromId: fromId, toId: toId, timestamp: timestamp)
-                                messageArray.append(currentMessage)
-                            }
+                    guard let chatMessagesSnapshot = chatMessagesSnapshot.children.allObjects as? [DataSnapshot] else { return }
+                    let lastMessage = chatMessagesSnapshot[chatMessagesSnapshot.count - 1]
+                    self.REF_MESSAGES.child(lastMessage.key).observeSingleEvent(of: .value, with: { (messageSnapshot) in
+                        guard let messageSnap = messageSnapshot.value as? [String: AnyObject] else { return }
+                        let fromId = messageSnap["fromId"] as! String
+                        let toId = messageSnap["toId"] as! String
+                        let content = messageSnap["content"] as! String
+                        let timestamp = messageSnap["timestamp"] as! String
+                        let currentMessage = ChatMessage(content: content, fromId: fromId, toId: toId, timestamp: timestamp)
+                        messageArray.append(currentMessage)
+                        if messageArray.count == userChatSnapshot.count
+                        {
+                            completion(messageArray)
                         }
                     })
-                    }
                 })
             }
-        completion(messageArray)
         }
     }
     
@@ -260,6 +254,19 @@ class DataService {
                 }
             }
             completion(emailArray)
+        }
+    }
+    
+    func getUserId(username: String, completion: @escaping (_ userId: String)-> ()) {
+        REF_USERS.observeSingleEvent(of: .value) { (userSnapshot) in
+            guard let userSnapshot = userSnapshot.children.allObjects as? [DataSnapshot] else { return }
+            for user in userSnapshot {
+                let name = user.childSnapshot(forPath: "name").value as! String
+                if name == username {
+                    completion(user.key)
+                    break
+                }
+            }
         }
     }
     

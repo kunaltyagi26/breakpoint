@@ -61,9 +61,6 @@ extension NewChatVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let chatFeedVC = storyboard?.instantiateViewController(withIdentifier: "chatFeedVC") as? ChatFeedVC else { return }
-        //print(indexPath.row)
-        //print(idArray[indexPath.row])
-        //print(users[indexPath.row].name)
         chatFeedVC.initData(id: idArray[indexPath.row], username: users[indexPath.row].name, profileImage: users[indexPath.row].profileImage)
         present(chatFeedVC, animated: true, completion: nil)
     }

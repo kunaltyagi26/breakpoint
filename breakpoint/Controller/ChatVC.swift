@@ -23,10 +23,13 @@ class ChatVC: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        DataService.instance.getChatContactDetails(id: (Auth.auth().currentUser?.uid)!) { (users) in
-            self.userArray = users
-            self.tableView.reloadData()
-        }
+        DataService.instance.getChatContactMessages(id: (Auth.auth().currentUser?.uid)!, completion: { (chatMessages) in
+            self.chatMessageArray = chatMessages
+            DataService.instance.getChatContactDetails(id: (Auth.auth().currentUser?.uid)!) { (users) in
+                self.userArray = users
+                self.tableView.reloadData()
+            }
+        })
     }
     
     @IBAction func newChatPressed(_ sender: Any) {
@@ -46,9 +49,15 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell") as? ChatCell else { return UITableViewCell() }
-        print(userArray[indexPath.row].name)
-//        cell.configureCell(profileImage: UIImage(named: userArray[indexPath.row].profileImage)!, name: userArray[indexPath.row].name, recentMessage: chatMessageArray[indexPath.row].content, timestamp: chatMessageArray[indexPath.row].timestamp)
-        cell.configureCell(profileImage: UIImage(named: userArray[indexPath.row].profileImage)!, name: userArray[indexPath.row].name, recentMessage: "Hello", timestamp: "10:20 A.M.")
+        cell.configureCell(profileImage: UIImage(named: userArray[indexPath.row].profileImage)!, name: userArray[indexPath.row].name, recentMessage: chatMessageArray[indexPath.row].content, timestamp: chatMessageArray[indexPath.row].timestamp)
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let chatFeedVC = storyboard?.instantiateViewController(withIdentifier: "chatFeedVC") as? ChatFeedVC else { return }
+        DataService.instance.getUserId(username: userArray[indexPath.row].name) { (userId) in
+            chatFeedVC.initData(id: userId, username: self.userArray[indexPath.row].name, profileImage: self.userArray[indexPath.row].profileImage)
+            self.present(chatFeedVC, animated: true, completion: nil)
+        }
     }
 }
