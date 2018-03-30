@@ -49,7 +49,12 @@ extension ChatVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "chatCell") as? ChatCell else { return UITableViewCell() }
-        cell.configureCell(profileImage: UIImage(named: userArray[indexPath.row].profileImage)!, name: userArray[indexPath.row].name, recentMessage: chatMessageArray[indexPath.row].content, timestamp: chatMessageArray[indexPath.row].timestamp)
+        if chatMessageArray[indexPath.row].content != nil {
+            cell.configureCell(profileImage: UIImage(named: userArray[indexPath.row].profileImage)!, name: userArray[indexPath.row].name, recentMessage: chatMessageArray[indexPath.row].content!, timestamp: chatMessageArray[indexPath.row].timestamp)
+        }
+        else {
+            cell.configureCell(profileImage: UIImage(named: userArray[indexPath.row].profileImage)!, name: userArray[indexPath.row].name, recentMessage: "Image", timestamp: chatMessageArray[indexPath.row].timestamp)
+        }
         return cell
     }
     

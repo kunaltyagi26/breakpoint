@@ -9,12 +9,13 @@
 import Foundation
 
 class ChatMessage {
-    private var _content: String
+    private var _content: String?
     private var _fromId: String
     private var _toId: String
     private var _timestamp: String
+    private var _imageUrl: String?
     
-    var content: String {
+    var content: String? {
         return _content
     }
     
@@ -30,8 +31,17 @@ class ChatMessage {
         return _timestamp
     }
     
-    init(content: String, fromId: String, toId: String, timestamp: String) {
-        self._content = content
+    var imageUrl: String? {
+        return _imageUrl
+    }
+    
+    init(content: String?, imageUrl: String?, fromId: String, toId: String, timestamp: String) {
+        if content != nil {
+            self._content = content!
+        }
+        else {
+            self._imageUrl = imageUrl!
+        }
         self._fromId = fromId
         self._toId = toId
         self._timestamp = timestamp

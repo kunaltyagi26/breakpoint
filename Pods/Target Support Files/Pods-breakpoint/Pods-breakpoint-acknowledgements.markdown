@@ -146,6 +146,10 @@ Copyright 2018 Google
 
 Copyright 2018 Google
 
+## FirebaseStorage
+
+Copyright 2018 Google
+
 ## GTMOAuth2
 
 

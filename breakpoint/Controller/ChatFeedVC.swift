@@ -9,6 +9,7 @@
 import UIKit
 import FirebaseAuth
 import RAMAnimatedTabBarController
+import FirebaseStorage
 
 class ChatFeedVC: UIViewController {
 
@@ -39,11 +40,8 @@ class ChatFeedVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //print(selectedId!)
         DataService.instance.getAllChatMessages(userId: selectedId!) { (chatMessageArray) in
-            //print(chatMessageArray)
             self.messages = chatMessageArray
-            //print(self.messages)
             self.tableView.reloadData()
             
             if self.messages.count > 0 {
@@ -62,6 +60,14 @@ class ChatFeedVC: UIViewController {
         tabbarController.setSelectIndex(from: 0, to: 1)
     }
     
+    @IBAction func uploadImagePressed(_ sender: Any) {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    
     @IBAction func sendPressed(_ sender: Any) {
         if messageTextView.text != "" {
             var message: ChatMessage
@@ -73,7 +79,7 @@ class ChatFeedVC: UIViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.timeStyle = .short
             let timeStamp = "\(dateFormatter.string(from: Date() as Date))"
-            message = ChatMessage(content: content!, fromId: fromId!, toId: toId!, timestamp: timeStamp)
+            message = ChatMessage(content: content!, imageUrl: nil, fromId: fromId!, toId: toId!, timestamp: timeStamp)
             DataService.instance.uploadChatMessage(chatMessage: message, completion: { (completed) in
                 if completed {
                     self.messageTextView.text = ""
@@ -108,5 +114,54 @@ extension ChatFeedVC: UITableViewDataSource, UITableViewDelegate {
         cell.configureCell(chatMessage: chatMessage)
         return cell
     }
+}
 
+extension ChatFeedVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        var selectedImage = UIImage()
+        
+        if let editedImage = info["UIImagePickerControllerEditedImage"] as? UIImage {
+            selectedImage = editedImage
+        }
+        else if let originalImage = info["UIImagePickerControllerOriginalImage"] as? UIImage {
+            selectedImage = originalImage
+        }
+        
+        uploadImage(selectedImage: selectedImage)
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func uploadImage(selectedImage: UIImage) {
+        let imageName = NSUUID().uuidString
+        let ref = Storage.storage().reference().child("message_images").child(imageName)
+        if let image = UIImageJPEGRepresentation(selectedImage, 0.2) {
+            ref.putData(image, metadata: nil, completion: { (metadata, error) in
+                if error != nil {
+                    print("Failed to upload image.")
+                    return
+                }
+                else {
+                    if let imageUrl = metadata?.downloadURL()?.absoluteString {
+                        var message: ChatMessage
+                        let fromId = Auth.auth().currentUser?.uid
+                        let toId = self.selectedId
+                        let dateFormatter = DateFormatter()
+                        dateFormatter.timeStyle = .short
+                        let timeStamp = "\(dateFormatter.string(from: Date() as Date))"
+                        message = ChatMessage(content: nil, imageUrl: imageUrl, fromId: fromId!, toId: toId!, timestamp: timeStamp)
+                        DataService.instance.uploadChatMessage(chatMessage: message, completion: { (completed) in
+                            if completed {
+                                self.sendBtn.isEnabled = true
+                            }
+                        })
+                    }
+                }
+            })
+        }
+    }
 }

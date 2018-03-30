@@ -91,8 +91,13 @@ class DataService {
     func uploadChatMessage(chatMessage: ChatMessage, completion: @escaping (_ status: Bool)-> ()) {
         let message = REF_MESSAGES.childByAutoId()
         let messageId = message.key
-        message.updateChildValues(["fromId": chatMessage.fromId, "toId": chatMessage.toId, "content": chatMessage.content, "timestamp": chatMessage.timestamp])
-        REF_CHATS.child(chatMessage.fromId).child(chatMessage.toId).updateChildValues([messageId: 1])
+        if chatMessage.content != nil {
+            message.updateChildValues(["fromId": chatMessage.fromId, "toId": chatMessage.toId, "content": chatMessage.content, "timestamp": chatMessage.timestamp])
+        }
+        else {
+            message.updateChildValues(["fromId": chatMessage.fromId, "toId": chatMessage.toId, "imageUrl": chatMessage.imageUrl, "timestamp": chatMessage.timestamp])
+        }
+        REF_CHATS.child((chatMessage.fromId)).child((chatMessage.toId)).updateChildValues([messageId: 1])
         completion(true)
     }
     
@@ -126,24 +131,51 @@ class DataService {
     
     func getAllChatMessages(userId: String, completion: @escaping (_ messageArray: [ChatMessage]) -> ()) {
         var chatMessageArray = [ChatMessage]()
-        var addedMessages = [String]()
+        //var addedMessages = [String]()
         REF_CHATS.child((Auth.auth().currentUser?.uid)!).child(userId).observe(.value) { (MessageIdSnapshot) in
             guard let MessageIdSnapshot = MessageIdSnapshot.children.allObjects as? [DataSnapshot] else { return }
             for messageId in MessageIdSnapshot {
-                self.REF_MESSAGES.observe(.value, with: { (userMessageSnapshot) in
+                /*self.REF_MESSAGES.observe(.value, with: { (userMessageSnapshot) in
                     guard let userMessageSnapshot = userMessageSnapshot.children.allObjects as? [DataSnapshot] else { return }
                     for message in userMessageSnapshot {
                         if message.key == messageId.key && !addedMessages.contains(messageId.key) {
                             addedMessages.append(messageId.key)
                             let fromId = message.childSnapshot(forPath: "fromId").value as! String
                             let toId = message.childSnapshot(forPath: "toId").value as! String
-                            let content = message.childSnapshot(forPath: "content").value as! String
-                            let timestamp = message.childSnapshot(forPath: "timestamp").value as! String
-                            let chatMessage = ChatMessage(content: content, fromId: fromId, toId: toId, timestamp: timestamp)
-                            chatMessageArray.append(chatMessage)
+                            if message.childSnapshot(forPath: "content").value != nil {
+                                let content = message.childSnapshot(forPath: "content").value as! String
+                                let timestamp = message.childSnapshot(forPath: "timestamp").value as! String
+                                let chatMessage = ChatMessage(content: content, imageUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
+                                chatMessageArray.append(chatMessage)
+                            }
+                            else {
+                                let imageUrl = message.childSnapshot(forPath: "imageUrl").value as! String
+                                let timestamp = message.childSnapshot(forPath: "timestamp").value as! String
+                                let chatMessage = ChatMessage(content: nil, imageUrl: imageUrl, fromId: fromId, toId: toId, timestamp: timestamp)
+                                chatMessageArray.append(chatMessage)
+                            }
                         }
                     }
                     completion(chatMessageArray)
+                })*/
+                self.REF_MESSAGES.child(messageId.key).observeSingleEvent(of: .value, with: { (messageSnapshot) in
+                    guard let messageSnapshot = messageSnapshot.value as? [String: AnyObject] else { return }
+                    let fromId = messageSnapshot["fromId"] as! String
+                    let toId = messageSnapshot["toId"] as! String
+                    let timestamp = messageSnapshot["timestamp"] as! String
+                    if messageSnapshot["content"] != nil {
+                        let content = messageSnapshot["content"] as! String
+                        let chatMessage = ChatMessage(content: content, imageUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
+                        chatMessageArray.append(chatMessage)
+                    }
+                    else {
+                        let imageUrl = messageSnapshot["imageUrl"] as! String
+                        let chatMessage = ChatMessage(content: nil, imageUrl: imageUrl, fromId: fromId, toId: toId, timestamp: timestamp)
+                        chatMessageArray.append(chatMessage)
+                    }
+                    if chatMessageArray.count == MessageIdSnapshot.count {
+                        completion(chatMessageArray)
+                    }
                 })
             }
         }
@@ -191,10 +223,17 @@ class DataService {
                         guard let messageSnap = messageSnapshot.value as? [String: AnyObject] else { return }
                         let fromId = messageSnap["fromId"] as! String
                         let toId = messageSnap["toId"] as! String
-                        let content = messageSnap["content"] as! String
                         let timestamp = messageSnap["timestamp"] as! String
-                        let currentMessage = ChatMessage(content: content, fromId: fromId, toId: toId, timestamp: timestamp)
-                        messageArray.append(currentMessage)
+                        if messageSnap["content"] != nil {
+                            let content = messageSnap["content"] as! String
+                            let currentMessage = ChatMessage(content: content, imageUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
+                            messageArray.append(currentMessage)
+                        }
+                        else {
+                            let imageUrl = messageSnap["imageUrl"] as! String
+                            let currentMessage = ChatMessage(content: nil, imageUrl: imageUrl, fromId: fromId, toId: toId, timestamp: timestamp)
+                            messageArray.append(currentMessage)
+                        }
                         if messageArray.count == userChatSnapshot.count
                         {
                             completion(messageArray)
