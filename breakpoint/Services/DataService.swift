@@ -135,29 +135,6 @@ class DataService {
         REF_CHATS.child((Auth.auth().currentUser?.uid)!).child(userId).observe(.value) { (MessageIdSnapshot) in
             guard let MessageIdSnapshot = MessageIdSnapshot.children.allObjects as? [DataSnapshot] else { return }
             for messageId in MessageIdSnapshot {
-                /*self.REF_MESSAGES.observe(.value, with: { (userMessageSnapshot) in
-                    guard let userMessageSnapshot = userMessageSnapshot.children.allObjects as? [DataSnapshot] else { return }
-                    for message in userMessageSnapshot {
-                        if message.key == messageId.key && !addedMessages.contains(messageId.key) {
-                            addedMessages.append(messageId.key)
-                            let fromId = message.childSnapshot(forPath: "fromId").value as! String
-                            let toId = message.childSnapshot(forPath: "toId").value as! String
-                            if message.childSnapshot(forPath: "content").value != nil {
-                                let content = message.childSnapshot(forPath: "content").value as! String
-                                let timestamp = message.childSnapshot(forPath: "timestamp").value as! String
-                                let chatMessage = ChatMessage(content: content, imageUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
-                                chatMessageArray.append(chatMessage)
-                            }
-                            else {
-                                let imageUrl = message.childSnapshot(forPath: "imageUrl").value as! String
-                                let timestamp = message.childSnapshot(forPath: "timestamp").value as! String
-                                let chatMessage = ChatMessage(content: nil, imageUrl: imageUrl, fromId: fromId, toId: toId, timestamp: timestamp)
-                                chatMessageArray.append(chatMessage)
-                            }
-                        }
-                    }
-                    completion(chatMessageArray)
-                })*/
                 self.REF_MESSAGES.child(messageId.key).observeSingleEvent(of: .value, with: { (messageSnapshot) in
                     guard let messageSnapshot = messageSnapshot.value as? [String: AnyObject] else { return }
                     let fromId = messageSnapshot["fromId"] as! String
