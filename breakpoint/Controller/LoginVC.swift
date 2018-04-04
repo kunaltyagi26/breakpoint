@@ -29,7 +29,9 @@ class LoginVC: UIViewController {
         emailTxt.autocorrectionType = .no
         registerStackView.elementsMoveWithKeyboard()
         credentialsStackView.elementsMoveWithKeyboard()
-        signInBtn.bindToKeyboard()
+        signInBtn.bindToKeyboard { (completed) in
+            
+        }
         screenTap()
     }
     

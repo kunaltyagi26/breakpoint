@@ -813,6 +813,7 @@
                         <outlet property="sendBtn" destination="HjK-M4-0JH" id="DKa-b6-kIX"/>
                         <outlet property="sendMessageView" destination="DpW-ib-LG3" id="uTg-Kk-mtI"/>
                         <outlet property="tableView" destination="Yx8-wS-c04" id="wSo-nF-wcr"/>
+                        <outlet property="tableViewTopConstraint" destination="feu-yK-ey0" id="d5B-X5-nmr"/>
                         <outlet property="username" destination="Gbo-xK-upL" id="MX7-47-6gY"/>
                     </connections>
                 </viewController>

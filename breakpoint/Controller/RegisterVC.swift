@@ -27,7 +27,9 @@ class RegisterVC: UIViewController {
         passwordTxt.delegate = self
         emailTxt.autocorrectionType = .no
         credentialsStackView.elementsMoveWithKeyboard()
-        nextBtn.bindToKeyboard()
+        nextBtn.bindToKeyboard { (completed) in
+            
+        }
         screenTap()
     }
     

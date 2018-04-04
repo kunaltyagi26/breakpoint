@@ -30,7 +30,9 @@ class PersonalDetailsVC: UIViewController {
         super.viewDidLoad()
         nameTxt.delegate = self
         nameTxt.elementsMoveWithKeyboard()
-        registerBtn.bindToKeyboard()
+        registerBtn.bindToKeyboard { (completed) in
+            
+        }
         overlay = UIView(frame: view.frame)
         overlay!.backgroundColor = UIColor.black
         overlay!.alpha = 0

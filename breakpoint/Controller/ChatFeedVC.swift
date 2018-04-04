@@ -20,22 +20,52 @@ class ChatFeedVC: UIViewController {
     @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var sendBtn: UIButton!
     
+    @IBOutlet weak var tableViewTopConstraint: NSLayoutConstraint!
+    
     var name: String?
     var image: String?
     var selectedId: String?
     var messages = [ChatMessage]()
+    var keyboardSize: CGSize?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
         messageTextView.textContainerInset = UIEdgeInsets(top: 10, left: 20, bottom: 8, right: 0)
-        tableView.tableViewBindToKeyboard()
-        messageTextView.autocorrectionType = .no
-        sendMessageView.bindToKeyboard()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        tableView.bindToKeyboard { (completed) in
+            if completed {
+            
+            }
+        }
+        sendMessageView.bindToKeyboard { (completed) in
+            if completed {
+                
+            }
+        }
         messageTextView.layer.cornerRadius = 15
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 50.0
+    }
+    
+    @objc func keyboardWillShow(notification: NSNotification){
+        keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
+        keyboardShow { (completed) in
+            if completed {
+                if self.messages.count > 0 {
+                    DispatchQueue.main.async {
+                        let indexPath = IndexPath(row: self.messages.count - 1, section: 0)
+                        self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+                    }
+                }
+            }
+        }
+    }
+    
+    func keyboardShow(completion: @escaping (_ status: Bool)-> ()) {
+        tableViewTopConstraint.constant += (keyboardSize?.height)! - 35
+        completion(true)
     }
     
     override func viewWillAppear(_ animated: Bool) {

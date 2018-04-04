@@ -29,7 +29,9 @@ class GroupFeedVC: UIViewController {
         super.viewDidLoad()
         messageTextView.textContainerInset = UIEdgeInsets(top: 10, left: 20, bottom: 8, right: 0)
         tableView.tableViewBindToKeyboard()
-        sendMessageView.bindToKeyboard()
+        sendMessageView.bindToKeyboard { (completed) in
+            
+        }
         tableView.delegate = self
         tableView.dataSource = self
         messageTextView.layer.cornerRadius = 15

@@ -9,14 +9,15 @@
 import UIKit
 
 extension UIView{
-    func bindToKeyboard(){
+    func bindToKeyboard(completion: @escaping (_ status: Bool)-> ()){
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        completion(true)
     }
     
     @objc func keyboardWillShow(notification: NSNotification){
-        //let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
-        self.transform = CGAffineTransform(translationX: 0, y: -60)
+        let keyboardSize = (notification.userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue.size
+        self.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height + 35)
     }
     
     @objc func keyboardWillHide(notification: NSNotification){

@@ -19,7 +19,9 @@ class CreatePostVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         postTextView.delegate = self
-        sendBtn.bindToKeyboard()
+        sendBtn.bindToKeyboard { (completed) in
+            
+        }
         screenTap()
     }
     
