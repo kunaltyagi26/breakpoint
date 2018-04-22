@@ -94,6 +94,9 @@ class DataService {
         if chatMessage.content != nil {
             message.updateChildValues(["fromId": chatMessage.fromId, "toId": chatMessage.toId, "content": chatMessage.content, "timestamp": chatMessage.timestamp])
         }
+        else if chatMessage.videoUrl != nil {
+            message.updateChildValues(["fromId": chatMessage.fromId, "toId": chatMessage.toId, "imageUrl": chatMessage.imageUrl, "videoUrl": chatMessage.videoUrl, "timestamp": chatMessage.timestamp])
+        }
         else {
             message.updateChildValues(["fromId": chatMessage.fromId, "toId": chatMessage.toId, "imageUrl": chatMessage.imageUrl, "timestamp": chatMessage.timestamp])
         }
@@ -142,12 +145,12 @@ class DataService {
                     let timestamp = messageSnapshot["timestamp"] as! String
                     if messageSnapshot["content"] != nil {
                         let content = messageSnapshot["content"] as! String
-                        let chatMessage = ChatMessage(content: content, imageUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
+                        let chatMessage = ChatMessage(content: content, imageUrl: nil, videoUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
                         chatMessageArray.append(chatMessage)
                     }
                     else {
                         let imageUrl = messageSnapshot["imageUrl"] as! String
-                        let chatMessage = ChatMessage(content: nil, imageUrl: imageUrl, fromId: fromId, toId: toId, timestamp: timestamp)
+                        let chatMessage = ChatMessage(content: nil, imageUrl: imageUrl, videoUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
                         chatMessageArray.append(chatMessage)
                     }
                     if chatMessageArray.count == MessageIdSnapshot.count {
@@ -203,12 +206,12 @@ class DataService {
                         let timestamp = messageSnap["timestamp"] as! String
                         if messageSnap["content"] != nil {
                             let content = messageSnap["content"] as! String
-                            let currentMessage = ChatMessage(content: content, imageUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
+                            let currentMessage = ChatMessage(content: content, imageUrl: nil, videoUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
                             messageArray.append(currentMessage)
                         }
                         else {
                             let imageUrl = messageSnap["imageUrl"] as! String
-                            let currentMessage = ChatMessage(content: nil, imageUrl: imageUrl, fromId: fromId, toId: toId, timestamp: timestamp)
+                            let currentMessage = ChatMessage(content: nil, imageUrl: imageUrl, videoUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
                             messageArray.append(currentMessage)
                         }
                         if messageArray.count == userChatSnapshot.count

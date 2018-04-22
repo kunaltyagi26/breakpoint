@@ -28,7 +28,7 @@ class FeedsVC: UIViewController {
         super.viewDidAppear(animated)
         //if messages.count == 0 {
             tableView.isSkeletonable = true
-            let gradient = SkeletonGradient(baseColor: UIColor.turquoise)
+            let gradient = SkeletonGradient(baseColor: UIColor.lightGray)
             //let animation = GradientDirection.topLeftBottomRight.slidingAnimation()
             let animation = SkeletonAnimationBuilder().makeSlidingAnimation(withDirection: .bottomRightTopLeft)
             view.showAnimatedGradientSkeleton(usingGradient: gradient, animation: animation)

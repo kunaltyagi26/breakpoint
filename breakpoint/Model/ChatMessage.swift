@@ -14,6 +14,7 @@ class ChatMessage {
     private var _toId: String
     private var _timestamp: String
     private var _imageUrl: String?
+    private var _videoUrl: String?
     
     var content: String? {
         return _content
@@ -35,12 +36,19 @@ class ChatMessage {
         return _imageUrl
     }
     
-    init(content: String?, imageUrl: String?, fromId: String, toId: String, timestamp: String) {
+    var videoUrl: String? {
+        return _videoUrl
+    }
+    
+    init(content: String?, imageUrl: String?, videoUrl: String?, fromId: String, toId: String, timestamp: String) {
         if content != nil {
             self._content = content!
         }
-        else {
+        if imageUrl != nil {
             self._imageUrl = imageUrl!
+        }
+        if videoUrl != nil {
+            self._videoUrl = videoUrl!
         }
         self._fromId = fromId
         self._toId = toId

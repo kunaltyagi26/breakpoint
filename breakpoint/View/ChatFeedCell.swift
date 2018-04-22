@@ -20,6 +20,7 @@ class ChatFeedCell: UITableViewCell {
     var startingFrame: CGRect?
     var blackBackgroundView: UIView?
     var zoomingImageView: UIImageView?
+    var startingImageView: UIImageView?
     
     let messageImageView: UIImageView = {
         let imageView = UIImageView()
@@ -38,21 +39,32 @@ class ChatFeedCell: UITableViewCell {
         return button
     }()
     
+    let playButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "play"), for: .normal)
+        return button
+    }()
+    
     @objc func closePressed() {
-        
         UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             self.closeButton.removeFromSuperview()
             self.zoomingImageView?.frame = self.startingFrame!
             self.blackBackgroundView?.alpha = 0
+            self.messageView.backgroundColor = UIColor.clear
         }) { (completed) in
             if completed {
                 self.zoomingImageView?.removeFromSuperview()
+                self.startingImageView?.isHidden = false
             }
         }
     }
     
     @objc func handleZoom(tapGesture: UITapGestureRecognizer) {
         if let imageView = tapGesture.view as? UIImageView {
+            messageView.backgroundColor = UIColor.clear
+            self.startingImageView = imageView
+            self.startingImageView?.isHidden = true
             startingFrame = imageView.superview?.convert(imageView.frame, to: nil)
             zoomingImageView = UIImageView(frame: startingFrame!)
             zoomingImageView?.image = messageImageView.image
@@ -105,25 +117,56 @@ class ChatFeedCell: UITableViewCell {
     func configureCell(chatMessage: ChatMessage) {
         messageView.isUserInteractionEnabled = true
         messageImageView.isUserInteractionEnabled = true
+        playButton.isUserInteractionEnabled = true
         messageView.addSubview(messageImageView)
+        messageView.addSubview(playButton)
         closeButton.addTarget(self, action: #selector(closePressed), for: .touchUpInside)
         messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoom)))
-        if chatMessage.imageUrl != nil {
+        if chatMessage.videoUrl != nil {
             messageImageView.alpha = 1
             message.alpha = 0
+            playButton.alpha = 1
             if let imageUrl = chatMessage.imageUrl {
                 loadImageUsingCacheWithUrlString(urlString: imageUrl)
             }
-            messageImageView.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 6).isActive = true
-            messageImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 6).isActive = true
-            messageImageView.rightAnchor.constraint(equalTo: timeStamp.rightAnchor, constant: -6).isActive = true
+            
+            playButton.centerXAnchor.constraint(equalTo: messageView.centerXAnchor).isActive = true
+            playButton.centerYAnchor.constraint(equalTo: messageView.centerYAnchor).isActive = true
+            playButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            
+            messageImageView.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 0).isActive = true
+            messageImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0).isActive = true
+            messageImageView.rightAnchor.constraint(equalTo: messageView.rightAnchor, constant: 0).isActive = true
             messageImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            messageImageView.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: -6).isActive = true
+            messageImageView.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: 0).isActive = true
+            
+            contentView.bringSubview(toFront: messageImageView)
+            messageView.bringSubview(toFront: timeStamp)
+        }
+        else if chatMessage.imageUrl != nil {
+            messageImageView.alpha = 1
+            message.alpha = 0
+            playButton.alpha = 0
+            if let imageUrl = chatMessage.imageUrl {
+                loadImageUsingCacheWithUrlString(urlString: imageUrl)
+            }
+            
+            playButton.centerXAnchor.constraint(equalTo: messageView.centerXAnchor).isActive = true
+            playButton.centerYAnchor.constraint(equalTo: messageView.centerYAnchor).isActive = true
+            playButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            
+            messageImageView.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 0).isActive = true
+            messageImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0).isActive = true
+            messageImageView.rightAnchor.constraint(equalTo: messageView.rightAnchor, constant: 0).isActive = true
+            messageImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            messageImageView.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: 0).isActive = true
+            
             contentView.bringSubview(toFront: messageImageView)
             messageView.bringSubview(toFront: timeStamp)
         }
         else {
             messageImageView.removeFromSuperview()
+            playButton.removeFromSuperview()
             message.alpha = 1
             self.message.text = chatMessage.content
         }

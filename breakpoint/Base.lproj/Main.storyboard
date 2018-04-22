@@ -681,15 +681,25 @@
                                             <constraint firstAttribute="width" constant="40" id="CVT-5u-sIY"/>
                                         </constraints>
                                     </imageView>
+                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dwY-67-LMt">
+                                        <rect key="frame" x="0.0" y="75" width="375" height="5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="5" id="5sX-8n-AHz"/>
+                                        </constraints>
+                                        <color key="progressTintColor" red="0.77662521600000001" green="0.18392121789999999" blue="0.2705684304" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </progressView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.95722240209999998" green="0.97237414119999999" blue="0.98431676629999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstItem="oiT-gY-U3D" firstAttribute="top" secondItem="K6Q-4M-VK5" secondAttribute="top" constant="-5" id="5va-oQ-fhp"/>
+                                    <constraint firstItem="dwY-67-LMt" firstAttribute="leading" secondItem="nwH-DZ-Ezf" secondAttribute="leading" id="81M-eI-SBK"/>
                                     <constraint firstItem="Gbo-xK-upL" firstAttribute="centerX" secondItem="nwH-DZ-Ezf" secondAttribute="centerX" id="JVm-oM-es3"/>
                                     <constraint firstItem="OFr-bP-wdk" firstAttribute="centerY" secondItem="Gbo-xK-upL" secondAttribute="centerY" id="K7X-X5-D36"/>
                                     <constraint firstItem="Gbo-xK-upL" firstAttribute="top" secondItem="K6Q-4M-VK5" secondAttribute="top" id="TuG-AN-USR"/>
                                     <constraint firstItem="OFr-bP-wdk" firstAttribute="leading" secondItem="nwH-DZ-Ezf" secondAttribute="leading" constant="20" id="TxD-vl-pAv"/>
+                                    <constraint firstItem="K6Q-4M-VK5" firstAttribute="bottom" secondItem="dwY-67-LMt" secondAttribute="bottom" id="ayc-hb-4XZ"/>
                                     <constraint firstItem="OFr-bP-wdk" firstAttribute="top" secondItem="nwH-DZ-Ezf" secondAttribute="top" constant="30" id="beV-t0-SRi"/>
+                                    <constraint firstAttribute="trailing" secondItem="dwY-67-LMt" secondAttribute="trailing" id="dIW-H8-10J"/>
                                     <constraint firstAttribute="height" constant="80" id="fnR-ly-Cdq"/>
                                     <constraint firstItem="oiT-gY-U3D" firstAttribute="leading" secondItem="OFr-bP-wdk" secondAttribute="trailing" constant="15" id="pTS-47-MIv"/>
                                 </constraints>
@@ -810,6 +820,7 @@
                     <connections>
                         <outlet property="messageTextView" destination="MRc-Y3-iOb" id="IR4-ec-Vct"/>
                         <outlet property="profileImage" destination="oiT-gY-U3D" id="AC7-xr-2Ih"/>
+                        <outlet property="progressView" destination="dwY-67-LMt" id="eJi-MV-Xk8"/>
                         <outlet property="sendBtn" destination="HjK-M4-0JH" id="DKa-b6-kIX"/>
                         <outlet property="sendMessageView" destination="DpW-ib-LG3" id="uTg-Kk-mtI"/>
                         <outlet property="tableView" destination="Yx8-wS-c04" id="wSo-nF-wcr"/>
