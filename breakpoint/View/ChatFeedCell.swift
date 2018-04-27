@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseStorage
+import AVFoundation
 
 class ChatFeedCell: UITableViewCell {
     @IBOutlet weak var message: UILabel!
@@ -21,6 +22,14 @@ class ChatFeedCell: UITableViewCell {
     var blackBackgroundView: UIView?
     var zoomingImageView: UIImageView?
     var startingImageView: UIImageView?
+    var url: String?
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let indicatorView = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
+        indicatorView.translatesAutoresizingMaskIntoConstraints = false
+        indicatorView.hidesWhenStopped = true
+        return indicatorView
+    }()
     
     let messageImageView: UIImageView = {
         let imageView = UIImageView()
@@ -60,7 +69,31 @@ class ChatFeedCell: UITableViewCell {
         }
     }
     
+    var player: AVPlayer?
+    var playerLayer: AVPlayerLayer?
+    
+    @objc func playPressed() {
+        playButton.alpha = 0
+        //self.startingImageView?.removeFromSuperview()
+        player = AVPlayer(url: NSURL(string: url!)! as URL)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer?.frame = messageView.bounds
+        messageView.layer.addSublayer(playerLayer!)
+        player?.play()
+        activityIndicatorView.alpha = 1
+        activityIndicatorView.startAnimating()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        playerLayer?.removeFromSuperlayer()
+        player?.pause()
+    }
+    
     @objc func handleZoom(tapGesture: UITapGestureRecognizer) {
+        if url != nil {
+            return
+        }
         if let imageView = tapGesture.view as? UIImageView {
             messageView.backgroundColor = UIColor.clear
             self.startingImageView = imageView
@@ -115,17 +148,29 @@ class ChatFeedCell: UITableViewCell {
     }
     
     func configureCell(chatMessage: ChatMessage) {
+        url = chatMessage.videoUrl
         messageView.isUserInteractionEnabled = true
         messageImageView.isUserInteractionEnabled = true
         playButton.isUserInteractionEnabled = true
         messageView.addSubview(messageImageView)
         messageView.addSubview(playButton)
+        messageImageView.addSubview(activityIndicatorView)
+        activityIndicatorView.alpha = 0
+        playButton.addTarget(self, action: #selector(playPressed), for: .touchUpInside)
         closeButton.addTarget(self, action: #selector(closePressed), for: .touchUpInside)
         messageImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleZoom)))
-        if chatMessage.videoUrl != nil {
+        
+        if chatMessage.imageUrl != nil {
+            if chatMessage.videoUrl != nil {
+                playButton.alpha = 1
+                //messageImageView.isUserInteractionEnabled = false
+            }
+            else {
+                playButton.alpha = 0
+                //messageImageView.isUserInteractionEnabled = true
+            }
             messageImageView.alpha = 1
             message.alpha = 0
-            playButton.alpha = 1
             if let imageUrl = chatMessage.imageUrl {
                 loadImageUsingCacheWithUrlString(urlString: imageUrl)
             }
@@ -134,26 +179,9 @@ class ChatFeedCell: UITableViewCell {
             playButton.centerYAnchor.constraint(equalTo: messageView.centerYAnchor).isActive = true
             playButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
             
-            messageImageView.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 0).isActive = true
-            messageImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0).isActive = true
-            messageImageView.rightAnchor.constraint(equalTo: messageView.rightAnchor, constant: 0).isActive = true
-            messageImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
-            messageImageView.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: 0).isActive = true
-            
-            contentView.bringSubview(toFront: messageImageView)
-            messageView.bringSubview(toFront: timeStamp)
-        }
-        else if chatMessage.imageUrl != nil {
-            messageImageView.alpha = 1
-            message.alpha = 0
-            playButton.alpha = 0
-            if let imageUrl = chatMessage.imageUrl {
-                loadImageUsingCacheWithUrlString(urlString: imageUrl)
-            }
-            
-            playButton.centerXAnchor.constraint(equalTo: messageView.centerXAnchor).isActive = true
-            playButton.centerYAnchor.constraint(equalTo: messageView.centerYAnchor).isActive = true
-            playButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+            activityIndicatorView.centerXAnchor.constraint(equalTo: messageView.centerXAnchor).isActive = true
+            activityIndicatorView.centerYAnchor.constraint(equalTo: messageView.centerYAnchor).isActive = true
+            activityIndicatorView.widthAnchor.constraint(equalToConstant: 50).isActive = true
             
             messageImageView.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 0).isActive = true
             messageImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0).isActive = true

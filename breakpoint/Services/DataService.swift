@@ -149,8 +149,15 @@ class DataService {
                         chatMessageArray.append(chatMessage)
                     }
                     else {
+                        var videoUrl: String?
+                        if messageSnapshot["videoUrl"] != nil {
+                            videoUrl = messageSnapshot["videoUrl"] as! String
+                        }
+                        else {
+                            videoUrl = nil
+                        }
                         let imageUrl = messageSnapshot["imageUrl"] as! String
-                        let chatMessage = ChatMessage(content: nil, imageUrl: imageUrl, videoUrl: nil, fromId: fromId, toId: toId, timestamp: timestamp)
+                        let chatMessage = ChatMessage(content: nil, imageUrl: imageUrl, videoUrl: videoUrl, fromId: fromId, toId: toId, timestamp: timestamp)
                         chatMessageArray.append(chatMessage)
                     }
                     if chatMessageArray.count == MessageIdSnapshot.count {
