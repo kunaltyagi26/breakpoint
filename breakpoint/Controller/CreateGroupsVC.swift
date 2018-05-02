@@ -35,6 +35,8 @@ class CreateGroupsVC: UIViewController {
         emailSearchTxt.layer.cornerRadius = 10
         emailSearchTxt.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
         emailSearchTxt.layer.borderWidth = 1.0
+        //tableView.backgroundColor = UIColor.black
+        //emailSearchTxt.backgroundColor = UIColor.red
     }
     
     override func viewDidLoad() {

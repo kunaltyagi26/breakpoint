@@ -148,6 +148,8 @@ class ChatFeedCell: UITableViewCell {
     }
     
     func configureCell(chatMessage: ChatMessage) {
+        print("ImageWidth:", chatMessage.imageWidth)
+        print("ImageHeight:", chatMessage.imageHeight)
         url = chatMessage.videoUrl
         messageView.isUserInteractionEnabled = true
         messageImageView.isUserInteractionEnabled = true
@@ -186,7 +188,18 @@ class ChatFeedCell: UITableViewCell {
             messageImageView.leftAnchor.constraint(equalTo: messageView.leftAnchor, constant: 0).isActive = true
             messageImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0).isActive = true
             messageImageView.rightAnchor.constraint(equalTo: messageView.rightAnchor, constant: 0).isActive = true
-            messageImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            if chatMessage.content != nil {
+                print("Entered in content section.")
+                //messageImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+            }
+            else {
+                print("Entered in image section.")
+                if let height = chatMessage.imageHeight as? CGFloat, let width = chatMessage.imageWidth as? CGFloat {
+                    let finalHeight = CGFloat(height / width * 250)
+                    print("height: ", finalHeight)
+                    messageImageView.heightAnchor.constraint(equalToConstant: finalHeight).isActive = true
+                }
+            }
             messageImageView.bottomAnchor.constraint(equalTo: messageView.bottomAnchor, constant: 0).isActive = true
             
             contentView.bringSubview(toFront: messageImageView)
@@ -210,7 +223,7 @@ class ChatFeedCell: UITableViewCell {
         }
         else {
             let constraint = NSLayoutConstraint(item: messageView, attribute: NSLayoutAttribute.leading, relatedBy: NSLayoutRelation.equal
-                , toItem: self.contentView, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: -16)
+                , toItem: self.contentView, attribute: NSLayoutAttribute.leading, multiplier: 1, constant: 16)
             NSLayoutConstraint.activate([constraint])
             message.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
             timeStamp.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)

@@ -126,7 +126,7 @@ class ChatFeedVC: UIViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.timeStyle = .short
             let timeStamp = "\(dateFormatter.string(from: Date() as Date))"
-            message = ChatMessage(content: content!, imageUrl: nil, videoUrl: nil, fromId: fromId!, toId: toId!, timestamp: timeStamp)
+            message = ChatMessage(content: content!, imageUrl: nil, imageWidth: nil, imageHeight: nil, videoUrl: nil, fromId: fromId!, toId: toId!, timestamp: timeStamp)
             DataService.instance.uploadChatMessage(chatMessage: message, completion: { (completed) in
                 if completed {
                     self.messageTextView.text = ""
@@ -217,7 +217,7 @@ extension ChatFeedVC: UIImagePickerControllerDelegate, UINavigationControllerDel
                                     dateFormatter.timeStyle = .short
                                     let timeStamp = "\(dateFormatter.string(from: Date() as Date))"
                                     print("Uploaded video url: ", uploadedVideoUrl)
-                                    message = ChatMessage(content: nil, imageUrl: imageUrl, videoUrl: uploadedVideoUrl, fromId: fromId!, toId: toId!, timestamp: timeStamp)
+                                    message = ChatMessage(content: nil, imageUrl: imageUrl, imageWidth: thumbnail.size.width as NSNumber, imageHeight: thumbnail.size.height as NSNumber, videoUrl: uploadedVideoUrl, fromId: fromId!, toId: toId!, timestamp: timeStamp)
                                     DataService.instance.uploadChatMessage(chatMessage: message, completion: { (completed) in
                                         if completed {
                                             self.sendBtn.isEnabled = true
@@ -273,7 +273,9 @@ extension ChatFeedVC: UIImagePickerControllerDelegate, UINavigationControllerDel
                         let dateFormatter = DateFormatter()
                         dateFormatter.timeStyle = .short
                         let timeStamp = "\(dateFormatter.string(from: Date() as Date))"
-                        message = ChatMessage(content: nil, imageUrl: imageUrl, videoUrl: nil, fromId: fromId!, toId: toId!, timestamp: timeStamp)
+                        print("Width:", selectedImage.size.width as NSNumber)
+                        print("Height:", selectedImage.size.height as NSNumber)
+                        message = ChatMessage(content: nil, imageUrl: imageUrl, imageWidth: selectedImage.size.width as NSNumber, imageHeight: selectedImage.size.height as NSNumber, videoUrl: nil, fromId: fromId!, toId: toId!, timestamp: timeStamp)
                         DataService.instance.uploadChatMessage(chatMessage: message, completion: { (completed) in
                             if completed {
                                 self.sendBtn.isEnabled = true
