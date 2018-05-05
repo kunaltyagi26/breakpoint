@@ -127,7 +127,7 @@ class ChatFeedVC: UIViewController {
             dateFormatter.timeStyle = .short
             let timeStamp = "\(dateFormatter.string(from: Date() as Date))"
             message = ChatMessage(content: content!, imageUrl: nil, imageWidth: nil, imageHeight: nil, videoUrl: nil, fromId: fromId!, toId: toId!, timestamp: timeStamp)
-            DataService.instance.uploadChatMessage(chatMessage: message, completion: { (completed) in
+            DataService.instance.uploadChatMessage(chatMessage: message, groupKey: nil, completion: { (completed) in
                 if completed {
                     self.messageTextView.text = ""
                     self.messageTextView.isEditable = true
@@ -218,7 +218,7 @@ extension ChatFeedVC: UIImagePickerControllerDelegate, UINavigationControllerDel
                                     let timeStamp = "\(dateFormatter.string(from: Date() as Date))"
                                     print("Uploaded video url: ", uploadedVideoUrl)
                                     message = ChatMessage(content: nil, imageUrl: imageUrl, imageWidth: thumbnail.size.width as NSNumber, imageHeight: thumbnail.size.height as NSNumber, videoUrl: uploadedVideoUrl, fromId: fromId!, toId: toId!, timestamp: timeStamp)
-                                    DataService.instance.uploadChatMessage(chatMessage: message, completion: { (completed) in
+                                    DataService.instance.uploadChatMessage(chatMessage: message, groupKey: nil,  completion: { (completed) in
                                         if completed {
                                             self.sendBtn.isEnabled = true
                                         }
@@ -276,7 +276,7 @@ extension ChatFeedVC: UIImagePickerControllerDelegate, UINavigationControllerDel
                         print("Width:", selectedImage.size.width as NSNumber)
                         print("Height:", selectedImage.size.height as NSNumber)
                         message = ChatMessage(content: nil, imageUrl: imageUrl, imageWidth: selectedImage.size.width as NSNumber, imageHeight: selectedImage.size.height as NSNumber, videoUrl: nil, fromId: fromId!, toId: toId!, timestamp: timeStamp)
-                        DataService.instance.uploadChatMessage(chatMessage: message, completion: { (completed) in
+                        DataService.instance.uploadChatMessage(chatMessage: message, groupKey: nil, completion: { (completed) in
                             if completed {
                                 self.sendBtn.isEnabled = true
                                 completion(imageUrl)

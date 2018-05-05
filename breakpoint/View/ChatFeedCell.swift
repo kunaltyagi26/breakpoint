@@ -148,8 +148,8 @@ class ChatFeedCell: UITableViewCell {
     }
     
     func configureCell(chatMessage: ChatMessage) {
-        print("ImageWidth:", chatMessage.imageWidth)
-        print("ImageHeight:", chatMessage.imageHeight)
+        //print("ImageWidth:", chatMessage.imageWidth)
+        //print("ImageHeight:", chatMessage.imageHeight)
         url = chatMessage.videoUrl
         messageView.isUserInteractionEnabled = true
         messageImageView.isUserInteractionEnabled = true
@@ -189,14 +189,14 @@ class ChatFeedCell: UITableViewCell {
             messageImageView.topAnchor.constraint(equalTo: messageView.topAnchor, constant: 0).isActive = true
             messageImageView.rightAnchor.constraint(equalTo: messageView.rightAnchor, constant: 0).isActive = true
             if chatMessage.content != nil {
-                print("Entered in content section.")
+                //print("Entered in content section.")
                 //messageImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
             }
             else {
-                print("Entered in image section.")
+                //print("Entered in image section.")
                 if let height = chatMessage.imageHeight as? CGFloat, let width = chatMessage.imageWidth as? CGFloat {
                     let finalHeight = CGFloat(height / width * 250)
-                    print("height: ", finalHeight)
+                    //print("height: ", finalHeight)
                     messageImageView.heightAnchor.constraint(equalToConstant: finalHeight).isActive = true
                 }
             }

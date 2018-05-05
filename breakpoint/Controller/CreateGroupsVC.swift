@@ -27,16 +27,20 @@ class CreateGroupsVC: UIViewController {
         DescriptionTxt.delegate = self
         emailSearchTxt.delegate = self
         TitleTxt.layer.cornerRadius = 10
-        TitleTxt.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
+        TitleTxt.layer.borderColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         TitleTxt.layer.borderWidth = 1.0
         DescriptionTxt.layer.cornerRadius = 10
-        DescriptionTxt.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
+        DescriptionTxt.layer.borderColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         DescriptionTxt.layer.borderWidth = 1.0
         emailSearchTxt.layer.cornerRadius = 10
-        emailSearchTxt.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
+        emailSearchTxt.layer.borderColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         emailSearchTxt.layer.borderWidth = 1.0
-        //tableView.backgroundColor = UIColor.black
-        //emailSearchTxt.backgroundColor = UIColor.red
+        TitleTxt.attributedPlaceholder = NSAttributedString(string: "Enter the title",
+                                                            attributes: [NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)])
+        DescriptionTxt.attributedPlaceholder = NSAttributedString(string: "Enter the description",
+                                                            attributes: [NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)])
+        emailSearchTxt.attributedPlaceholder = NSAttributedString(string: "Enter the email",
+                                                            attributes: [NSAttributedStringKey.foregroundColor: #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)])
     }
     
     override func viewDidLoad() {
@@ -133,12 +137,12 @@ class CreateGroupsVC: UIViewController {
  
  extension CreateGroupsVC: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
+        textField.layer.borderColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         textField.layer.borderWidth = 2.0
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        textField.layer.borderColor = #colorLiteral(red: 0.3170751631, green: 0.1997062266, blue: 0.9257713556, alpha: 1)
+        textField.layer.borderColor = #colorLiteral(red: 0.5568627715, green: 0.3529411852, blue: 0.9686274529, alpha: 1)
         textField.layer.borderWidth = 1.0
     }
  }

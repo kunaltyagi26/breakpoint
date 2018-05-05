@@ -88,9 +88,10 @@ class DataService {
         }
     }
     
-    func uploadChatMessage(chatMessage: ChatMessage, completion: @escaping (_ status: Bool)-> ()) {
+    func uploadChatMessage(chatMessage: ChatMessage, groupKey: String?, completion: @escaping (_ status: Bool)-> ()) {
         let message = REF_MESSAGES.childByAutoId()
         let messageId = message.key
+        
         if chatMessage.content != nil {
             message.updateChildValues(["fromId": chatMessage.fromId, "toId": chatMessage.toId, "content": chatMessage.content!, "timestamp": chatMessage.timestamp])
         }
@@ -100,8 +101,14 @@ class DataService {
         else {
             message.updateChildValues(["fromId": chatMessage.fromId, "toId": chatMessage.toId, "imageUrl": chatMessage.imageUrl!, "imageWidth": chatMessage.imageWidth!, "imageHeight": chatMessage.imageHeight!, "timestamp": chatMessage.timestamp])
         }
-        REF_CHATS.child((chatMessage.fromId)).child((chatMessage.toId)).updateChildValues([messageId: 1])
-        REF_CHATS.child((chatMessage.toId)).child((chatMessage.fromId)).updateChildValues([messageId: 1])
+        
+        if groupKey != nil {
+            REF_GROUPS.child(groupKey!).child("messages").updateChildValues([messageId: 1])
+        }
+        else {
+            REF_CHATS.child((chatMessage.fromId)).child((chatMessage.toId)!).updateChildValues([messageId: 1])
+            REF_CHATS.child((chatMessage.toId)!).child((chatMessage.fromId)).updateChildValues([messageId: 1])
+        }
         completion(true)
     }
     
@@ -119,15 +126,45 @@ class DataService {
         }
     }
     
-    func GetAllMessagesFor(desiredGroup group: Group, completion: @escaping (_ messageArray: [Message])-> ()) {
-        var groupMessageArray = [Message]()
-        REF_GROUPS.child(group.groupId).child("messages").observeSingleEvent(of: .value) { (groupMessageSnapshot) in
-            guard let groupMessageSnapshot = groupMessageSnapshot.children.allObjects as? [DataSnapshot] else { return }
-            for group in groupMessageSnapshot {
-                let content = group.childSnapshot(forPath: "content").value as! String
-                let senderId = group.childSnapshot(forPath: "senderId").value as! String
-                let groupMessage = Message(content: content, senderId: senderId)
-                groupMessageArray.append(groupMessage)
+    func GetAllMessagesFor(desiredGroup group: Group, completion: @escaping (_ messageArray: [ChatMessage])-> ()) {
+        var groupMessageArray = [ChatMessage]()
+        REF_GROUPS.child(group.groupId).child("messages").observeSingleEvent(of: .value) { (groupMessageIdSnapshot) in
+            guard let groupMessageIdSnapshot = groupMessageIdSnapshot.children.allObjects as? [DataSnapshot] else { return }
+            for groupMessageId in groupMessageIdSnapshot {
+                
+                self.REF_MESSAGES.child(groupMessageId.key).observeSingleEvent(of: .value, with: { (messageSnapshot) in
+                    guard let messageSnapshot = messageSnapshot.value as? [String: AnyObject] else { return }
+                    let fromId = messageSnapshot["fromId"] as! String
+                    //let toId = messageSnapshot["toId"] as! String
+                    let timestamp = messageSnapshot["timestamp"] as! String
+                    if messageSnapshot["content"] != nil {
+                        let content = messageSnapshot["content"] as! String
+                        let chatMessage = ChatMessage(content: content, imageUrl: nil, imageWidth: nil, imageHeight: nil, videoUrl: nil, fromId: fromId, toId: nil, timestamp: timestamp)
+                        groupMessageArray.append(chatMessage)
+                    }
+                    else {
+                        var videoUrl: String?
+                        if messageSnapshot["videoUrl"] != nil {
+                            videoUrl = messageSnapshot["videoUrl"] as! String
+                        }
+                        else {
+                            videoUrl = nil
+                        }
+                        let imageUrl = messageSnapshot["imageUrl"] as! String
+                        let imageWidth = messageSnapshot["imageWidth"] as! NSNumber
+                        let imageHeight = messageSnapshot["imageHeight"] as! NSNumber
+                        let chatMessage = ChatMessage(content: nil, imageUrl: imageUrl, imageWidth: imageWidth, imageHeight: imageHeight, videoUrl: videoUrl, fromId: fromId, toId: nil, timestamp: timestamp)
+                        groupMessageArray.append(chatMessage)
+                    }
+                    if groupMessageArray.count == groupMessageIdSnapshot.count {
+                        completion(groupMessageArray)
+                    }
+                })
+                
+                //let content = group.childSnapshot(forPath: "content").value as! String
+                //let senderId = group.childSnapshot(forPath: "senderId").value as! String
+                //let groupMessage = Message(content: content, senderId: senderId)
+                //groupMessageArray.append(groupMessage)
             }
             completion(groupMessageArray)
         }

@@ -19,7 +19,7 @@ class GroupFeedVC: UIViewController {
     
     var group: Group?
     var emailArray: [String]?
-    var groupMessages = [Message]()
+    var groupMessages = [ChatMessage]()
     
     func initGroupData(forGroup group: Group) {
         self.group = group
@@ -35,7 +35,7 @@ class GroupFeedVC: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         messageTextView.layer.cornerRadius = 15
-        screenTap()
+        //screenTap()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,6 +72,13 @@ class GroupFeedVC: UIViewController {
         if messageTextView.text != "" {
             messageTextView.isEditable = false
             sendBtn.isEnabled = false
+            DataService.instance.uploadChatMessage(chatMessage: groupMessages, groupKey: group?.groupId, completion: { (complete) in
+                if complete {
+                    self.messageTextView.text = ""
+                    self.messageTextView.isEditable = true
+                    self.sendBtn.isEnabled = true
+                }
+            })
             DataService.instance.uploadPost(withMessage: messageTextView.text, forUID: (Auth.auth().currentUser?.uid)!, withGroupKey: group?.groupId, completion: { (complete) in
                 if complete {
                     self.messageTextView.text = ""
@@ -100,7 +107,7 @@ extension GroupFeedVC: UITableViewDelegate, UITableViewDataSource {
         let message = groupMessages[indexPath.row]
         //let image = UIImage(named: "defaultProfileImage")
         DataService.instance.getUserNameAndImage(ForUID: message.senderId) { (username, image, imageBackground) in
-            cell.configureCell(image: UIImage(named: image)!, imageBackground: imageBackground, username: username, content: message.content)
+            cell.configureCell(username: username, content: message.content)
         }
         return cell
     }

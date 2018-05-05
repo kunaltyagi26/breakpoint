@@ -18,6 +18,8 @@ class GroupsVC: UIViewController {
         super.viewDidLoad()
         groupsTableView.delegate = self
         groupsTableView.dataSource = self
+        groupsTableView.rowHeight = UITableViewAutomaticDimension
+        groupsTableView.estimatedRowHeight = 50.0
     }
     
     override func viewDidAppear(_ animated: Bool) {

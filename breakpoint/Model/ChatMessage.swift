@@ -11,7 +11,7 @@ import Foundation
 class ChatMessage {
     private var _content: String?
     private var _fromId: String
-    private var _toId: String
+    private var _toId: String?
     private var _timestamp: String
     private var _imageUrl: String?
     private var _imageWidth: NSNumber?
@@ -26,7 +26,7 @@ class ChatMessage {
         return _fromId
     }
     
-    var toId: String {
+    var toId: String? {
         return _toId
     }
     
@@ -50,7 +50,7 @@ class ChatMessage {
         return _videoUrl
     }
     
-    init(content: String?, imageUrl: String?, imageWidth: NSNumber?, imageHeight: NSNumber?, videoUrl: String?, fromId: String, toId: String, timestamp: String) {
+    init(content: String?, imageUrl: String?, imageWidth: NSNumber?, imageHeight: NSNumber?, videoUrl: String?, fromId: String, toId: String?, timestamp: String) {
         if content != nil {
             self._content = content!
         }
@@ -62,8 +62,10 @@ class ChatMessage {
         if videoUrl != nil {
             self._videoUrl = videoUrl!
         }
+        if toId != nil {
+            self._toId = toId
+        }
         self._fromId = fromId
-        self._toId = toId
         self._timestamp = timestamp
     }
 }
