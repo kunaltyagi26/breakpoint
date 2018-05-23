@@ -156,6 +156,7 @@ class DataService {
                         let chatMessage = ChatMessage(content: nil, imageUrl: imageUrl, imageWidth: imageWidth, imageHeight: imageHeight, videoUrl: videoUrl, fromId: fromId, toId: nil, timestamp: timestamp)
                         groupMessageArray.append(chatMessage)
                     }
+                    print(groupMessageArray.count)
                     if groupMessageArray.count == groupMessageIdSnapshot.count {
                         completion(groupMessageArray)
                     }
