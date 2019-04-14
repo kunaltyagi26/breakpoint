@@ -76,7 +76,6 @@ class AuthVC: UIViewController {
                 print(accessToken.authenticationToken)
                 Auth.auth().signIn(with: credential) { (user, error) in
                   print(error)
-                    let req = GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], accessToken: accessToken, httpMethod: GraphRequestHTTPMethod(rawValue: "GET")!, apiVersion: .defaultVersion)
                     let request = GraphRequest(graphPath: "me", parameters: ["fields":"email,name"], accessToken: AccessToken.current, httpMethod: .GET, apiVersion: FacebookCore.GraphAPIVersion.defaultVersion)
                     request.start { (response, result) in
                         switch result {
@@ -92,7 +91,6 @@ class AuthVC: UIViewController {
                                     print("User created.")
                                     guard let personalDetailsVC = self.storyboard?.instantiateViewController(withIdentifier: "personalDetailsVC") as? PersonalDetailsVC else { return }
                                     self.activityIndicatorView.stopAnimating()
-//                                    self.present(personalDetailsVC, animated: true, completion: nil)
                                    self.dismiss(animated: true, completion: nil)
                                 }
                                 else {
@@ -145,7 +143,6 @@ extension AuthVC: GIDSignInDelegate {
                         self.overlay!.alpha = 0.8
                         self.overlay!.removeFromSuperview()
                         self.activityIndicatorView.stopAnimating()
-//                        self.present(personalDetailsVC, animated: true, completion: nil)
                         self.dismiss(animated: true, completion: nil)
                     }
                     else {

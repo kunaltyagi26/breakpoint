@@ -142,13 +142,13 @@ extension SDKSettings {
    */
   public static var enabledLoggingBehaviors: Set<SDKLoggingBehavior> {
     get {
-      let behaviors = FBSDKSettings.loggingBehavior().flatMap { object -> SDKLoggingBehavior? in
+      let behaviors = FBSDKSettings.loggingBehavior()?.compactMap { object -> SDKLoggingBehavior? in
         if let value = object as? String {
           return SDKLoggingBehavior(sdkStringValue: value)
         }
         return nil
       }
-      return Set(behaviors)
+        return Set(behaviors!)
     }
     set {
       let behaviors = newValue.map({ $0.sdkStringValue })

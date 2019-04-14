@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '9CAC68090D56EE3E28205AC3F437FC88'
-               BlueprintName = 'TKSubmitTransition'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'TKSubmitTransition.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "ACF152FCD16D0FC273785AEF383CD4BF"
+               BlueprintName = "TKSubmitTransition"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "TKSubmitTransition.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

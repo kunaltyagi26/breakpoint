@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "0930"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '278E442B7D2C3C7091495A864CBA7A2D'
-               BlueprintName = 'SkeletonView'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SkeletonView.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B794C4BBACE9D513624F867EBDDC4A59"
+               BlueprintName = "SkeletonView"
+               ReferencedContainer = "container:Pods.xcodeproj"
+               BuildableName = "SkeletonView.framework">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
